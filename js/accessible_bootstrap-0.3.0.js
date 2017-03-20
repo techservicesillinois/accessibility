@@ -1,12 +1,12 @@
 /* ========================================================================
  * Technology Services at Illinois Bootstrap Accessibility Plugin
  *
- * Version 0.2.1
+ * Version 0.3.0
  *
  * This script is a modified and extended version of the PayPal Bootstrap Accessibility plugin.
  * The original copyright notice is included below to fulfill eBay's terms of use.
  *
- * This version of the script extends Bootstrap 3.3.4
+ * This version of the script extends Bootstrap 3.3.4 and up.
  *
 * ======================================================================== */
 /* ========================================================================
@@ -105,53 +105,33 @@
    // This version ensures that only an element with the .close class in an alert region is modified.
    //
    $('.alert').attr('role', 'alert') // add alert role
-      .find('.close').removeAttr('aria-hidden').attr('aria-label', 'close').wrapInner('<span aria-hidden="true"></span>'); // correct close button markup
+      .find('.close').removeAttr('aria-hidden').wrapInner('<span aria-hidden="true"></span>').append('<span class="sr-only">Close</span>'); // correct close button markup
 
    /////////////////////////////////////////////////////
    // Modal Dialog - from PayPal script
    //
-   $('.modal-dialog').attr('role', 'document')
-      .find('.close').removeAttr('aria-hidden').attr('aria-label', 'close').wrapInner('<span aria-hidden="true"></span>'); // correct close button markup
-
+   $('.modal-body').attr({'role': 'document', 'tabindex': '0'});
    var modalHide = $.fn.modal.Constructor.prototype.hide; // store the bootstrap modal hide function
    $.fn.modal.Constructor.prototype.hide = function() { // override the hide function
       var modalOpener = this.$element.parent().find('[data-target="#' + this.$element.attr('id') + '"]');
-
       modalHide.apply(this, arguments); // call the original bootstrap modal hide function
       modalOpener.focus(); // set focus on the element that triggered the dialog
       $(document).off('keydown.bs.modal');
-      
    };
 
-   var modalShow = $.fn.modal.Constructor.prototype.show; // store the bootstrap modal show function
-   $.fn.modal.Constructor.prototype.show = function() { // override the show function
+   var modalFocus = $.fn.modal.Constructor.prototype.enforceFocus; // store the bootstrap modal focus function
+   $.fn.modal.Constructor.prototype.enforceFocus = function() { // override the focus function
+      var $focEls = this.$element.find(':tabbable');
+      var lastEl = $focEls[$focEls.length-1];
 
-      $(document).on('keydown.bs.modal', $.proxy(function (e) {
-         var $focusable = this.$element.find(':tabbable');
-
-         if (e.keyCode === 9) { // user is tabbing
-            if (e.shiftKey && $focusable.first()[0] == e.target) {
-               // this is the first element - set focus on the last element
-               $focusable.last().focus();
-               return false;
-            }
-            else if (!e.shiftKey && $focusable.last()[0] == e.target) {
-               // user is tabbing forward and this is the last element
-               // set focus on the first element
-               $focusable.first().focus();
-               return false;
-            }
-         }
-         else if (e.keyCode === 27) { // escape key - dismiss dialog
-            this.hide();
-            return false;
-         }
-
-         return true;
+      $(document).on('keydown.bs.modal', $.proxy(function (ev) {
+        if(!this.$element.has(ev.target).length && ev.shiftKey && ev.which === 9) {  
+          lastEl.focus()
+          ev.preventDefault();
+        }
       }, this));
 
-      modalShow.apply(this, arguments); // call the original bootstrap modal focus function
-
+      modalFocus.apply(this, arguments); // call the original bootstrap modal focus function
    };
 
    /////////////////////////////////////////////////////
@@ -208,7 +188,7 @@
          $items,
          $ul = $this.closest('ul[role=tablist] '),
          index,
-         k = e.which || e.keyCode;
+         k = e.which; // jQuery standardizes this
 
       if (!/(37|38|39|40)/.test(k)) return
 
@@ -244,24 +224,25 @@
    $.fn.tab.Constructor.prototype.activate = function (element, container, callback) {
       var $active = container.find('> .active');
 
+      tabactivate.apply(this, arguments);
+
       $active.find('[data-toggle=tab], [data-toggle=pill]').attr({
          'tabIndex' : '-1',
          'aria-selected' : false
-      });
+      }).removeAttr('aria-expanded');
 
       $active.filter('.tab-pane').attr({
          'aria-hidden' : true,
          'tabIndex' : '-1'
       });
 
-      tabactivate.apply(this, arguments);
 
       element.addClass('active');
 
       element.find('[data-toggle=tab], [data-toggle=pill]').attr({
          'tabIndex' : '0',
          'aria-selected' : true
-      });
+      }).removeAttr('aria-expanded');
 
       element.filter('.tab-pane').attr({
          'aria-hidden' : false,
@@ -319,7 +300,7 @@
          });
 
          $accordianToggles.on('keydown', function(e) {
-            var key = e.keyCode || e.which;
+            var key = e.which; // jQuery standardizes this
             var index = $accordianToggles.index($(this));
 
             if (!/(32|37|38|39|40)/.test(key)) {
@@ -403,4 +384,192 @@
          this.$trigger.attr('tabindex', '-1');
       }
    };
+
+   /////////////////////////////////////////////////////
+   // Dropdown
+   //
+   var $toggle   = $('[data-toggle=dropdown]');
+   var $menus = $toggle.parent().find('[role=menu]');
+
+   $toggle.attr({
+      'aria-haspopup': 'true',
+      'aria-expanded': 'false'
+   });
+
+   $menus.on('focusout', function(e) {
+      $(e.target).attr('tabindex', '-1');
+   })
+   .on('focusin', function(e) {
+      $(e.target).attr('tabindex', '0');
+   })
+   .find('[role=menuitem]').attr('tabindex', '-1');
+
+   $(document).off('keydown.bs.dropdown.data-api', '[role="menu"]');
+   var dropdownKeydown = $.fn.dropdown.Constructor.prototype.keydown;
+   $.fn.dropdown.Constructor.prototype.keydown = function(e) {
+
+      if (/(27)/.test(e.which)) {
+
+         var $parent = $(this).parent();
+
+         $parent.find('.dropdown-toggle').trigger('focus');
+         return $(this).trigger('click');
+      }
+
+      dropdownKeydown.apply(this, arguments);
+   };
+
+   $(document).on('keydown.bs.dropdown.data-api', '[role="menu"]', $.fn.dropdown.Constructor.prototype.keydown);
+
+
+   /////////////////////////////////////////////////////
+   // Carousel
+   $('.carousel').each(function (index) {
+      var $this = $(this)
+        , $prev = $this.find('[data-slide="prev"]')
+        , $next = $this.find('[data-slide="next"]')
+        , $slides = $this.find('.item')
+        , $tablist = $this.find('.carousel-indicators')
+        , $tabs = $tablist.find('li');
+
+      var $spanPrev = $('<span>')
+         .addClass('sr-only')
+         .html('Previous');
+
+      var $spanNext = $('<span>')
+         .addClass('sr-only')
+         .html('Next');
+
+      $prev.attr({
+         'role': 'button',
+         'aria-label': 'Show slide ' + $slides.length + ' of ' + $slides.length 
+      })
+      .append($spanPrev);
+
+      $next.attr({
+         'role': 'button',
+         'aria-label': 'Show slide 2 of ' + $slides.length
+      })
+      .append($spanNext);
+
+      $slides.each(function(index) {
+         $(this).attr({
+            'role': 'tabpanel',
+            'aria-label': 'Slide ' + (index + 1)
+         });
+
+         var $caption = $(this).find('.carousel-caption');
+         if ($caption.length) {
+            $caption.attr('id', 'slide' + (index+1) + '-caption');
+         }
+      });
+
+      $tablist.attr('role', 'tablist');
+      $tabs.each(function(index) {
+         var $this = $(this);
+         var captionID = 'slide' + (index + 1) + '-caption';
+
+         $this.attr({
+            'role': 'tab',
+            'tabindex': (index == 0 ? '0' : '-1'),
+            'aria-selected': (index == 0 ? 'true' : 'false'),
+            'aria-label': 'Slide ' + (index + 1) + ' of ' + $tabs.length
+         });
+
+         if ($('#' + captionID).length) {
+            $this.attr('aria-describedby', captionID);
+         }
+      });
+
+      $this.on('focusin.bs.carousel', function(e) {
+         $this.carousel('pause');
+         return false;
+      });
+      $this.on('focusout.bs.carousel', function(e) {
+         $this.carousel('cycle');
+         return false;
+      });
+   });
+
+   var slideCarousel = $.fn.carousel.Constructor.prototype.slide;
+   $.fn.carousel.Constructor.prototype.slide = function (type, next) {
+
+      slideCarousel.apply(this, arguments);
+
+      var $tabs = this.$element.find('[role="tab"]');
+      var $active = $tabs.filter('.active');
+      var index = $tabs.index($active);
+      var numSlides = $tabs.length;
+
+      // update the button labels.
+      this.$element.find('[data-slide="prev"]').attr('aria-label', 'Show slide ' + (index == 0 ? numSlides : index) + ' of ' + numSlides);
+      this.$element.find('[data-slide="next"]').attr('aria-label', 'Show slide ' + (index == numSlides-1 ? 1 : index+2) + ' of ' + numSlides);
+
+      // update the tab markup
+      $active.attr({
+        'aria-selected': 'true',
+        'tabindex': '0'
+      });
+
+      $tabs.not($active).attr({
+        'aria-selected': 'false',
+        'tabindex': '-1'
+      });
+   };
+
+   var keydownCarousel = $.fn.carousel.Constructor.prototype.keydown
+   $.fn.carousel.Constructor.prototype.keydown = function(e) {
+      var $target = $(e.target);
+      var $tabs = this.$indicators.find('[role="tab"]');
+
+         switch (e.which) {
+            case 37: // left arrow
+            case 38: { // up arrow
+               if (this.sliding) {
+                  return false;
+               }
+               if ($target.is('[role="tab"]')) { // move focus to previous tab
+                  this.prev();
+
+                  if ($tabs.index($target) == 0) {
+                     $tabs.last().focus();
+                  }
+                  else {
+                     $target.prev().focus();
+                  }
+               }
+               else if (e.which != 38) {
+                  this.prev();
+               }
+
+               e.preventDefault();
+               return true;
+            }
+            case 39: // right arrow
+            case 40: { //down arrow
+               if (this.sliding) {
+                  return false;
+               }
+               if ($target.is('[role="tab"]')) { // move focus to next tab
+
+                  this.next();
+
+                  if ($tabs.index($target) == $tabs.length - 1) {
+                     $tabs.first().focus();
+                  }
+                  else {
+                     $target.next().focus();
+                  }
+               }
+               else if (e.which != 40) {
+                  this.next();
+               }
+
+               e.preventDefault();
+               return true;
+            }
+         }
+         return true;
+   };
+
 })(jQuery);
