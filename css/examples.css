@@ -1,0 +1,138 @@
+@import 'https://fonts.googleapis.com/css?family=Kameron:700';
+@import 'https://fonts.googleapis.com/css?family=Open+Sans';
+html {
+   position: relative;
+   min-height: 100%;
+}
+body {
+   margin-bottom: 6em;
+   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+}
+header {
+   background-color: #13294b;
+   box-shadow: 0 2px 2px #222;
+   border-bottom: 1px solid #e06a27;
+}
+footer {
+   position: absolute;
+   bottom: 0;
+   width: 100%;
+   height: 4em;
+   background-color: #13294b;
+   color: #fff;
+   border-top: 1px solid #808080;
+}
+
+.container {
+   padding: 2em 2.5em;
+   background-color: #fff;
+}
+
+h1, h2, h3, h4, h5, h5 {
+   /*font-family: 'Kameron', serif;*/
+}
+h1 {
+   text-align: center;
+   font-size: 2.441em;
+}
+h2 {
+   font-size: 1.953em;
+   line-height:1.536em;
+   margin-top: 2rem;
+   margin-bottom: 1rem;
+}
+h3 {
+   font-size: 1.563em;
+}
+h4 {
+   font-size: 1.25em;
+}
+/**** Banner markup ****/
+.imark {
+   margin: 10px;
+}
+
+header h1 {
+   color: #fff;
+   margin: 10px;
+}
+.sitenav {
+   margin: 0;
+   background-color: #f2f1ec;
+   width: 100%;
+} 
+.sitenav .inner {
+   max-width: 1024px;
+   width: 100%;
+   margin: 0 auto;
+}
+.sitenav ul {
+   list-style: none;
+   padding: 0;
+   margin: 0;
+   margin-left: 20px;
+}
+.sitenav li {
+   margin: 0;
+   float:left;
+}
+.sitenav li a {
+   display: block;
+   color: #333;
+   font-size: 1.25em;
+   height: 2.4em;
+   padding: 0.5em 0.5em 0;
+   text-transform: uppercase;
+}
+.sitenav li a:hover,
+.sitenav li a:focus {
+   background-color: #bdc3cd;
+}
+/**** main markup ****/
+div.example-wrap {
+   margin: 0 auto;
+   width: 65%;
+   padding: 1em;
+   background-color: rgba(255,255,255,.6);
+   border: 1px solid #999;
+   box-shadow: 1px 1px 2px #999;
+   border-radius: 5px;
+}
+
+div.example-wrap h2 {
+   margin: 0;
+   padding: 0;
+   text-align: center;
+}
+.copy {
+   padding: .5em 1em;
+}
+
+@media screen and (min-width: 768px) {
+   .imark {
+      width: 400px;
+   }
+   .container {
+      margin: 2em auto;
+      border-radius: 7px;
+      border: 1px solid #ccc;
+      max-width: 960px;
+   }
+   /*
+   .sitenav nav {
+      display: inherit;
+   }
+   */
+   .sitenav li a {
+      height: 2.4em;
+      line-height: 1em;
+      padding-top: 0.75em;
+   }
+}
+@media screen and (min-width: 992px) {
+   .sitenav li a {
+      font-size: 1.125em;
+      height: 2em;
+      padding-top: 0.5em;
+   }
+}
