@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Accessible Widget Examples</title>
+<title>Technology Services Accessibility Examples</title>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/examples.css">
 <script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
 </head>
 <body>
 <header role="banner">
+   <a class="skip-link" href="#main">Skip to Main Content</a>
    <div class="row">
       <div class="col-xs-12 col-lg-4">
          <img class="imark" src="images/techsvc-logo-bw.svg" alt="Technology Sevices at Illinois I-mark">
@@ -21,22 +22,33 @@
       <nav role="navigation" aria-label="site">
          <ul>
             <li><a href="#">Home</a></li>
+            <li><a href="#">ARIA Widgets</a></li>
+            <li><a href="#">Bootstrap Accessibility</a></li>
             <li><a href="#">Resources</a></li>
-            <li><a href="#">Widget Library</a></li>
          </ul>
       </nav>
    </div>
 </header>
-<main role="main" class="container">
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc rhoncus eros volutpat tincidunt convallis. In rhoncus rutrum mauris eu vulputate. Donec porta dolor velit, quis dignissim urna imperdiet vel. Praesent tristique orci in ornare aliquam. Fusce lobortis nibh lacinia nisi bibendum, sed faucibus est tempor. Curabitur massa mauris, accumsan at bibendum id, gravida at lacus. Vivamus tristique nisi in est viverra molestie. Proin accumsan nunc maximus dapibus sodales. Ut posuere metus ac felis consectetur porttitor. Etiam vel diam rhoncus orci laoreet ullamcorper at sit amet arcu. Proin eu mattis risus. Curabitur gravida eleifend enim, sed placerat orci tincidunt eget. Vestibulum lectus nibh, egestas eget ante sed, sagittis mollis purus. Suspendisse gravida ac lacus quis venenatis. Donec ut gravida metus, id rutrum nisi.</p>
-
-<p>Nunc rhoncus leo sed lorem tincidunt bibendum. Ut sit amet neque dui. Duis in enim tempus, facilisis justo sit amet, auctor risus. Duis eleifend ante sit amet est congue consectetur. Phasellus quis luctus lectus. Suspendisse ut laoreet orci. Curabitur sollicitudin ac lectus eget volutpat. Etiam et lobortis erat, et gravida dolor. Fusce lectus neque, placerat ac semper nec, efficitur at tortor. Sed hendrerit quam ac tortor aliquet placerat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent tempus est non finibus gravida. Sed molestie turpis non ante semper, vitae feugiat velit euismod. In fermentum laoreet felis id euismod. Maecenas congue lectus libero, sit amet hendrerit libero ultrices nec. Donec semper lectus est, ut pulvinar erat pharetra eget.</p>
-
-<p>Praesent tempus vitae mauris in gravida. Nam et sem sit amet ante ultricies tempus ornare non neque. Maecenas imperdiet sodales leo, id malesuada ex congue ac. Proin ut enim eget metus tempor lobortis eu in lectus. Aliquam sed nisl maximus, aliquet felis in, eleifend lacus. Donec eget convallis nisi. Suspendisse feugiat tortor nec est iaculis consequat vel ac mi. Vivamus scelerisque tortor lacus, at condimentum metus pellentesque quis. Suspendisse nec lacus non nunc imperdiet accumsan et nec tellus. Donec ultricies gravida tristique. Donec sed cursus justo. Aliquam pharetra justo in tempus feugiat. Quisque pretium finibus augue in sagittis. Proin ornare leo sit amet nulla egestas, sed tempor tellus elementum.</p>
+<main id="main" role="main" class="container">
+<h1>Technology Services Accessibility Examples</h1>
+<div class="alert alert-warning" role="alert">
+   <div class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></div>
+   <p>This site is under construction.</p>
+</div>
+<p>Welcome to the Technology Services accessibility examples website. This site will serve to showcase examples of how to implement common elements of webpages and user interfaces accessibly.</p>
+<p>On this site, you will find working examples of:</p>
+<ul>
+   <li>ARIA widgets</li>
+   <li>Technology Services Bootstrap accessibility shim</li>
+   <li>Common areas where accessibility issues arise</li>
+   <li>Tests for accessibility support of various user agents</li>
+   <li>Miscellaneous examples that arise out of consultation with developers</li>
+</ul>
 </main>
 <footer role="contentinfo">
    <p class="copy">Copyright &copy; 2016 University of Illinois Board of Trustees</p>
 </footer>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/accessible_bootstrap-0.2.1.js"></script>
 </body>
 </html>
