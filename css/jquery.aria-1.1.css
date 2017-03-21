@@ -1,0 +1,311 @@
+/***** Slider *****/
+.slider-container {
+   position: relative;
+}
+.slider {
+   height: 20px;
+   width: 300px;
+   border: 1px solid #222;
+   margin: 20px;
+   position: relative;
+   box-shadow: inset 0 1px 2px #222;
+   float: left;
+}
+.slider-text {
+   display: inline-block;
+   margin-top: 20px;
+}
+.slider-handle {
+   position: absolute;
+   height: 20px;
+   width: 20px;
+   margin: -1px;
+   background-color: #99a;
+   border: 1px solid #666;
+}
+.slider-handle:hover,
+.slider-handle:focus,
+.slider-handle.focus {
+
+   background-color: #ff0;
+   border-color: #222;
+   border-width: 2px;
+}
+/***** End Slider *****/
+/***** Treeview *****/
+.treeview-container {
+   position: relative;
+}
+[role=tree],
+.treeview [role=group] {
+   list-style-type: none;
+}
+.treeview [aria-hidden=true] {
+   display: none;
+}
+.treeview [aria-hidden=false] {
+   display: block;
+}
+[role=treeitem] {
+   margin: 0;
+   padding: 5px 10px;
+}
+[role=treeitem]:hover > span,
+[role=treeitem]:focus > span {
+   border-bottom: 2px solid #009;
+   font-weight: bold;
+}
+.treeview-img {
+   height: 13px;
+   width: 13px;
+   margin: 0 5px 0 0;
+   border: none !important;
+}
+/***** End Treeview *****/
+/***** Tab Panel *****/
+.panel-widget {
+   position: relative;
+   max-width: 35em;
+   margin: 20px auto;
+}
+#tablist-label {
+   border-bottom: 1px solid #222;
+}
+[role=tablist] {
+   list-style-type: none;
+   padding: 0;
+   margin: 0;
+   width: 100%;
+   overflow: hidden;
+}
+[role=tab] {
+   float: left;
+   height: 2.5em;
+   margin: 0;
+   padding: 0.5em 1em;
+   width: 25%;
+   text-align: center;
+   text-transform: uppercase;
+   letter-spacing: 0.1em;
+   border: 1px solid #222;
+   border-bottom-width: 3px;
+   background-color: #8fae80;
+   border-bottom: none;
+}
+[role=tabpanel] {
+   width: 100%;
+   padding: 1em;
+   border: 1px solid #222;
+   background-color: #fff;
+}
+[role=tabpanel] ul {
+   list-style-type: none;
+}
+[role=tablist] [aria-selected=true],
+[role=tab]:hover {
+   background-color: #fff;
+}
+[role=tab]:hover {
+   background-color: #c6debb;
+}
+.panel-widget input:hover + label,
+.panel-widget input:focus + label {
+   border-bottom: 1px solid #040;
+   font-weight: bold;
+   color: #040;
+}
+
+.panel-widget [aria-hidden=true] {
+   display: none;
+}
+
+/***** End Tab Panel *****/
+/***** Modal Dialog *****/
+div[role='dialog'] {
+   margin: auto;
+   width: 300px;
+}
+div.aria-dialog-overlay {
+   position: fixed;
+   top: 0;
+   left: 0;
+   height: 1000em;
+   width: 100%;
+   z-index: 2000;
+   background-color: rgba(0, 0, 0, 0.25);
+   background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 25%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0) 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, rgba(0, 0, 0, 0) 75%, rgba(0, 0, 0, 0));
+   background-size: 50px 50px;
+}
+div.aria-dialog-overlay[aria-hidden=true],
+div.aria-dialog[aria-hidden=true] {
+   display: none;
+}
+div.aria-dialog[aria-hidden=false] {
+   position: absolute;
+   width: 300px;
+   height: auto; 
+   background-color: #eee;
+   border:1px solid #222;
+   border-radius: 5px;
+   box-shadow: 2px 2px 4px #222;
+   z-index: 2001;
+   overflow: hidden;
+}
+div.aria-dialog h2 {
+   margin: 0;
+   padding: 0;
+   width: 100%;
+   text-align: center;
+   background-color: #800;
+   color: #fff;
+   letter-spacing: 0.1em;
+}
+div.aria-dialog .dialog-msg {
+   margin: 10px 20px;
+}
+div.aria-dialog .aria-dialog-close {
+   display: block;
+   margin: 10px auto;
+}
+/***** End Modal Dialog *****/
+/***** Timer Widget *****/
+.timer-wrapper {
+   max-width: 30em;
+   margin: 20px auto;
+   overflow: hidden;
+}
+.timer-wrapper .settings legend {
+   font-weight: bold;
+}
+.timer-settings {
+   float: left;
+}
+.timer-button,
+.timer {
+   float: left;
+   margin-top: 1em;
+   margin-left: 1em;
+}
+#timer-interval {
+   width: 3em;
+}
+.timer {
+   width: 6em;
+   height: 1em;
+   padding: 0.2em 0.5em;
+   border: 1px solid #222;
+   text-align: right;
+}
+/***** End Timer Widget *****/
+/***** Combobox *****/
+.cb-hidden,
+.cb-status {
+  position: absolute;
+  top: -20em;
+  left: -200em;
+}
+
+.cb-wrapper {
+  position: relative;
+  width: 250px; /* total width of control - also set .cb-edit and .cb-list */
+}
+.cb-wrapper * {
+  box-sizing: inherit; 
+}
+.cb-editwrapper {
+   position: relative;
+}
+.cb-edit {
+  margin: 0;
+  width: 100%;
+  height: 1.8em;
+  border: 1px solid black;
+}
+.cb-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 18px;
+  background: url('data:image/svg+xml;utf8,<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 25.3 16" style="enable-background:new 0 0 25.3 16;" xml:space="preserve"> <path d="M12.7,11.4L2.7,1.1c-1.3-1.3-3.3,0.7-2,2l11.9,12.3l12-12.3c1.3-1.4-0.8-3.4-2.1-2L12.7,11.4z"/> </svg>') no-repeat center;
+  background-size: 14px;
+}
+.cb-button:hover {
+  background-color: #ddd;
+  border: 1px solid black;
+}
+
+.cb-list {
+  clear: both;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 200px;
+  overflow: auto;
+  background-color: #fff;
+  border: 1px solid black;
+}
+.cb-collapsible {
+  position: absolute;
+  float: right;
+  z-index: 300;
+}
+
+.cb-option {
+  margin: 0 1px 0 0;
+  padding: 2px 5px;
+}
+.cb-selected {
+  border-top: 1px solid #44e;
+  border-bottom: 1px solid #44e;
+  padding: 1px 5px;
+  background-color: #77a;
+  color: #fff;
+}
+.cb-option:hover {
+  border-top: 1px solid #44e;
+  border-bottom: 1px solid #44e;
+  padding: 1px 5px;
+  font-weight: bold;
+  background-color: #77f;
+  color: #fff;
+}
+.cb-disabled .cb-edit,
+.cb-disabled .cb-option {
+   color: #999;
+   overflow: hidden;
+}
+
+.cb-disabled .cb-selected {
+  background-color: #ddd;
+}
+
+.cb-disabled .cb-button:hover {
+   background-color: transparent;
+   border: none;
+}
+
+.cb-listoverlay {
+   position: absolute;
+   top: 0;
+   left: 0;
+   z-index: 100;
+}
+/***** End Combobox *****/
+
+/***** CSS for instructional cues *****/
+.widget-cue {
+   position: absolute;
+   padding: 0.5em 1em;
+   border: 1px solid #3c0000;
+   background-color: #ffd;
+   max-width: 400px;
+}
+.treeview-container .widget-cue,
+.slider-container .widget-cue {
+   display: none;
+}
+.cue-visible {
+   display: block !important;
+}

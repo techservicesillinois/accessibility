@@ -1,0 +1,159 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ARIA Tab Panel - Technology Services Accessibility Examples</title>
+<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../css/examples.css">
+<link rel="stylesheet" type="text/css" href="../css/jquery.aria-1.1.css">
+<script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
+<script async type="text/javascript" src="../js/jquery.aria-1.1.js"></script>
+<script>
+   $('document').ready(function() {
+         $('.tablist').tabpanel();
+   });
+</script>
+</head>
+<body>
+<header role="banner">
+   <a class="skip-link" href="#main">Skip to Main Content</a>
+   <div class="row">
+      <div class="col-xs-12 col-lg-4">
+         <img class="imark" src="images/techsvc-logo-bw.svg" alt="Technology Sevices at Illinois I-mark">
+      </div>
+      <div class="col-xs-12 col-lg-8">
+         <h1>Accessible Widget Examples</h1>
+      </div>
+   </div>
+   <div class="sitenav row">
+      <nav role="navigation" aria-label="site">
+         <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="aria.html" class="active">ARIA</a></li>
+            <li><a href="bootstrap.html">Bootstrap</a></li>
+            <li><a href="#">Resources</a></li>
+         </ul>
+      </nav>
+   </div>
+</header>
+<main id="main" role="main" class="container">
+<h1>Accessibility Examples: ARIA Tab Panel</h1>
+<div class="example-wrap">
+
+<h2 id="tablist-label">Pizza Toppings</h2>
+<div id="tabpanel1" class="panel-widget">
+	<ul class="tablist">
+		<li id="tab1" class="tab">Crust</li>
+		<li id="tab3" class="tab">Meat</li>
+		<li id="tab2" class="tab">Veggies</li>
+		<li id="tab4" class="tab">Delivery</li>
+	</ul>
+
+	<div id="tab1-panel" class="tabpanel">
+		<h3>Select Crust</h3>
+	   
+      <ul role="presentation">
+         <li>
+            <input id="crust_opt1" type="radio" name="crust" value="crust1" checked="checked">
+            <label for="crust_opt1">Deep Dish</label>
+         </li>
+         <li>
+            <input id="crust_opt2" type="radio" name="crust" value="crust2">
+            <label for="crust_opt2">Pan</label>
+         </li>
+         <li>
+            <input id="crust_opt3" type="radio" name="crust" value="crust3">
+            <label for="crust_opt3">Hand Tossed</label>
+         </li>
+         <li>
+            <input id="crust_opt4" type="radio" name="crust" value="crust4">
+            <label for="crust_opt4">Thin</label>
+         </li>
+      </ul>
+	</div>
+
+   <div id="tab2-panel" class="tabpanel">
+		<h3>Select Meat Options</h3>
+	   
+      <ul role="presentation">
+        		<li>
+               <input id="meat_opt1" type="checkbox" name="meat" value="pepperoni">
+               <label for="meat_opt1">Pepperoni</label>
+            </li>
+        		<li>
+               <input id="meat_opt2" type="checkbox" name="meat" value="sausage">
+               <label for="meat_opt4">Italian Sausage</label>
+            </li>
+        		<li>
+               <input id="meat_opt3" type="checkbox" name="meat" value="ham">
+               <label for="meat_opt4">Ham</label>
+            </li>
+        		<li>
+               <input id="meat_opt4" type="checkbox" name="meat" value="anchovi">
+               <label for="meat_opt4">Anchovi</label>
+            </li>
+      		</ul>
+	</div>
+	<div id="tab3-panel" class="tabpanel">
+		<h3>Select Vegetables</h3>	
+	   
+      <ul role="presentation">
+         <li>
+            <input id="veg_opt1" type="checkbox" name="veg" value="black olives">
+            <label for="veg_opt1">Black Olives</label>
+         </li>
+         <li>
+            <input id="veg_opt2" type="checkbox" name="veg" value="green olives">
+            <label for="veg_opt2">Green Olives</label>
+         </li>
+         <li>
+            <input id="veg_opt3" type="checkbox" name="veg" value="green peppers">
+            <label for="veg_opt3">Green Peppers</label>
+         </li>
+         <li>
+            <input id="veg_opt4" type="checkbox" name="veg" value="mushrooms">
+            <label for="veg_opt4">Mushrooms</label>
+         </li>
+         <li>
+            <input id="veg_opt5" type="checkbox" name="veg" value="onions">
+            <label for="veg_opt5">Onions</label>
+         </li>
+         <li>
+            <input id="veg_opt6" type="checkbox" name="veg" value="pineapple">
+            <label for="veg_opt6">Pineapple</label>
+         </li>
+      </ul>
+	</div>
+
+   <div id="tab4-panel" class="tabpanel">
+	 	<h3>Select Delivery Method</h3>
+	   
+      <ul role="presentation">
+			<li>
+            <input id="del_opt1" type="radio" name="delivery" value="delivery1" checked="checked">
+            <label for="del_opt1">Delivery</label>
+         </li>
+			<li>
+            <input id="del_opt2" type="radio" name="delivery" value="delivery2">
+            <label for="del_opt2">Dine in</label>
+         </li>
+			<li>
+            <input id="del_opt3" type="radio" name="delivery" value="delivery3">
+            <label for="del_opt3">Carry out</label>
+         </li>
+			<li>
+            <input id="del_opt4" type="radio" name="delivery" value="delivery4">
+            <label for="del_opt4">Overnight mail</label>
+         </li>
+		</ul>
+	</div>
+</div>
+</div>
+</main>
+<footer role="contentinfo">
+   <p class="copy">Copyright &copy; 2016 University of Illinois Board of Trustees</p>
+</footer>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/accessible_bootstrap-0.3.0.js"></script>
+</body>
+</html>
