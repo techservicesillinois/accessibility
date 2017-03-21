@@ -110,6 +110,9 @@ header h1 {
 .sitenav li a:focus {
    background-color: #bdc3cd;
 }
+.sitenav li a.active {
+   text-decoration: underline;
+}
 /**** main markup ****/
 div.example-wrap {
    margin: 0 auto;
@@ -128,6 +131,15 @@ div.example-wrap h2 {
 }
 .copy {
    padding: .5em 1em;
+}
+table {
+   border-collapse: collapse;
+   border: 1px solid #666;
+   width: 100%;
+}
+th, td {
+   border: 1px solid #666;
+   padding: 2px 5px;
 }
 /************ Bootstrap Overrides ************/
 .glyphicon {
