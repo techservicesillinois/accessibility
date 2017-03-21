@@ -116,7 +116,7 @@ header h1 {
 /**** main markup ****/
 div.example-wrap {
    margin: 0 auto;
-   width: 65%;
+   width: 100%;
    padding: 1em;
    background-color: rgba(255,255,255,.6);
    border: 1px solid #999;
@@ -159,15 +159,13 @@ th, td {
       border: 1px solid #ccc;
       max-width: 960px;
    }
-   /*
-   .sitenav nav {
-      display: inherit;
-   }
-   */
    .sitenav li a {
       height: 2.4em;
       line-height: 1em;
       padding-top: 0.75em;
+   }
+   div.example-wrap {
+      width: 95%;
    }
 }
 @media screen and (min-width: 992px) {
@@ -175,5 +173,8 @@ th, td {
       font-size: 1.125em;
       height: 2em;
       padding-top: 0.5em;
+   }
+   div.example-wrap {
+      width: 75%;
    }
 }
