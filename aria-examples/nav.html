@@ -1,0 +1,247 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>ARIA Navigation Menus - Technology Services Accessibility Examples</title>
+<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../css/examples.css">
+<link rel="stylesheet" type="text/css" href="../css/jquery.aria-1.1.css">
+<script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
+<script async type="text/javascript" src="../js/jquery.aria-1.1.js"></script>
+<script>
+   $('document').ready(function() {
+      var keys = {
+         tab:     9,
+         enter:   13,
+         esc:     27,
+         space:   32,
+         up:      38,
+         down:    40
+      };
+
+      var $toggle = $('#menu-toggle');
+      var $nav = $('#' + $toggle.attr('aria-controls'));
+      var $items = $nav.find('a');
+
+      $toggle.on('click', function(e) {
+         if ($toggle.attr('aria-expanded') === 'false') {
+            $toggle.attr('aria-expanded', 'true');
+            $nav.attr('aria-hidden', 'false');
+         } else {
+            $toggle.attr('aria-expanded', 'false');
+            $nav.attr('aria-hidden', 'true');
+         }
+         $toggle.focus();
+
+         return false;
+      })
+      .on('keydown', function(e) {
+         switch (e.which) {
+            case keys.down: {
+               $items.first().focus();
+               return false;
+            }
+            case keys.tab: {
+               if (e.shiftKey) {
+                  $toggle.attr('aria-expanded', 'false');
+                  $nav.attr('aria-hidden', 'true');
+                  $items.attr('tabindex', '-1').first().attr('tabindex', '0');
+               }
+            }
+         }
+
+         return true;
+      });
+
+      $items.on('keydown', function(e) {
+         var index = $items.index($(this));
+
+         switch(e.which) {
+            case keys.esc: {
+               $toggle.click();
+               return false;
+            }
+            case keys.down: {
+               if (index < $items.length-1) {
+                  $items.attr('tabindex', '-1').eq(index+1).attr('tabindex', '0').focus();
+               }
+               return false;
+            }
+            case keys.up: {
+               if (index > 0) {
+                  $items.attr('tabindex', '-1').eq(index-1).attr('tabindex', '0').focus();
+               }
+               return false;
+            }
+            case keys.tab: {
+               if (!e.shiftKey) {
+                  if (index < $items.length-1) {
+                     $items.attr('tabindex', '-1').eq(index+1).attr('tabindex', '0').focus();
+                     return false;
+                  }
+                  else { // hide the menu
+                     $toggle.attr('aria-expanded', 'false');
+                     $nav.attr('aria-hidden', 'true');
+                     $items.attr('tabindex', '-1').first().attr('tabindex', '0');
+                  }
+                  return true;
+               }
+
+               if (index == 0) {
+                  // move to toggle
+                  $toggle.focus();
+               }
+               else {
+                  // Move to previous item
+                  $items.attr('tabindex', '-1').eq(index-1).attr('tabindex', '0').focus();
+               }
+
+               return false;
+            }
+         }
+         return true;
+      });
+
+      $(document).on('click', function(e) {
+         if ($(e.target) != $toggle) {
+            $toggle.attr('aria-expanded', 'false');
+            $nav.attr('aria-hidden', 'true');
+            $items.attr('tabindex', '-1').first().attr('tabindex', '0');
+         }
+      }); 
+   });
+</script>
+<style>
+   #menu-toggle {
+      margin-left: 1em;
+   }
+   #menu-toggle:focus .menu-thumb {
+      background-color: #e06a27;
+   }
+   .menu-thumb {
+      display: block;
+      width: 40px;
+      height: 3px;
+      background-color: #222;
+      margin: 0;
+      padding: 0;
+   }
+   .menu-thumb:nth-child(2) {
+      margin: 4px 0;
+   }
+   .aria-navbar {
+      position: relative;
+      height: 3em;
+   }
+   .aria-nav {
+      position: absolute;
+      top: 35px;
+      z-index: 1000;
+   }
+   .aria-nav[aria-hidden=true] {
+      display: none;
+   }
+
+   .aria-nav ul {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+      border: 1px solid #ccc;
+      background-color: #fff;
+      border-radius: 4px;
+      box-shadow: rgba(0, 0, 0, 0.176) 0px 6px 12px 0px;
+   }
+   .aria-nav li a {
+      display: block;
+      width: 10em;
+      padding: .25em .75em;
+      color: #222;
+   }
+   .aria-nav li a:hover,
+   .aria-nav li a:focus {
+      background-color: #e7e7e7;
+   }
+
+</style>
+</head>
+<body>
+<header role="banner">
+   <a class="skip-link" href="#main">Skip to Main Content</a>
+   <div class="row">
+      <div class="col-xs-12 col-lg-4">
+         <img class="imark" src="../images/techsvc-logo-bw.svg" alt="Technology Sevices at Illinois I-mark">
+      </div>
+      <div class="col-xs-12 col-lg-8">
+         <h1>Accessible Widget Examples</h1>
+      </div>
+   </div>
+   <div class="sitenav row">
+      <nav role="navigation" aria-label="site">
+         <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../aria.html" class="active">ARIA</a></li>
+            <li><a href="../bootstrap.html">Bootstrap</a></li>
+            <li><a href="#">Resources</a></li>
+         </ul>
+      </nav>
+   </div>
+</header>
+<main id="main" role="main" class="container">
+<h1>Accessibility Examples: Navigation Menus</h1>
+<div class="example-wrap">
+   <h2>Collapsible Menu with Toggle Button</h2>
+   <div class="aria-navbar">
+      <button id="menu-toggle" class="btn btn-default" aria-controls="sh-example" aria-expanded="false" aria-label="Toggle Menu" title="Toggle Menu">
+         <span class="menu-thumb"></span>
+         <span class="menu-thumb"></span>
+         <span class="menu-thumb"></span>
+      </button>
+      <nav id="sh-example" class="aria-nav" aria-label="Show/Hide Example" aria-hidden="true">
+         <ul role="menu">
+            <li role="presentation" tabindex="-1">
+               <a href="../index.html" role="menuitem" tabindex="0">Home</a>
+            </li>
+            <li role="presentation" tabindex="-1">
+               <a href="../aria.html" role="menuitem" tabindex="-1">ARIA</a>
+            </li>
+            <li role="presentation" tabindex="-1">
+               <a href="../bootstrap.html" role="menuitem" tabindex="-1">Bootstrap</a>
+            </li>
+         </ul>
+      </nav>
+
+   </div>
+
+   <h3>Required HTML Markup</h3>
+   <p>A menu toggle must indicate whether its associated menu is expanded or collapsed. This requires the following ARIA attributes:</p>
+   <ul>
+      <li><code>aria-expanded</code> &ndash; Set to true if the menu is expanded; false if the menu is collapsed.</li>
+      <li><code>aria-controls</code> &ndash; Set to the HTML id of the menu toggled by this button.</li>
+      <li><code>aria-hidden</code> &ndash; Placed on the controlled menu. Set to false when expanded; true when collapsed.</li>
+   </ul>
+   <p>Below is a code snippet showing simplified markup for implementing an accessible menu toggle button. The values of the <code>aria-expanded</code> and the <code>aria-hidden</code> attributes would be for the collapsed state.</p>
+   <pre>
+&lt;button <strong>aria-expanded="false" aria-controls="menu-id"</strong>&gt;Toggle Menu&lt;/button&gt;     
+&lt;ul id="menu-id" <strong>aria-hidden="true"</strong>&gt;
+   . . .
+&lt;/ul&gt;
+   </pre>
+   <p>Here is the snippet with the ARIA attributes in the expanded state:</p>
+   <pre>
+&lt;button <strong>aria-expanded="true" aria-controls="menu-id"</strong>&gt;Toggle Menu&lt;/button&gt;     
+&lt;ul id="menu-id" <strong>aria-hidden="false"</strong>&gt;
+   . . .
+&lt;/ul&gt;
+   </pre>
+   <p>JavaScript is needed to toggle the values of the <code>aria-expanded</code> and <code>aria-hidden</code> attributes. Note that the value of <code>aria-controls</code> does not change.
+</div>
+
+</main>
+<footer role="contentinfo">
+   <p class="copy">Copyright &copy; 2016 University of Illinois Board of Trustees</p>
+</footer>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/accessible_bootstrap-0.3.0.js"></script>
+</body>
+</html>

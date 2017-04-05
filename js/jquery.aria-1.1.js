@@ -1,3 +1,13 @@
+/*
+ * ARIA Widget Library
+ * Revision 1.1
+ *
+ * Created by Keith hays
+ *
+ * Copyright 2017 Illinois Board of Trustees
+ *
+ */
+
 // Utility
 if (typeof Object.create !== 'function') {
    Object.create = function(obj) {
@@ -7,12 +17,11 @@ if (typeof Object.create !== 'function') {
    };
 }
 
-;(function($, window, document, undefined) { // COMBOBOX v2.2
+/******** COMBOBOX v2.2 **********/
+;(function($, window, document, undefined) {
 
    var pluginName = 'combobox';
    var uuid = 0;
-
-
 
    var keys = {
       backspace:  8,
@@ -980,7 +989,8 @@ if (typeof Object.create !== 'function') {
    }
 })(jQuery, window, document); // END COMBOBOX
 
-;(function($, window, document, undefined) { // MODAL DIALOG v1.1
+/********* MODAL DIALOG v1.1 ********/
+;(function($, window, document, undefined) {
 
    var pluginName = 'dialog';
    var uuid = 0;
@@ -1236,8 +1246,8 @@ if (typeof Object.create !== 'function') {
    //// End jQuery UI core include ///
 })(jQuery, window, document); // END MODAL DIALOG
 
-
-;(function($, window, document, undefined) { // SLIDER v1.2
+/******** SLIDER v1.2 ********/
+;(function($, window, document, undefined) {
 
    var pluginName = 'slider';
 
@@ -1477,7 +1487,8 @@ if (typeof Object.create !== 'function') {
 
 })(jQuery, window, document); // END SLIDER
 
-;(function($, window, document, undefined) { // TABPANEL v1.1
+/********* TABPANEL v1.1 *********/
+;(function($, window, document, undefined) {
 
    var pluginName = 'tabpanel';
 
@@ -1678,7 +1689,8 @@ if (typeof Object.create !== 'function') {
    };
 })(jQuery, window, document); // END TABPANEL 
 
-;(function($, window, document, undefined) { // TREEVIEW v1.1
+/********* TREEVIEW v1.1 *********/
+;(function($, window, document, undefined) {
 
    var pluginName = 'treeview';
 
@@ -1809,7 +1821,10 @@ if (typeof Object.create !== 'function') {
                // parent node
                $node
                   .addClass('parent')
-                  .attr('aria-expanded', !thisObj.options.collapsed)
+                  .attr({
+                     'aria-expanded': !thisObj.options.collapsed,
+                     'aria-label':  $node.find('span').first().text()
+                  })
                   .prepend('<img class="treeview-img" src="' + thisObj.imgCollapsed + '" alt="">');
             }
          })
@@ -1966,5 +1981,3 @@ if (typeof Object.create !== 'function') {
 
    };
 })(jQuery, window, document); // END TREEVIEW
-
-
