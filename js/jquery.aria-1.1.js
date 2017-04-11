@@ -1149,6 +1149,7 @@ if (typeof Object.create !== 'function') {
          if (thisObj.options.triggerID.length) {
             this.$triggerElem = $('#' + thisObj.options.triggerID)
                .on('click', function(e) {
+                  alert('click');
                   thisObj.showDialog();
                   return false;
                });
@@ -1424,6 +1425,7 @@ if (typeof Object.create !== 'function') {
                thisObj._handleMouse(e);
                return false;
          })
+         /*
          .on('focusin', function(e) {
             if (!thisObj.bClicked) {
                thisObj.$cue.addClass('cue-visible');
@@ -1434,7 +1436,8 @@ if (typeof Object.create !== 'function') {
             thisObj.$cue.removeClass('cue-visible');
             thisObj.bClicked = false;
             return false;
-         });
+         })*/;
+         
 
       }, // end _BuildWidget()
       _storeMousePos: function(x, y) {
@@ -1446,7 +1449,12 @@ if (typeof Object.create !== 'function') {
       },
       _handleMouse: function(e) {
          var container = this.$elem.offset();
-         this.val = Math.round(((e.pageX || e.originalEvent.touches[0].pageX) - container.left)*100 / this.$elem.width());
+         var delta = {
+            x: Math.round(((e.pageX || e.originalEvent.touches[0].pageX) - container.left)*100 / this.$elem.width()),
+            y: Math.round(((e.pageY || e.originalEvent.touches[0].pageY) - this.pos.y)) + this.val // TODO: Fix this calculation!
+         }
+
+         this.val = delta.x;
 
          if (this.val < this.min) {
             this.val = this.min;
@@ -1478,7 +1486,7 @@ if (typeof Object.create !== 'function') {
       _setSlider: function() {
          this.$handle
             .attr('aria-valuenow', this.val)
-            .css('left', 'calc(' + this.val + '% - ' + (this.$handle.outerWidth()/2) + 'px)');
+            .css('left', 'calc(' + this.val + '% - ' + (this.$handle.outerWidth()/2) + 'px)')
 
          this.$text.text(this.val + '%');
       }
@@ -1561,6 +1569,7 @@ if (typeof Object.create !== 'function') {
 
          // add tablist markup
          this.$tablist.attr('role', 'tablist')
+            /*
             .on('focusin', function(e) {
                if (!thisObj.bCueDismissed) {
                   thisObj.$cue.addClass('cue-visible');
@@ -1572,7 +1581,7 @@ if (typeof Object.create !== 'function') {
                   thisObj.$cue.removeClass('cue-visible');
                }
                return false;
-            });
+            })*/;
 
          this.$panels = this.$tablist.parent().find('.tabpanel');
 
@@ -1767,6 +1776,7 @@ if (typeof Object.create !== 'function') {
 
          // Add treeview role
          this.$elem.attr('role', 'tree')
+            /*
             .on('focusin', function(e) {
                if (!thisObj.bClicked) {
                   thisObj.$cue.addClass('cue-visible');
@@ -1778,6 +1788,7 @@ if (typeof Object.create !== 'function') {
                thisObj.bclicked = false;
                return false;
             });
+            */
 
          // Add group markup
          this.$groups.attr({
@@ -1900,7 +1911,6 @@ if (typeof Object.create !== 'function') {
             return true;
          })
          .on('focus', function(e) {
-            console.log('focus: ', $(e.target));
             return false;
          });
       }, // end _BuildTree()
