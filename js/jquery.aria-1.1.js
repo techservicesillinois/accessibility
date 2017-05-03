@@ -1039,7 +1039,7 @@ if (typeof Object.create !== 'function') {
       init: function(elem, options) {
          this.$elem = $(elem);
          this.elem = elem;
-         this.uuid = ++uuid;
+         this.uuid = uniqueId();
 
          this.keys = {
             tab:   9,
@@ -1080,8 +1080,7 @@ if (typeof Object.create !== 'function') {
             })
             .addClass('aria-dialog')
             .on('keydown', function(e) {
-               var $tabbable = thisObj.$dialog.find(':tabbable');
-               var numTabbable = $tabbable.length;
+               var numTabbable = thisObj.$tabbable.length;
 
                switch (e.keyCode) {
                   case thisObj.keys.tab: {
@@ -1089,13 +1088,13 @@ if (typeof Object.create !== 'function') {
                         return false;
                      }
 
-                     if (($tabbable.index(e.target) == (numTabbable - 1)) && !e.shiftKey) {
+                     if ((thisObj.$tabbable.index(e.target) == (numTabbable - 1)) && !e.shiftKey) {
                        // last focusable item
-                       $tabbable.first().focus(); 
+                       thisObj.$tabbable.first().focus(); 
                      } 
-                     else if ($tabbable.index(e.target) == 0 && e.shiftKey) {
+                     else if (thisObj.$tabbable.index(e.target) == 0 && e.shiftKey) {
                        // first focusable item
-                       $tabbable.last().focus(); 
+                       thisObj.$tabbable.last().focus(); 
                      }
                      else {
                         return true;
@@ -1107,14 +1106,6 @@ if (typeof Object.create !== 'function') {
                      thisObj._hideDialog();
                      return false;
                   }
-                 /*
-                  case thisObj.keys.up:
-                  case thisObj.keys.right:
-                  case thisObj.keys.down:
-                  case thisObj.keys.left: {
-                     return false;
-                  }
-                  */
                }
             });
 
@@ -1125,8 +1116,7 @@ if (typeof Object.create !== 'function') {
             .html(thisObj.options.title);
 
          thisObj.$dialogMsg = $('<p>').attr({
-               'role': 'document',
-               'tabindex': '0'
+               'role': 'document'
             })
             .addClass('dialog-msg')
             .html(thisObj.options.msg);
@@ -1143,11 +1133,13 @@ if (typeof Object.create !== 'function') {
                return false;
             });
 
-         thisObj.$dialog.append(this.$dialogTitle, this.$dialogMsg, thisObj.$bnDialogClose);
+         this.$dialog.append(this.$dialogTitle, this.$dialogMsg, this.$bnDialogClose);
+         this.$tabbable = this.$dialog.find(':tabbable');
 
          $('body').prepend(thisObj.$dialogOverlay);
          thisObj.$dialogOverlay.after(thisObj.$dialog);
          thisObj._positionDialog();
+
 
          $(window).resize(function() {
             thisObj._positionDialog();
@@ -1167,7 +1159,7 @@ if (typeof Object.create !== 'function') {
 
          this.$dialogOverlay.attr('aria-hidden', 'false');
          this.$dialog.attr('aria-hidden', 'false');
-         this.$dialogMsg.focus();
+         this.$tabbable.first().focus();
 
          $('body').trigger('open.' + pluginName);
       },
@@ -1200,7 +1192,7 @@ if (typeof Object.create !== 'function') {
    };
 
    //// From jQuery UI core ///
-   function focusable( element, isTabIndexNotNaN ) {
+   function focusable( element, isTabIndexNotNaN) {
       var map, mapName, img,
          nodeName = element.nodeName.toLowerCase();
 
@@ -1217,9 +1209,10 @@ if (typeof Object.create !== 'function') {
          !element.disabled :
          "a" === nodeName ?
             element.href || isTabIndexNotNaN :
-            isTabIndexNotNaN) &&
+            isTabIndexNotNaN);/* &&
          // the element and all of its ancestors must be visible
          visible( element );
+         */
    }
 
    function visible( element ) {
@@ -1247,7 +1240,7 @@ if (typeof Object.create !== 'function') {
       tabbable: function( element ) {
          var tabIndex = $.attr( element, "tabindex" ),
             isTabIndexNaN = isNaN( tabIndex );
-         return ( isTabIndexNaN || tabIndex >= 0 ) && focusable( element, !isTabIndexNaN );
+         return ( isTabIndexNaN || tabIndex >= 0 ) && focusable( element, !isTabIndexNaN);
       }
    });
    //// End jQuery UI core include ///
@@ -1439,7 +1432,6 @@ if (typeof Object.create !== 'function') {
             return false;
          })
          .on('focusout', function(e) {
-            console.log('focusout');
             thisObj.$cue.removeClass('cue-visible');
             thisObj.bClicked = false;
             return false;
@@ -1748,7 +1740,6 @@ if (typeof Object.create !== 'function') {
          this.$elem = $(elem);
          this.elem = elem;
          this.uuid = uniqueId();
-         console.log(this.uuid);
          this.keys = { // Define values for keycodes
             tab:        9,
             enter:      13,
