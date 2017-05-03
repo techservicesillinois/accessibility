@@ -1076,11 +1076,13 @@ if (typeof Object.create !== 'function') {
                'id': pluginName + thisObj.uuid + '-dialog',
                'role': 'dialog',
                'aria-labelledby': pluginName + thisObj.uuid + '-title',
+               'aria-describedby': pluginName + thisObj.uuid + '-msg',
                'aria-hidden': 'true'
             })
             .addClass('aria-dialog')
             .on('keydown', function(e) {
-               var numTabbable = thisObj.$tabbable.length;
+               var $tabbable = thisObj.$dialog.find(':tabbable');
+               var numTabbable = $tabbable.length;
 
                switch (e.keyCode) {
                   case thisObj.keys.tab: {
@@ -1088,13 +1090,13 @@ if (typeof Object.create !== 'function') {
                         return false;
                      }
 
-                     if ((thisObj.$tabbable.index(e.target) == (numTabbable - 1)) && !e.shiftKey) {
+                     if (($tabbable.index(e.target) == (numTabbable - 1)) && !e.shiftKey) {
                        // last focusable item
-                       thisObj.$tabbable.first().focus(); 
+                       $tabbable.first().focus(); 
                      } 
-                     else if (thisObj.$tabbable.index(e.target) == 0 && e.shiftKey) {
+                     else if ($tabbable.index(e.target) == 0 && e.shiftKey) {
                        // first focusable item
-                       thisObj.$tabbable.last().focus(); 
+                       $tabbable.last().focus(); 
                      }
                      else {
                         return true;
@@ -1116,7 +1118,8 @@ if (typeof Object.create !== 'function') {
             .html(thisObj.options.title);
 
          thisObj.$dialogMsg = $('<p>').attr({
-               'role': 'document'
+               'role': 'document',
+               'id': pluginName + thisObj.uuid + '-msg',
             })
             .addClass('dialog-msg')
             .html(thisObj.options.msg);
@@ -1134,7 +1137,6 @@ if (typeof Object.create !== 'function') {
             });
 
          this.$dialog.append(this.$dialogTitle, this.$dialogMsg, this.$bnDialogClose);
-         this.$tabbable = this.$dialog.find(':tabbable');
 
          $('body').prepend(thisObj.$dialogOverlay);
          thisObj.$dialogOverlay.after(thisObj.$dialog);
@@ -1155,11 +1157,12 @@ if (typeof Object.create !== 'function') {
       },
       showDialog: function() {
 
+         var thisObj = this;
          this._positionDialog();
 
          this.$dialogOverlay.attr('aria-hidden', 'false');
          this.$dialog.attr('aria-hidden', 'false');
-         this.$tabbable.first().focus();
+         thisObj.$dialog.find(':focusable').first().focus();
 
          $('body').trigger('open.' + pluginName);
       },
@@ -1192,56 +1195,27 @@ if (typeof Object.create !== 'function') {
    };
 
    //// From jQuery UI core ///
-   function focusable( element, isTabIndexNotNaN) {
-      var map, mapName, img,
-         nodeName = element.nodeName.toLowerCase();
-
-      if ( "area" === nodeName ) {
-         map = element.parentNode;
-         mapName = map.name;
-         if ( !element.href || !mapName || map.nodeName.toLowerCase() !== "map" ) {
-            return false;
-         }
-         img = $( "img[usemap=#" + mapName + "]" )[0];
-         return !!img && visible( img );
-      }
-      return ( /input|select|textarea|button|object/.test( nodeName ) ?
-         !element.disabled :
-         "a" === nodeName ?
-            element.href || isTabIndexNotNaN :
-            isTabIndexNotNaN);/* &&
+   $.extend($.expr[':'], {
+     data: function(elem, i, match) {
+       return !!$.data(elem, match[3]);
+     },
+     focusable: function(element) {
+       var nodeName = element.nodeName.toLowerCase(),
+         tabIndex = $.attr(element, 'tabindex');
+       return (/input|select|textarea|button|object/.test(nodeName)
+         ? !element.disabled
+         : 'a' == nodeName || 'area' == nodeName
+           ? element.href || !isNaN(tabIndex)
+           : !isNaN(tabIndex))
          // the element and all of its ancestors must be visible
-         visible( element );
-         */
-   }
+         // the browser may report that the area is hidden
+         && !$(element)['area' == nodeName ? 'parents' : 'closest'](':hidden').length;
+     },
 
-   function visible( element ) {
-      return $.expr.filters.visible( element ) &&
-         !$( element ).parents().addBack().filter(function() {
-            return $.css( this, "visibility" ) === "hidden";
-         }).length;
-   }
-   $.extend( $.expr[ ":" ], {
-	data: $.expr.createPseudo ?
-		$.expr.createPseudo(function( dataName ) {
-			return function( elem ) {
-				return !!$.data( elem, dataName );
-			};
-		}) :
-		// support: jQuery <1.8
-		function( elem, i, match ) {
-			return !!$.data( elem, match[ 3 ] );
-		},
-
-      focusable: function( element ) {
-         return focusable( element, !isNaN( $.attr( element, "tabindex" ) ) );
-      },
-
-      tabbable: function( element ) {
-         var tabIndex = $.attr( element, "tabindex" ),
-            isTabIndexNaN = isNaN( tabIndex );
-         return ( isTabIndexNaN || tabIndex >= 0 ) && focusable( element, !isTabIndexNaN);
-      }
+     tabbable: function(element) {
+       var tabIndex = $.attr(element, 'tabindex');
+       return (isNaN(tabIndex) || tabIndex >= 0) && $(element).is(':focusable');
+     }
    });
    //// End jQuery UI core include ///
 })(jQuery, window, document); // END MODAL DIALOG
