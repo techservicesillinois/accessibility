@@ -88,7 +88,7 @@
 }
 /***** End Treeview *****/
 /***** Tab Panel *****/
-.panel-widget {
+.tabpanel-container {
    position: relative;
    max-width: 35em;
    margin: 20px auto;
@@ -133,14 +133,14 @@
 [role=tab]:hover {
    background-color: #c6debb;
 }
-.panel-widget input:hover + label,
-.panel-widget input:focus + label {
+.tabpanel input:hover + label,
+.tabpanel input:focus + label {
    border-bottom: 1px solid #040;
    font-weight: bold;
    color: #040;
 }
 
-.panel-widget [aria-hidden=true] {
+.tabpanel-container [aria-hidden=true] {
    display: none;
 }
 @media screen and (min-width: 500px) {
@@ -333,7 +333,8 @@ div.aria-dialog .aria-dialog-close {
    max-width: 400px;
 }
 .treeview-container .widget-cue,
-.slider-container .widget-cue {
+.slider-container .widget-cue,
+.tabpanel-container .widget-cue {
    display: none;
 }
 .cue-visible {
