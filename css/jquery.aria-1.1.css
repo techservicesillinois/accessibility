@@ -1,7 +1,7 @@
 /***** Slider *****/
 .slider-container {
    position: relative;
-   overflow: hidden;
+   height: 70px;
 }
 .slider {
    height: 20px;
@@ -42,6 +42,9 @@
    width: 30px;
 }
 @media screen and (min-width: 768px) {
+   .slider-container {
+      height: 60px;
+   }
    .slider {
       height: 20px;
    }

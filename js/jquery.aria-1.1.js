@@ -16,6 +16,13 @@ if (typeof Object.create !== 'function') {
       return new F();
    };
 }
+/******* Simple Unique ID Generator ******/
+;(function($, window, document, undefined) {
+    var counter = 0;
+    window.uniqueId = function(){
+        return 'a11y' + counter++
+    }
+})(jQuery, window, document);
 
 /******** COMBOBOX v2.2 **********/
 ;(function($, window, document, undefined) {
@@ -1149,7 +1156,6 @@ if (typeof Object.create !== 'function') {
          if (thisObj.options.triggerID.length) {
             this.$triggerElem = $('#' + thisObj.options.triggerID)
                .on('click', function(e) {
-                  alert('click');
                   thisObj.showDialog();
                   return false;
                });
@@ -1188,7 +1194,7 @@ if (typeof Object.create !== 'function') {
 
          this.$dialog.css({
             'left': width/2 - (dlgWidth/2) + 'px', 
-            'top': height/2 + $(document).scrollTop() - dlgHeight + 'px'
+            'top': (height - dlgHeight)/2 + $(document).scrollTop() + 'px'
          });
       }
    };
@@ -1259,7 +1265,7 @@ if (typeof Object.create !== 'function') {
       step: 5,
       jump: 25,
       vertical: false,
-      cues: "You can use the arrow, page up, page down, home and end keys to change the slider value."
+      cue: "You can use the arrow, page up, page down, home and end keys to change the slider value."
 
    };
 
@@ -1324,7 +1330,7 @@ if (typeof Object.create !== 'function') {
          this.$cue = $('<div>')
             .attr('aria-hidden', 'true')
             .addClass('widget-cue')
-            .html(this.options.cues)
+            .html(this.options.cue)
             .insertBefore(this.$elem);
 
          // position the cue above the widget
@@ -1415,6 +1421,7 @@ if (typeof Object.create !== 'function') {
          })
          .on('touchstart', function(e) {
             thisObj.bTouch = true;
+            thisObj.$cue.removeClass('cue-visible');
             thisObj.$handle.trigger('mousedown');
 
             e.preventDefault();
@@ -1425,18 +1432,18 @@ if (typeof Object.create !== 'function') {
                thisObj._handleMouse(e);
                return false;
          })
-         /*
          .on('focusin', function(e) {
-            if (!thisObj.bClicked) {
+            if (!(thisObj.bClicked || thisObj.bTouch)) {
                thisObj.$cue.addClass('cue-visible');
             }
             return false;
          })
          .on('focusout', function(e) {
+            console.log('focusout');
             thisObj.$cue.removeClass('cue-visible');
             thisObj.bClicked = false;
             return false;
-         })*/;
+         });
          
 
       }, // end _BuildWidget()
@@ -1569,7 +1576,6 @@ if (typeof Object.create !== 'function') {
 
          // add tablist markup
          this.$tablist.attr('role', 'tablist')
-            /*
             .on('focusin', function(e) {
                if (!thisObj.bCueDismissed) {
                   thisObj.$cue.addClass('cue-visible');
@@ -1580,8 +1586,9 @@ if (typeof Object.create !== 'function') {
                if (!thisObj.bCueDismissed) {
                   thisObj.$cue.removeClass('cue-visible');
                }
+               thisObj.bCueDismissed = false;
                return false;
-            })*/;
+            });
 
          this.$panels = this.$tablist.parent().find('.tabpanel');
 
@@ -1630,6 +1637,8 @@ if (typeof Object.create !== 'function') {
          })
          .on('click', function(e) {
             thisObj._selectTab($(e.target));
+            thisObj.$cue.removeClass('cue-visible');
+            thisObj.bCueDismissed = true;
             return false;
          });
 
@@ -1648,6 +1657,11 @@ if (typeof Object.create !== 'function') {
             if ($panel.outerHeight() > panelHeight)  {
                panelHeight = $panel.outerHeight();
             }
+         })
+         .on('touchstart, mousedown', function(e) {
+            thisObj.$cue.removeClass('cue-visible');
+            thisObj.bCueDismissed = true;
+            return true;
          })
          .css('height', (panelHeight / parseInt(this.$panels.first().css('font-size'))) + 'em'); 
 
@@ -1733,6 +1747,8 @@ if (typeof Object.create !== 'function') {
       init: function(elem, options) {
          this.$elem = $(elem);
          this.elem = elem;
+         this.uuid = uniqueId();
+         console.log(this.uuid);
          this.keys = { // Define values for keycodes
             tab:        9,
             enter:      13,
@@ -1776,7 +1792,6 @@ if (typeof Object.create !== 'function') {
 
          // Add treeview role
          this.$elem.attr('role', 'tree')
-            /*
             .on('focusin', function(e) {
                if (!thisObj.bClicked) {
                   thisObj.$cue.addClass('cue-visible');
@@ -1788,7 +1803,6 @@ if (typeof Object.create !== 'function') {
                thisObj.bclicked = false;
                return false;
             });
-            */
 
          // Add group markup
          this.$groups.attr({
@@ -1834,7 +1848,6 @@ if (typeof Object.create !== 'function') {
                   .addClass('parent')
                   .attr({
                      'aria-expanded': !thisObj.options.collapsed,
-                     'aria-label':  $node.find('span').first().text()
                   })
                   .prepend('<img class="treeview-img" src="' + thisObj.imgCollapsed + '" alt="">');
             }
@@ -1845,7 +1858,7 @@ if (typeof Object.create !== 'function') {
          .on('click', function(e) {
             var $node = $(e.target);
 
-            if ($node.is ('span')) {
+            if ($node.is ('span') || $node.is('img')) {
                $node = $node.parent();
             }
 
