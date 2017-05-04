@@ -1513,7 +1513,7 @@ if (typeof Object.create !== 'function') {
             down:       40,
          };
 
-         this.bCueDismissed = false;
+         this.bHideCue = false;
 
          // merge and store options
          this.options = $.extend({}, defaults, options);
@@ -1543,16 +1543,16 @@ if (typeof Object.create !== 'function') {
          // add tablist markup
          this.$tablist.attr('role', 'tablist')
             .on('focusin', function(e) {
-               if (!thisObj.bCueDismissed) {
+               if (!thisObj.bHideCue) {
                   thisObj.$cue.addClass('cue-visible');
                }
                return false;
             })
             .on('focusout', function(e) {
-               if (!thisObj.bCueDismissed) {
+               if (!thisObj.bHideCue) {
                   thisObj.$cue.removeClass('cue-visible');
                }
-               thisObj.bCueDismissed = false;
+               //thisObj.bHideCue = false; 
                return false;
             });
 
@@ -1576,25 +1576,25 @@ if (typeof Object.create !== 'function') {
                case thisObj.keys.left: {
                   thisObj._selectPrev($item);
                   thisObj.$cue.removeClass('cue-visible');
-                  thisObj.bCueDismissed = true;
+                  thisObj.bHideCue = true;
                   return false;
                }
                case thisObj.keys.right: {
                   thisObj._selectNext($item);
                   thisObj.$cue.removeClass('cue-visible');
-                  thisObj.bCueDismissed = true;
+                  thisObj.bHideCue = true;
                   return false;
                }
                case thisObj.keys.home: {
                   thisObj._selectTab(thisObj.$tabs.first());
                   thisObj.$cue.removeClass('cue-visible');
-                  thisObj.bCueDismissed = true;
+                  thisObj.bHideCue = true;
                   return false;
                }
                case thisObj.keys.end: {
                   thisObj._selectTab(thisObj.$tabs.last());
                   thisObj.$cue.removeClass('cue-visible');
-                  thisObj.bCueDismissed = true;
+                  thisObj.bHideCue = true;
                   return false;
                }
             }
@@ -1603,9 +1603,12 @@ if (typeof Object.create !== 'function') {
          })
          .on('click', function(e) {
             thisObj._selectTab($(e.target));
-            thisObj.$cue.removeClass('cue-visible');
-            thisObj.bCueDismissed = true;
             return false;
+         })
+         .on('touchstart, mousedown', function(e) {
+            thisObj.bHideCue = true;
+            thisObj.$cue.removeClass('cue-visible');
+            return true;
          });
 
          // add panel markup
@@ -1623,11 +1626,6 @@ if (typeof Object.create !== 'function') {
             if ($panel.outerHeight() > panelHeight)  {
                panelHeight = $panel.outerHeight();
             }
-         })
-         .on('touchstart, mousedown', function(e) {
-            thisObj.$cue.removeClass('cue-visible');
-            thisObj.bCueDismissed = true;
-            return true;
          })
          .css('height', (panelHeight / parseInt(this.$panels.first().css('font-size'))) + 'em'); 
 
