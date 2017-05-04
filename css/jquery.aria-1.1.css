@@ -119,10 +119,11 @@
 [role=tabpanel] ul {
    list-style-type: none;
 }
-[role=tablist] [aria-selected=true],
-[role=tab]:hover {
-   background-color: #fff;
+[role=tab]:focus,
+[role=tab]:focus[aria-selected=true] {
+   background-color: #f2f1ec;
 }
+[role=tab][aria-selected=true],
 [role=tab]:hover {
    background-color: #c6debb;
 }
