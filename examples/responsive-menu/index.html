@@ -1,0 +1,192 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Responsive Menu Example - Technology Services Accessibility Examples</title>
+<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../../css/examples.css">
+<link rel="stylesheet" type="text/css" href="../../css/jquery.aria-1.1.css">
+<link rel="stylesheet" type="text/css" href="responsive.css">
+<script type="text/javascript" src="../../js/jquery-3.1.0.min.js"></script>
+</head>
+<body>
+<header role="banner">
+   <a class="skip-link" href="#main">Skip to Main Content</a>
+   <div class="row">
+      <div class="col-xs-12 col-lg-4">
+         <img class="imark" src="../images/techsvc-logo-bw.svg" alt="Technology Sevices at Illinois I-mark">
+      </div>
+      <div class="col-xs-12 col-lg-8">
+         <h1>Accessible Widget Examples</h1>
+      </div>
+   </div>
+   <div class="sitenav row">
+      <nav role="navigation" aria-label="site">
+         <ul>
+            <li><a href="../../index.html">Home</a></li>
+            <li><a href="../../aria.html">ARIA</a></li>
+            <li><a href="../../bootstrap.html">Bootstrap</a></li>
+            <li><a href="../../examples.html" class="active">Examples</a></li>
+         </ul>
+      </nav>
+   </div>
+</header>
+<main role="main" class="container">
+   <h1>Responsive Menu Example</h1>
+   <p>This example showcases a menu found in the footer of the <a href="http://www.adobe.com">Adobe website</a>. There were accessibility issues with this menu that would prevent screen reader users from successfully interacting with the menu. On this page is a modified example that corrects the accessibility issues while leaving the user interaction very similar to the original.</p>
+   <p><strong>Note:</strong> This example should not be taken as a general indication of the accessibility of Adobe's products or services.</p>
+
+   <div class="menu">
+     <ul>
+        <li>
+              <h2>Products</h2>
+              <button id="products-btn" aria-haspopup="true" aria-expanded="false" aria-controls="products-menu">Products</button>
+              <div class="arrow"></div>
+              <nav id="products-menu" class="submenu-wrapper" data-type="popup" role="navigation" aria-labelledby="products-btn" aria-hidden="false">
+                  <ul class="submenu" data-type="column">
+                      <li>
+                          <a href="http://www.adobe.com/creativecloud.html?promoid=ZP46FD38&amp;mv=other" title="Creative Cloud">Creative Cloud</a>
+                      </li>
+                  
+                      <li>
+                          <a href="http://www.adobe.com/experience-cloud.html?promoid=Z9X3FR9C&amp;mv=other" title="Experience Cloud">Experience Cloud</a>
+                      </li>
+                  
+                      <li>
+                          <a href="https://acrobat.adobe.com/us/en/?promoid=ZKD5FHT9&amp;mv=other" title="Document Cloud">Document Cloud</a>
+                      </li>
+                  
+                      <li>
+                          <a href="http://www.adobe.com/products/special-offers.html?promoid=ZSV7F8C7&amp;mv=other" title="Special offers">Special offers</a>
+                      </li>
+                  
+                      <li>
+                          <a href="https://www.adobe.com/products/catalog.html?sort=date&amp;filters=cd_252Fdesign&amp;filters=cd_252Fphotography&amp;filters=cd_252Fvideo-audio&amp;filters=cd_252Fweb-ux&amp;filters=ma_252Fadvertising&amp;filters=ma_252Fanalytics&amp;filters=ma_252Fmarketing&amp;filters=de_252Fdocuments&amp;filters=de_252Fe-signatures&amp;promoid=ZFN4FMKB&amp;mv=other" title="View all products">View all products</a>
+                      </li>
+                  </ul>
+              </nav>
+          </li>
+      
+          <li>
+              <h2>Blogs &amp; Community</h2>
+              <button id="blogs-btn" aria-haspopup="true" aria-expanded="false" aria-controls="blogs-menu">Blogs &amp; Community</button>
+              <div class="arrow"></div>
+              <nav id="blogs-menu" class="submenu-wrapper" data-type="popup" role="navigation" aria-labelledby="blogs-btn" aria-hidden="false">
+                  <ul class="submenu" data-type="column">
+                      <li>
+                          <a href="https://blogs.adobe.com/conversations/?promoid=Z662FW1D&amp;mv=other" title="Adobe Conversations">Adobe Conversations</a>
+                      </li>
+                  
+                      <li>
+                          <a href="http://blogs.adobe.com/creativecloud/?promoid=12B9DZW5&amp;mv=other" title="Creative Cloud blog">Creative Cloud blog</a>
+                      </li>
+                  
+                      <li>
+                          <a href="http://create.adobe.com/?promoid=162BDW54&amp;mv=other" title="Create Magazine">Create Magazine</a>
+                      </li>
+                  
+                      <li>
+                          <a href="http://behance.net/?promoid=ZXL8F4M6&amp;mv=other" title="Behance">Behance</a>
+                      </li>
+                  
+                      <li>
+                          <a href="http://99u.com/?promoid=1FJDDMP2&amp;mv=other" title="99u">99u</a>
+                      </li>
+                  
+                      <li>
+                          <a href="http://blogs.adobe.com/digitalmarketing/?promoid=19SCDRF3&amp;mv=other" title="Digital Marketing blog">Digital Marketing blog</a>
+                      </li>
+                  
+                      <li>
+                          <a href="http://www.cmo.com/?promoid=1K8FDHY1&amp;mv=other" title="CMO.com">CMO.com</a>
+                      </li>
+                  
+                      <li>
+                          <a href="http://blogs.adobe.com/documentcloud/?promoid=1NZGDD6Z&amp;mv=other" title="Document Services">Document Services</a>
+                      </li>
+                  
+                      <li>
+                          <a href="https://www.adobe.io/?promoid=1SQHD8GY&amp;mv=other" title="Adobe I/O">Adobe I/O</a>
+                      </li>
+                  
+                      <li>
+                          <a href="http://news.adobe.com/blogs-social/?promoid=226KCZZW&amp;mv=other" title="View all">View all</a>
+                      </li>
+                  </ul>
+              </nav>
+          </li>
+      
+          <li>
+              <h2>Support</h2>
+              <button id="support-btn" title="Support" aria-controls="support-menu" aria-haspopup="true" aria-expanded="false">Support</button>
+              <div class="arrow"></div>
+              <nav id="support-menu" class="submenu-wrapper" data-type="popup" role="navigation" aria-labelledby="support-btn" aria-hidden="false">
+                  <ul class="submenu" data-type="column">
+                      <li>
+                          <a href="https://helpx.adobe.com/support.html?promoid=1XGJD4QX&amp;mv=other" title="Adobe Support">Adobe Support</a>
+                      </li>
+                  
+                      <li>
+                          <a href="https://helpx.adobe.com/learn.html?promoid=25XLCW8V&amp;mv=other" title="Adobe Learn">Adobe Learn</a>
+                      </li>
+                  
+                      <li>
+                          <a href="https://forums.adobe.com/welcome?promoid=29NMCRJT&amp;mv=other" title="Community Forums">Community Forums</a>
+                      </li>
+                  
+                      <li>
+                          <a href="http://www.adobe.com/about-adobe/contact.html?promoid=2FDNCMSS&amp;mv=other" title="Contact Adobe">Contact Adobe</a>
+                      </li>
+                  
+                      <li>
+                          <a href="https://helpx.adobe.com/download-install.html?promoid=2K4PCJ2R&amp;mv=other" title="Download and Install">Download and Install</a>
+                      </li>
+                  </ul>
+                  
+              </nav>
+          </li>
+      
+          <li class="menu-item ">
+              <h2>Adobe</h2>
+              <button id="adobe-btn" aria-haspopup="true" aria-expanded="false" aria-controls="adobe-menu">Adobe</button>
+              <div class="arrow"></div>
+
+              <nav id="adobe-menu" class="submenu-wrapper" data-type="popup" role="navigation" aria-labelledby="adobe-btn" aria-hidden="false">
+                  <ul class="submenu" data-type="column">
+                      <li>
+                          <a href="http://www.adobe.com/about-adobe.html?promoid=2NVQCDBQ&amp;mv=other" title="About">About</a>
+                      </li>
+                  
+                      <li>
+                          <a href="http://www.adobe.com/news-room.html?promoid=2SLRC8LP&amp;mv=other" title="Newsroom">Newsroom</a>
+                      </li>
+                  
+                      <li>
+                          <a href="http://www.adobe.com/about-adobe/corporate-responsibility.html?promoid=322TC14M&amp;mv=other" title="Corporate Responsibility">Corporate Responsibility</a>
+                      </li>
+                  
+                      <li>
+                          <a href="https://www.adobe.com/investor-relations.html?promoid=2XBSC4VN&amp;mv=other" title="Investor Relations">Investor Relations</a>
+                      </li>
+                  
+                      <li>
+                          <a href="http://www.adobe.com/about-adobe/events.html?promoid=39JWBRNK&amp;mv=other" title="Events">Events</a>
+                      </li>
+                  
+                      <li>
+                          <a href="http://www.adobe.com/careers.html?promoid=35SVBWDL&amp;mv=other" title="Careers">Careers</a>
+                      </li>
+                  </ul>
+              </nav>
+          </li>
+      </ul>
+  </div>
+</main>
+<footer role="contentinfo">
+   <p class="copy">Copyright &copy; 2016 University of Illinois Board of Trustees</p>
+</footer>
+<script type="text/javascript" src="../../js/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="responsive.js"></script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+h1 {
+   margin-bottom: 0.5em;
+}
+p {
+   max-width: 650px;
+   margin-left: auto;
+   margin-right: auto;
+}
+.menu {
+   width: 100%;
+   margin-top: 40px;
+}
+.menu ul {
+   list-style-type: none;
+   padding: 0;
+   margin: 0;
+}
+.menu > ul > li {
+   width: 100%;
+   border: none;
+   position: relative;
+}
+.menu button {
+   width: 100%;
+   padding: 20px 0 20px 40px;
+   font-size: 1.1em;
+   font-weight: bold;
+   color: #333;
+   text-align: left;
+   border: none;
+   background-color: transparent;
+   border-top: 1px solid #666;
+   border-bottom: 1px solid #666;
+   margin: -1px 0 0 0;
+   transition: background-color 0.50s;
+}
+.menu button + .arrow {
+   position: absolute;
+   right: 20px;
+   top: 20px;
+   content: '';
+   width: 0;
+   height: 0;
+   border-right: 10px solid transparent;
+   border-left: 10px solid transparent;
+   border-top: 15px solid #333;
+   border-bottom: none;
+   transform: rotate(0deg);
+   transition: transform 0.15s border-top-color 0.15s;
+
+}
+
+.menu button[aria-expanded=true] {
+   background-color: #555;
+   color: #fff;
+   transition: color 0.25s;
+}
+.menu button[aria-expanded=true] + .arrow {
+   border-top-color: #fff;
+   transform: rotate(180deg);
+   transition: transform 0.15s;
+}
+.menu button:hover,
+.menu button:focus {
+   background-color: #666;
+   color: #fff;
+   outline: 0;
+   transition: background-color 0.15s, color 0.15s;
+}
+.menu button:hover + .arrow,
+.menu button:focus + .arrow {
+   border-top-color: #fff;
+   transition: border-top-color: 0.15s;
+}
+.menu h2 {
+   padding: 0 0 0.5em 0;
+   margin: 0;
+   font-size: 1.1em;
+   display: none;
+}
+.menu nav {
+   display: none;
+   margin: 10px 0 20px 6em;
+}
+
+.menu nav li {
+   line-height: 2em;
+}
+.menu nav[aria-hidden=false] {
+   display: inherit;
+}
+.menu a {
+   padding: 0 5px;
+   transition: color 0.15s;
+   position: relative;
+}
+.menu a:hover,
+.menu a:focus {
+   outline: 0;
+   text-decoration: none;
+   color: #222;
+   transition: color 0.15s;
+}
+.menu a:hover:before,
+.menu a:focus:before {
+   content: ' ';
+   width: 10px;
+   height: 1px;
+   border-top: 0.1em solid #222;
+   position: absolute;
+   left: -10px;
+   top: 0.6em;
+}
+.menu a:hover:after,
+.menu a:focus:after {
+   content: ' ';
+   width: 10px;
+   height: 1px;
+   border-top: 0.1em solid #222;
+   position: absolute;
+   right: -10px;
+   top: 0.65em;
+}
+@media screen and (min-width: 991px) {
+   .menu {
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+   }
+   .menu button,
+   .menu .arrow {
+      display: none;
+   }
+   .menu h2 {
+      display: inherit;
+   }
+   .menu > ul > li {
+      float: left;
+      padding-left: 10px;
+      width: 25%;
+      height: 23em;
+      border: none;
+   }
+   .menu > ul > li:not(:last-child) {
+      margin-right: 10px;
+      border-right: 1px solid #ccc;
+      width: calc(25% - 10px);
+   }
+   .menu nav {
+      margin-left: 0;
+   }
+}

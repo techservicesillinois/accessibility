@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<title>Technology Services Accessibility Examples</title>
+<title>Widget Examples - Technology Services Accessibility Examples</title>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/examples.css">
 <script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
@@ -22,29 +22,38 @@
    <div class="sitenav row">
       <nav role="navigation" aria-label="site">
          <ul>
-            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="index.html">Home</a></li>
             <li><a href="aria.html">ARIA</a></li>
             <li><a href="bootstrap.html">Bootstrap</a></li>
-            <li><a href="examples.html">Examples</a></li>
+            <li><a href="examples.html" class="active">Examples</a></li>
          </ul>
       </nav>
    </div>
 </header>
 <main id="main" role="main" class="container">
-<h1>Technology Services Accessibility Examples</h1>
+<h1>Accessibile Widget Examples</h1>
 <div class="alert alert-warning" role="alert">
    <div class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></div>
    <p>This site is under construction.</p>
 </div>
-<p>Welcome to the Technology Services accessibility examples website. This site will serve to showcase examples of how to implement common elements of webpages and user interfaces accessibly.</p>
-<p>On this site, you will find working examples of:</p>
-<ul>
-   <li>ARIA widgets and examples of implementing ARIA in webpages</li>
-   <li>Technology Services Bootstrap accessibility shim</li>
-   <li>Common areas where accessibility issues arise</li>
-   <li>Tests for accessibility support of various user agents</li>
-   <li>Miscellaneous examples that arise out of consultation with developers</li>
-</ul>
+<p>This section will showcase various examples of accessible widgets, with a discussion of design patterns, accessibility issues presented by each particular approach and suggestions for a better approach.</p>
+<table>
+   <thead>
+      <tr>
+         <td> </td>
+         <th>Example</th>
+         <th>Description</th>
+      </tr>
+   </thead>
+   <tbody>
+      <tr>
+         <td>1</td>
+         <th><a href="./examples/responsive-menu/index.html">Responsive Menu</a></th>
+         <td>This example is an accessible reimplementation of a responsive menu adobe.com website. The example keeps the keyboard interaction pattern similar to the original.</td>
+      </tr>
+   </tbody>
+</table>
+
 </main>
 <footer role="contentinfo">
    <p class="copy">Copyright &copy; 2016 University of Illinois Board of Trustees</p>

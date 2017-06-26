@@ -145,6 +145,10 @@ th, td {
    padding: 2px 5px;
 }
 /************ Bootstrap Overrides ************/
+.row {
+   margin-left: 0;
+   margin-right: 0;
+}
 .glyphicon {
     display: block;
     float: left;
