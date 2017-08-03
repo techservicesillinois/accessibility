@@ -6,12 +6,49 @@
 <title>ARIA Treeview - Technology Services Accessibility Examples</title>
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../css/examples.css">
-<link rel="stylesheet" type="text/css" href="../css/jquery.aria-1.1.css">
+<link rel="stylesheet" type="text/css" href="../css/treeview.css">
 <script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
-<script async type="text/javascript" src="../js/jquery.aria-1.1.js"></script>
+<script async type="text/javascript" src="../js/treeview.js"></script>
 <script>
    $('document').ready(function() {
-         $('.treeview').treeview();
+         var $fruitsWidget1 = $('#fruits1-treeview').treeview();
+         var $fruitsVal1 = $('#fruits1-val');
+
+         var $fruitsWidget2 = $('#fruits2-treeview').treeview({'multiselectable': 'true'});
+         var $fruitsVal2 = $('#fruits2-val');
+
+         $fruitsWidget1.on('change', function(e) {
+            outputValue($fruitsWidget1, $fruitsVal1); 
+            return false;
+         });
+         $fruitsWidget2.on('change', function(e) {
+            outputValue($fruitsWidget2, $fruitsVal2); 
+            return false;
+         });
+
+         function outputValue($widget, $outBox) {
+            var arrValue = $widget.treeview('getValue');
+            var valueLength = arrValue.length;
+            var output;
+
+            $outBox.empty();
+
+            for (ndx = 0; ndx < arrValue.length; ndx++) {
+               if (!ndx) {
+                  output = arrValue[ndx];
+               }
+               else {
+                  output += arrValue[ndx];
+               }
+
+               if (valueLength > 1 && ndx < valueLength - 1) {
+                  output += ', ';
+               }
+            }
+
+            $outBox.html(output);
+         }
+
    });
 </script>
 </head>
@@ -32,7 +69,7 @@
             <li><a href="../index.html">Home</a></li>
             <li><a href="../aria.html" class="active">ARIA</a></li>
             <li><a href="../bootstrap.html">Bootstrap</a></li>
-            <li><a href="#">Resources</a></li>
+            <li><a href="../examples.html">Examples</a></li>
          </ul>
       </nav>
    </div>
@@ -40,23 +77,47 @@
 <main id="main" role="main" class="container">
 <h1>Accessibility Examples: ARIA Treeview</h1>
 <div class="example-wrap">
-   <h2 id="treeview-label">Types of Fruit</h2>
+   <h2 id="treeview-label">Types of Fruit (single-select)</h2>
    <div class="treeview-container">
-   <ul class="treeview" aria-labelledby="treeview-label">
-      <li aria-labelledby="fruits-lbl"><span id="fruits-lbl">Fruits</span>
+   <ul id="fruits1-treeview" class="treeview" aria-labelledby="treeview-label" data-name="fruits-treeview">
+      <li aria-labelledby="fruits-lbl" data-value="fruits"><span id="fruits-lbl">Fruits</span>
          <ul>
-            <li><span>Oranges</span></li>
-            <li aria-labelledby="apples-lbl"><span id="apples-lbl">Apples</span>
+            <li data-value="oranges"><span>Oranges</span></li>
+            <li aria-labelledby="apples-lbl" data-value="apples"><span id="apples-lbl">Apples</span>
                <ul>
-                  <li><span>Macintosh</span></li>
-                  <li><span>Granny Smith</span></li>
-                  <li><span>Fuji</span></li>
+                  <li data-value="macintosh"><span>Macintosh</span></li>
+                  <li data-value="granny-smith"><span>Granny Smith</span></li>
+                  <li data-value="fuji"><span>Fuji</span></li>
                </ul>
             </li>
-            <li><span>Bananas</span></li>
+            <li data-value="bananas"><span>Bananas</span></li>
          </ul>
       </li>
    </ul>
+   <h3 class="treeview-val-heading">Treeview Value</h3>
+   <div id="fruits1-val" class="treeview-val-box"></div>
+   </div>
+</div>
+<div class="example-wrap">
+   <h2 id="treeview-label">Types of Fruit (multi-select)</h2>
+   <div class="treeview-container">
+   <ul id="fruits2-treeview" class="treeview treeview-multi" aria-labelledby="treeview-label" data-name="fruits-treeview">
+      <li aria-labelledby="fruits-lbl" data-value="fruits"><span id="fruits-lbl">Fruits</span>
+         <ul>
+            <li data-value="oranges"><span>Oranges</span></li>
+            <li aria-labelledby="apples-lbl" data-value="apples"><span id="apples-lbl">Apples</span>
+               <ul>
+                  <li data-value="macintosh"><span>Macintosh</span></li>
+                  <li data-value="granny-smith"><span>Granny Smith</span></li>
+                  <li data-value="fuji"><span>Fuji</span></li>
+               </ul>
+            </li>
+            <li data-value="bananas"><span>Bananas</span></li>
+         </ul>
+      </li>
+   </ul>
+   <h3 class="treeview-val-heading">Treeview Value</h3>
+   <div id="fruits2-val" class="treeview-val-box"></div>
    </div>
 </div>
 </main>

@@ -118,7 +118,7 @@ header h1 {
    padding: 2em 1em; 
 }
 div.example-wrap {
-   margin: 0 auto;
+   margin: 0 auto 1em;
    width: 100%;
    padding: 1em;
    background-color: rgba(255,255,255,.6);
@@ -156,6 +156,21 @@ th, td {
     margin-right: 5px;
     margin-top: -0.2em;
 }
+
+/************ Treeview example styles ************/
+.treeview-val-heading {
+   font-size: 1em;
+   font-weight: bold;
+}
+.treeview-val-box {
+   padding: 1em;
+   border: 1px solid #999;
+   border-radius: 5px;
+   min-height: 3.5em;
+   width: 80%;
+}
+
+/************ Normal View ************/
 @media screen and (min-width: 768px) {
    .imark {
       width: 400px;
@@ -176,6 +191,8 @@ th, td {
       width: 95%;
    }
 }
+
+/************ Wide View ************/
 @media screen and (min-width: 992px) {
    .sitenav li a {
       font-size: 1.125em;

@@ -6,12 +6,16 @@
 <title>ARIA Slider - Technology Services Accessibility Examples</title>
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../css/examples.css">
-<link rel="stylesheet" type="text/css" href="../css/jquery.aria-1.1.css">
+<link rel="stylesheet" type="text/css" href="../css/slider.css">
 <script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
-<script async type="text/javascript" src="../js/jquery.aria-1.1.js"></script>
+<script async type="text/javascript" src="../js/slider.js"></script>
+
 <script>
    $('document').ready(function() {
-         $('.slider').slider();
+         $('#slider1').slider();
+         $('#slider2').slider({val: [30, 50], bShowRange: true});
+         $('#slider3').slider();
+         $('#slider4').slider({val: [30, 50], bShowRange: true});
    });
 </script>
 </head>
@@ -32,7 +36,7 @@
             <li><a href="../index.html">Home</a></li>
             <li><a href="../aria.html" class="active">ARIA</a></li>
             <li><a href="../bootstrap.html">Bootstrap</a></li>
-            <li><a href="#">Resources</a></li>
+            <li><a href="../examples.html">Examples</a></li>
          </ul>
       </nav>
    </div>
@@ -41,7 +45,28 @@
 <h1>Accessibility Examples: ARIA Slider</h1>
 <div class="example-wrap">
    <div class="slider-container">
-   <div class="slider"><div class="slider-handle"></div></div>
+      <div id="slider1" class="slider">
+         <div class="slider-handle"></div>
+      </div>
+   </div>
+   <div class="slider-container">
+      <div id="slider2" class="slider slider-multi">
+         <div class="slider-handle"></div>
+         <div class="slider-handle"></div>
+      </div>
+   </div>
+</div>
+<div class="example-wrap">
+   <div class="slider-container slider-vertical">
+      <div id="slider3" class="slider">
+         <div class="slider-handle"></div>
+      </div>
+   </div>
+   <div class="slider-container slider-vertical">
+      <div id="slider4" class="slider slider-multi">
+         <div class="slider-handle"></div>
+         <div class="slider-handle"></div>
+      </div>
    </div>
 </div>
 </main>
