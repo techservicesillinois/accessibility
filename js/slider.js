@@ -160,7 +160,7 @@ if (typeof Object.create !== 'function') {
                this.$labels[ndx] = $('<span>')
                   .attr('aria-hidden', 'true')
                   .addClass('slider-text')
-                  .text(this.val[ndx] + '%');
+                  .text(this.val[ndx]);
 
                if (!this.bMulti) {
                   this.$labels[ndx].insertAfter(this.$elem);
@@ -406,12 +406,13 @@ if (typeof Object.create !== 'function') {
       },
       _positionHandle: function($handle) {
          var index = this.$handles.index($handle);
+         var valPercent = ((this.val[index] - this.options.min) / (this.options.max - this.options.min)) * 100; // interpolate the current handle value
 
          if (!this.bVertical) {
-            $handle.css('left', 'calc(' + this.val[index] + '% - ' + ($handle.outerWidth()/2) + 'px)');
+            $handle.css('left', 'calc(' + valPercent + '% - ' + ($handle.outerWidth()/2) + 'px)');
          }
          else {
-            $handle.css('top', 'calc(' + this.val[index] + '% - ' + ($handle.outerHeight()/2) + 'px)');
+            $handle.css('top', 'calc(' + valPercent + '% - ' + ($handle.outerHeight()/2) + 'px)');
          }
       },
       _positionRangeIndicator($handle) {
@@ -454,7 +455,7 @@ if (typeof Object.create !== 'function') {
          this._positionHandle($handle);
 
          if (this.options.bShowLabel) {
-            this.$labels[ndx].text(this.val[ndx] + '%');
+            this.$labels[ndx].text(this.val[ndx]);
          }
 
          if (this.bMulti && this.options.bShowRange) {
