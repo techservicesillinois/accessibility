@@ -192,12 +192,12 @@
 }
 .slider-vertical .slider-multi .slider-handle:first-child .slider-text {
    transform: rotate(90deg);
-   left: -15px;
+   left: -0.5em;
    top: -100px;
 }
 .slider-vertical .slider-multi .slider-handle:nth-child(2) .slider-text {
    transform: rotate(90deg);
-   left: -15px;
+   left: -0.5em;
    top: 40px;
 }
 .slider-vertical .slider-multi .slider-range {
