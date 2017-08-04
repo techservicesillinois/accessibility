@@ -36,12 +36,11 @@
    <h1>Responsive Menu Example</h1>
    <p>This example showcases a menu found in the footer of the <a href="http://www.adobe.com">Adobe website</a>. There were accessibility issues with this menu that would prevent screen reader users from successfully interacting with the menu. On this page is a modified example that corrects the accessibility issues while leaving the user interaction very similar to the original.</p>
    <p><strong>Note:</strong> This example should not be taken as a general indication of the accessibility of Adobe's products or services.</p>
-
-   <h2>Responsive Menu</h2>
+   <div class="example-wrap">
    <div class="menu">
      <ul>
         <li>
-              <h3>Products</h3>
+              <h2>Products</h2>
               <button id="products-btn" aria-haspopup="true" aria-expanded="false" aria-controls="products-menu">Products</button>
               <div class="arrow"></div>
               <nav id="products-menu" role="navigation" aria-labelledby="products-btn" aria-hidden="false">
@@ -70,7 +69,7 @@
           </li>
       
           <li>
-              <h3>Blogs &amp; Community</h3>
+              <h2>Blogs &amp; Community</h2>
               <button id="blogs-btn" aria-haspopup="true" aria-expanded="false" aria-controls="blogs-menu">Blogs &amp; Community</button>
               <div class="arrow"></div>
               <nav id="blogs-menu" role="navigation" aria-labelledby="blogs-btn" aria-hidden="false">
@@ -119,7 +118,7 @@
           </li>
       
           <li>
-              <h3>Support</h3>
+              <h2>Support</h2>
               <button id="support-btn" aria-controls="support-menu" aria-haspopup="true" aria-expanded="false">Support</button>
               <div class="arrow"></div>
               <nav id="support-menu" role="navigation" aria-labelledby="support-btn" aria-hidden="false">
@@ -149,7 +148,7 @@
           </li>
       
           <li>
-              <h3>Adobe</h3>
+              <h2>Adobe</h2>
               <button id="adobe-btn" aria-haspopup="true" aria-expanded="false" aria-controls="adobe-menu">Adobe</button>
               <div class="arrow"></div>
 
@@ -182,6 +181,7 @@
               </nav>
           </li>
       </ul>
+  </div>
   </div>
 </main>
 <footer role="contentinfo">
