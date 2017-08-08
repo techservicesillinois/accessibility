@@ -26,11 +26,13 @@
          if ($toggle.attr('aria-expanded') === 'false') {
             $toggle.attr('aria-expanded', 'true');
             $nav.attr('aria-hidden', 'false');
+            $items.attr('tabindex', '-1').first().attr('tabindex', '0').focus();
          } else {
             $toggle.attr('aria-expanded', 'false');
             $nav.attr('aria-hidden', 'true');
+            $toggle.focus();
          }
-         $toggle.focus();
+         //$toggle.focus();
 
          return false;
       })
@@ -216,23 +218,24 @@
    <ul>
       <li><code>aria-expanded</code> &ndash; Set to true if the menu is expanded; false if the menu is collapsed.</li>
       <li><code>aria-controls</code> &ndash; Set to the HTML id of the menu toggled by this button.</li>
+      <li><code>aria-haspopup</code> &ndash; Set to true. This attribute informs a user that the button is a menu button.</li>
       <li><code>aria-hidden</code> &ndash; Placed on the controlled menu. Set to false when expanded; true when collapsed.</li>
    </ul>
    <p>Below is a code snippet showing simplified markup for implementing an accessible menu toggle button. The values of the <code>aria-expanded</code> and the <code>aria-hidden</code> attributes would be for the collapsed state.</p>
    <pre>
-&lt;button <strong>aria-expanded="false" aria-controls="menu-id"</strong>&gt;Toggle Menu&lt;/button&gt;     
+&lt;button <strong>aria-expanded="false" aria-haspopup="true" aria-controls="menu-id"</strong>&gt;Toggle Menu&lt;/button&gt;     
 &lt;ul id="menu-id" <strong>aria-hidden="true"</strong>&gt;
    . . .
 &lt;/ul&gt;
    </pre>
    <p>Here is the snippet with the ARIA attributes in the expanded state:</p>
    <pre>
-&lt;button <strong>aria-expanded="true" aria-controls="menu-id"</strong>&gt;Toggle Menu&lt;/button&gt;     
+&lt;button <strong>aria-expanded="true" aria-haspopup="true" aria-controls="menu-id"</strong>&gt;Toggle Menu&lt;/button&gt;     
 &lt;ul id="menu-id" <strong>aria-hidden="false"</strong>&gt;
    . . .
 &lt;/ul&gt;
    </pre>
-   <p>JavaScript is needed to toggle the values of the <code>aria-expanded</code> and <code>aria-hidden</code> attributes. Note that the value of <code>aria-controls</code> does not change.
+   <p>JavaScript is needed to toggle the values of the <code>aria-expanded</code> and <code>aria-hidden</code> attributes. Note that the values of <code>aria-controls</code> and <code>aria-haspopup</code> do not change.
 </div>
 
 </main>
