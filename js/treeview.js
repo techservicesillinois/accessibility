@@ -33,6 +33,7 @@ if (typeof Object.create !== 'function') {
       collapsed: true,
       multiselectable: false,
       showCheckboxes: true,
+      touchInterval: 500,
       cues: "You can use the arrow keys to navigate between items in the tree.<br>Use enter or space to expand or collapse items."
    };
 
@@ -120,6 +121,7 @@ if (typeof Object.create !== 'function') {
          this.imgChecked = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDIxLjAuMiwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiBoZWlnaHQ9IjE2cHgiIHdpZHRoPSIxNnB4IiB2aWV3Qm94PSIwIDAgMTYgMTYiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDE2IDE2OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6I0ZGRkZGRjt9CgkuY2hlY2ttYXJre2ZpbGw6bm9uZTtzdHJva2U6IzAwMDAwMDtzdHJva2Utd2lkdGg6MjtzdHJva2UtbWl0ZXJsaW1pdDoxMDt9Cjwvc3R5bGU+CjxnPgoJPHBhdGggY2xhc3M9InN0MCIgZD0iTTUsMTUuNWMtMi41LDAtNC41LTItNC41LTQuNVY1YzAtMi41LDItNC41LDQuNS00LjVoNmMyLjUsMCw0LjUsMiw0LjUsNC41djZjMCwyLjUtMiw0LjUtNC41LDQuNUg1eiIvPgoJPHBhdGggZD0iTTExLDFjMi4yLDAsNCwxLjgsNCw0djZjMCwyLjItMS44LDQtNCw0SDVjLTIuMiwwLTQtMS44LTQtNFY1YzAtMi4yLDEuOC00LDQtNEgxMSBNMTEsMEg1QzIuMiwwLDAsMi4yLDAsNXY2CgkJYzAsMi44LDIuMiw1LDUsNWg2YzIuOCwwLDUtMi4yLDUtNVY1QzE2LDIuMiwxMy44LDAsMTEsMEwxMSwweiIvPgo8L2c+CjxnIGlkPSJjaGVjayI+Cgk8Zz4KCQk8bGluZSBjbGFzcz0iY2hlY2ttYXJrIiB4MT0iMy4yIiB5MT0iMy4zIiB4Mj0iMTIuNyIgeTI9IjEyLjgiLz4KCTwvZz4KCTxnPgoJCTxsaW5lIGNsYXNzPSJjaGVja21hcmsiIHgxPSIxMi43IiB5MT0iMy4zIiB4Mj0iMy4yIiB5Mj0iMTIuOCIvPgoJPC9nPgo8L2c+Cjwvc3ZnPgo=";
 
          this.bClicked = false;
+         this.bLongTouch = false;
 
          this.selected = $([]);
 
@@ -211,32 +213,23 @@ if (typeof Object.create !== 'function') {
          })
          .on('mousedown', function(e) {
             thisObj.bClicked = true;
+            thisObj._handleClick($(e.target));
+
+            return false;
          })
-         .on('click', function(e) {
-            var $target = $(e.target);
-            var $node = $();
+         .on('touchstart', function(e) {
+            thisObj.bClicked = true;
 
-            if ($target.is ('span') || $target.is('img')) {
-               $node = $target.parent();
-            }
+            thisObj.touchTimer = setTimeout(function() {
+               thisObj.bLongTouch = true;
+            }, thisObj.options.touchInterval);
+            return false;
+         })
+         .on('touchend', function(e) {
+            clearTimeout(thisObj.touchTimer);
+            thisObj.touchTimer = null;
 
-            $node.attr('tabindex', '0');
-            thisObj.$nodes.not($node).attr('tabindex', '-1');
-
-            if (thisObj.options.multiselectable) {
-               if ($target.is('span') || $target.is('.treeview-chkbox')) {
-                  thisObj._toggleSelect($node);
-                  return false;
-               }
-            }
-            else {
-               thisObj._selectNode($node);
-            }
-
-            if ($node.hasClass('parent')) {
-               thisObj._toggleGroup($node);
-            }
-
+            thisObj._handleClick($(e.target));
             return false;
          })
          .on('keydown', function(e) {
@@ -323,6 +316,32 @@ if (typeof Object.create !== 'function') {
          });
 
          return value;
+      },
+      _handleClick: function($target) {
+         var $node = $();
+
+         if ($target.is ('span') || $target.is('img')) {
+            $node = $target.parent();
+         }
+
+         $node.attr('tabindex', '0');
+         this.$nodes.not($node).attr('tabindex', '-1');
+
+         if (this.options.multiselectable) {
+            if (($target.is('span') || $target.is('.treeview-chkbox')) && !this.bLongTouch) {
+               this._toggleSelect($node);
+               return false;
+            }
+
+            this.bLongTouch = false;
+         }
+         else {
+            this._selectNode($node);
+         }
+
+         if ($node.hasClass('parent')) {
+            this._toggleGroup($node);
+         }
       },
       _moveDown: function($node) {
          if ($node.hasClass('parent')) {
