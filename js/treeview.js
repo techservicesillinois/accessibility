@@ -31,9 +31,11 @@ if (typeof Object.create !== 'function') {
 
    var defaults = {
       collapsed: true,
+      followFocus: true,
       multiselectable: false,
+      selectParents: false,
       showCheckboxes: true,
-      touchInterval: 500,
+      touchInterval: 400,
       cues: "You can use the arrow keys to navigate between items in the tree.<br>Use enter or space to expand or collapse items."
    };
 
@@ -120,10 +122,14 @@ if (typeof Object.create !== 'function') {
 
          this.imgChecked = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDIxLjAuMiwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiBoZWlnaHQ9IjE2cHgiIHdpZHRoPSIxNnB4IiB2aWV3Qm94PSIwIDAgMTYgMTYiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDE2IDE2OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6I0ZGRkZGRjt9CgkuY2hlY2ttYXJre2ZpbGw6bm9uZTtzdHJva2U6IzAwMDAwMDtzdHJva2Utd2lkdGg6MjtzdHJva2UtbWl0ZXJsaW1pdDoxMDt9Cjwvc3R5bGU+CjxnPgoJPHBhdGggY2xhc3M9InN0MCIgZD0iTTUsMTUuNWMtMi41LDAtNC41LTItNC41LTQuNVY1YzAtMi41LDItNC41LDQuNS00LjVoNmMyLjUsMCw0LjUsMiw0LjUsNC41djZjMCwyLjUtMiw0LjUtNC41LDQuNUg1eiIvPgoJPHBhdGggZD0iTTExLDFjMi4yLDAsNCwxLjgsNCw0djZjMCwyLjItMS44LDQtNCw0SDVjLTIuMiwwLTQtMS44LTQtNFY1YzAtMi4yLDEuOC00LDQtNEgxMSBNMTEsMEg1QzIuMiwwLDAsMi4yLDAsNXY2CgkJYzAsMi44LDIuMiw1LDUsNWg2YzIuOCwwLDUtMi4yLDUtNVY1QzE2LDIuMiwxMy44LDAsMTEsMEwxMSwweiIvPgo8L2c+CjxnIGlkPSJjaGVjayI+Cgk8Zz4KCQk8bGluZSBjbGFzcz0iY2hlY2ttYXJrIiB4MT0iMy4yIiB5MT0iMy4zIiB4Mj0iMTIuNyIgeTI9IjEyLjgiLz4KCTwvZz4KCTxnPgoJCTxsaW5lIGNsYXNzPSJjaGVja21hcmsiIHgxPSIxMi43IiB5MT0iMy4zIiB4Mj0iMy4yIiB5Mj0iMTIuOCIvPgoJPC9nPgo8L2c+Cjwvc3ZnPgo=";
 
+         this.imgMixed = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMTYgMTYiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDE2IDE2OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PHN0eWxlIHR5cGU9InRleHQvY3NzIj4uc3Qwe2ZpbGw6I0ZGRkZGRjt9LnN0MXtmaWxsOiM3MDczNzI7fTwvc3R5bGU+PGc+PHBhdGggY2xhc3M9InN0MCIgZD0iTTUsMTUuNWMtMi41LDAtNC41LTItNC41LTQuNVY1YzAtMi41LDItNC41LDQuNS00LjVoNmMyLjUsMCw0LjUsMiw0LjUsNC41djZjMCwyLjUtMiw0LjUtNC41LDQuNUg1eiIvPjxwYXRoIGQ9Ik0xMSwxYzIuMiwwLDQsMS44LDQsNHY2YzAsMi4yLTEuOCw0LTQsNEg1Yy0yLjIsMC00LTEuOC00LTRWNWMwLTIuMiwxLjgtNCw0LTRIMTEgTTExLDBINUMyLjIsMCwwLDIuMiwwLDV2NmMwLDIuOCwyLjIsNSw1LDVoNmMyLjgsMCw1LTIuMiw1LTVWNUMxNiwyLjIsMTMuOCwwLDExLDBMMTEsMHoiLz48L2c+PGc+PHBhdGggY2xhc3M9InN0MSIgZD0iTTUuNiwxMy44Yy0xLjksMC0zLjUtMS41LTMuNS0zLjVWNS43YzAtMS45LDEuNS0zLjUsMy41LTMuNWg0LjZjMS45LDAsMy41LDEuNSwzLjUsMy41djQuNmMwLDEuOS0xLjUsMy41LTMuNSwzLjVINS42eiIvPjwvZz48L3N2Zz4="
+
          this.bClicked = false;
          this.bLongTouch = false;
 
-         this.selected = $([]);
+         this.selected = $();
+         this.$parentNodes = $();
+         this.$prevToggled = $();
 
          // merge and store options
          this.options = $.extend({}, defaults, options);
@@ -174,6 +180,10 @@ if (typeof Object.create !== 'function') {
                'aria-posinset': index+1,
                'tabindex': (index == 0 ? '0' : '-1')
             });
+
+            if (thisObj.options.multiselectable) {
+               $(this).attr('aria-checked', 'false');
+            }
          });
 
          this.$groups.each(function(grpNdx) {
@@ -188,6 +198,10 @@ if (typeof Object.create !== 'function') {
                   'aria-posinset': nodeNdx+1,
                   'tabindex': -1
                });
+
+               if (thisObj.options.multiselectable) {
+                  $(this).attr('aria-checked', 'false');
+               }
             });
 
          });
@@ -209,6 +223,12 @@ if (typeof Object.create !== 'function') {
                      'aria-expanded': !thisObj.options.collapsed,
                   })
                   .prepend('<img class="treeview-img" src="' + thisObj.imgCollapsed + '" alt="">');
+
+                  thisObj.$parentNodes = thisObj.$parentNodes.add($node);
+            }
+
+            if (thisObj.multiselectable) {
+               thisObj.nodeStates[index] = $node.attr('aria-checked');
             }
          })
          .on('mousedown', function(e) {
@@ -242,7 +262,8 @@ if (typeof Object.create !== 'function') {
             switch(e.keyCode) {
                case thisObj.keys.space: {
                   if (thisObj.options.multiselectable) { // toggle selection
-                     thisObj._toggleSelect($node);
+                     thisObj._toggleSelection($node);
+                     this.$prevToggled = $node;
                      return false;
                   }
                }
@@ -296,15 +317,21 @@ if (typeof Object.create !== 'function') {
                $node = $node.parent();
             }
 
-            if (!thisObj.options.multiselectable) {
+            if (!thisObj.options.multiselectable && thisObj.options.followFocus) {
                thisObj._selectNode($node);
             }
 
             return false;
          });
 
-         if (this.options.multiselectable && this.options.showCheckboxes) {
-            this.$chkBoxes = this.$elem.find('.treeview-chkbox');
+         if (this.options.multiselectable) {
+
+            this.nodeStates = new Array(this.$nodes.length);
+            this._storeNodeStates();
+
+            if (this.options.showCheckboxes) {
+               this.$chkBoxes = this.$elem.find('.treeview-chkbox');
+            }
          }
 
       }, // end _BuildTree()
@@ -324,24 +351,28 @@ if (typeof Object.create !== 'function') {
             $node = $target.parent();
          }
 
-         $node.attr('tabindex', '0');
+
          this.$nodes.not($node).attr('tabindex', '-1');
+         $node.attr('tabindex', '0');
 
          if (this.options.multiselectable) {
             if (($target.is('span') || $target.is('.treeview-chkbox')) && !this.bLongTouch) {
-               this._toggleSelect($node);
+               this._toggleSelection($node);
+               this.$prevToggled = $node;
                return false;
             }
 
             this.bLongTouch = false;
          }
-         else {
+         else if (this.options.followFocus) {
             this._selectNode($node);
          }
 
          if ($node.hasClass('parent')) {
             this._toggleGroup($node);
          }
+
+         $node.focus();
       },
       _moveDown: function($node) {
          if ($node.hasClass('parent')) {
@@ -402,13 +433,134 @@ if (typeof Object.create !== 'function') {
             $parents.first().attr('tabindex', '0').focus();
          }
       },
-      _selectNode: function($node) {
-         if (!this.options.multiselectable) {
-            this.$nodes.attr('aria-selected', 'false');
-         }
-         $node.attr('aria-selected', 'true');
+      _deselectNode: function($node) {
+         if (this.options.multiselectable) {
+            $node.attr('aria-checked', 'false');
 
-         this.$selected = this.$nodes.filter('[aria-selected=true]');
+            if (this.options.showCheckboxes) {
+               $node.find('.treeview-chkbox').first().attr('src', this.imgNotChecked);
+            }
+         }
+         else {
+            $node.attr('aria-selected', 'false');
+         }
+
+         this._updateValue();
+         this.$elem.trigger('change');
+      },
+      _isMixed: function($node) {
+            return ($node.attr('aria-checked') == 'mixed');
+      },
+      _isSelected: function($node) {
+            return ($node.attr('aria-' + (this.options.multiselectable ? 'checked' : 'selected')) == 'true');
+      },
+      _restoreNodeStates: function() {
+         var thisObj = this;
+
+         this.$nodes.each(function(index) {
+            var nodeState = thisObj.nodeStates[index];
+            var $node = $(this);
+
+            $node.attr('aria-checked', nodeState);
+
+            if (thisObj.options.showCheckboxes) {
+               if (nodeState == 'true') {
+                  $node.find('.treeview-chkbox').first().attr('src', thisObj.imgChecked);
+               }
+               else if (nodeState == 'mixed') {
+                  $node.find('.treeview-chkbox').first().attr('src', thisObj.imgMixed);
+               }
+               else {
+                  $node.find('.treeview-chkbox').first().attr('src', thisObj.imgNotChecked);
+               }
+            }
+         });
+      },
+      _selectNode: function($node) {
+         if (this.options.multiselectable) {
+
+            $node.attr('aria-checked', 'true');
+            if (this.options.showCheckboxes) {
+               $node.find('.treeview-chkbox').first().attr('src', this.imgChecked);
+            }
+         }
+         else {
+            this.$nodes.attr('aria-selected', 'false');
+            $node.attr('aria-selected', 'true');
+         }
+
+         this._updateValue();
+         this.$elem.trigger('change');
+      },
+      _storeNodeStates: function() {
+         var thisObj = this;
+
+         this.$nodes.each(function(index) {
+            thisObj.nodeStates[index] = $(this).attr('aria-checked');
+         });
+
+      },
+      _toggleSelection: function($node) {
+         var thisObj = this;
+         var $childNodes = $();
+         var bParent = $node.hasClass('parent');
+
+         if (bParent) {
+            // parent node - get collection of children
+            $childNodes = $node.find('[role=treeitem]').not('parent'); 
+         }
+
+         if (this._isSelected($node)) { // node is selected
+            if (bParent) {
+               $childNodes.add($node).each(function(index) {
+                  thisObj._deselectNode($(this));
+               });
+               if (!$node.is(thisObj.$prevToggled)) {
+                  this._storeNodeStates();
+               }
+               this._updateParentNodes();
+            }
+            else {
+               this._deselectNode($node);
+               this._updateParentNodes();
+               this._storeNodeStates();
+            }
+         }
+         else { // node is not selected or is mixed (if parent)
+            if (bParent) {
+               if (this._isMixed($node)) {
+                  // check all children
+                  $childNodes.add($node).each(function(index) {
+                     thisObj._selectNode($(this));
+                  });
+                  this._updateParentNodes();
+               }
+               else {
+                  // if the node was previously mixed - restore states
+                  if(this.nodeStates[this.$nodes.index($node)] == 'mixed') {
+                     this._restoreNodeStates();
+                  }
+                  else {
+                     // check all children
+                     $childNodes.add($node).each(function(index) {
+                        thisObj._selectNode($(this));
+                     });
+
+                     this._updateParentNodes();
+
+                     // store node states
+                     this._storeNodeStates();
+                  }
+               }
+            }
+            else {
+               this._selectNode($node);
+               this._updateParentNodes();
+               this._storeNodeStates();
+            }
+         }
+
+         this._updateValue();
          this.$elem.trigger('change');
       },
       _toggleGroup: function($node) {
@@ -426,21 +578,34 @@ if (typeof Object.create !== 'function') {
             $node.find('.treeview-img').first().attr('src', this.imgCollapsed);
          }
       },
-      _toggleSelect: function($node) {
-         if ($node.attr('aria-selected') == 'true') {
-            $node.attr('aria-selected', 'false');
-            if (this.options.showCheckboxes) {
-               $node.find('.treeview-chkbox').first().attr('src', this.imgNotChecked);
+      _updateParentNodes: function() { // Update the selected state of parent nodes, based on their children
+         var thisObj = this;
+
+         this.$parentNodes.each(function(index) {
+            var $parent = $(this);
+            var $children = $parent.find('[role=treeitem]').not('parent');
+            var $unselected = $children.filter('[aria-checked=false]'); 
+
+            if ($unselected.length) {
+               if ($children.length === $unselected.length) {
+                  $parent.attr('aria-checked', 'false').find('.treeview-chkbox').first().attr('src', thisObj.imgNotChecked);
+               }
+               else {
+                  $parent.attr('aria-checked', 'mixed').find('.treeview-chkbox').first().attr('src', thisObj.imgMixed);
+               }
             }
+            else {
+               $parent.attr('aria-checked', 'true').find('.treeview-chkbox').first().attr('src', thisObj.imgChecked);
+            }
+         });
+      },
+      _updateValue: function() {
+         if (this.options.multiselectable && !this.options.selectParents) {
+            this.$selected = this.$nodes.not('.parent').filter('[aria-' + (this.options.multiselectable ? 'checked' : 'selected') + '=true]');
          }
          else {
-            $node.attr('aria-selected', 'true');
-            if (this.options.showCheckboxes) {
-               $node.find('.treeview-chkbox').first().attr('src', this.imgChecked);
-            }
+            this.$selected = this.$nodes.filter('[aria-' + (this.options.multiselectable ? 'checked' : 'selected') + '=true]');
          }
-         this.$selected = this.$nodes.filter('[aria-selected=true]');
-         this.$elem.trigger('change');
       }
    };
 })(jQuery, window, document); // END TREEVIEW
