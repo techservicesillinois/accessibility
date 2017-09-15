@@ -1,0 +1,243 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Form Validation - Technology Services Accessibility Examples</title>
+<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../css/examples.css">
+<script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
+<script>
+   function contactSubmit(e) {
+
+      var $name = $('#edit-name');
+      var $email = $('#edit-mail');
+      var $subject = $('#edit-subject');
+      var $message = $('#edit-message');
+      var value;
+      var bError = false;
+      var $focus = null;
+      var $errContainer = $('#form_errMsg');
+      var errMsg = '';
+      var errCnt = 0;
+
+      // clear any previous flagged errors and remove the error message div (if present)
+      $name.removeAttr('aria-invalid');
+      $email.removeAttr('aria-invalid');
+      $subject.removeAttr('aria-invalid');
+      $message.removeAttr('aria-invalid');
+      $errContainer.empty();
+
+      // check the name field
+      value = $name.val();
+
+      if (value.length == 0) {
+         // name field is empty or text is too long
+         $name.attr('aria-invalid', 'true');
+         errCnt++;
+         bError = true;
+         //$focus = $name;
+         errMsg += '\t<li><a href="#edit-name">You must enter your name.</a></li>\n';
+      }
+      else if (value.length > 255) {
+         // truncate the string to 255 characters
+         $name.attr(value, value.substr(0, 254));
+      }
+
+      // check the email field
+      value = $email.val();
+
+      if (value.length == 0) {
+
+         // email field is empty or text is too long
+         $email.attr('aria-invalid', 'true');
+
+         errCnt++;
+
+         if (bError == false) {
+            bError = true;
+            //$focus = $email;
+         }
+
+         errMsg += '\t<li><a href="#edit-mail">You must enter your email address.</a></li>\n';
+      }
+      else if ((value.length > 320) || (/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(value) == false)) {
+
+         // email is not in correct format
+         $email.attr('aria-invalid', 'true');
+
+         errCnt++;
+
+         if (bError == false) {
+            bError = true;
+            //$focus = $email;
+         }
+         errMsg += '\t<li><a href="#edit-mail">Invalid email address.</a></li>\n';
+      }
+
+      // check the subject field
+      value = $subject.val();
+
+      if (value.length == 0) {
+         // subject field is empty or text is too long
+         $subject.attr('aria-invalid', 'true');
+
+         errCnt++;
+
+         if (bError == false) {
+            bError = true;
+            //$focus = $subject;alert('Your message has been sent.');
+         }
+         errMsg += '\t<li><a href="#edit-subject">You must enter a subject.</a></li>\n';
+      }
+      else if (value.length > 255) {
+         // truncate the string to 255 characters
+         $subject.attr(value, value.substr(0, 254));
+      }
+
+      // check the subject field
+      value = $message.val();
+
+      if (value.length == 0) {
+         // message field is empty or text is too long
+         $message.attr('aria-invalid', 'true');
+
+         errCnt++;
+
+         if (bError == false) {
+            bError = true;
+            //$focus = $message;
+         }
+         errMsg += '\t<li><a href="#edit-message">You must enter a message.</a></li>\n';
+      }
+      else if (value.length > 2048) {
+         // truncate the string to 2048 characters
+         $message.attr('value', value.substr(0, 2047));
+      }
+
+      if (bError == true) {
+         errMsg = '<h2">Message not sent (' + errCnt + ' error' + (errCnt > 1 ? 's':'') + '):</h2><ul>' + errMsg + '</ul>';
+         
+         $errContainer.html(errMsg).focus();
+
+         e.preventDefault();
+         return false;
+      }
+
+      // form is valid - alert user that form was submitted.
+      alert('Your message has been sent.');
+      e.preventDefault();
+      return false;
+
+   }
+</script>
+<style>
+div.description {
+	margin: 10px 0;
+}
+[aria-invalid="true"] {
+   background-color: #faa;
+}
+div#form_errMsg:not(:empty) {
+   margin-right: 20px;
+   padding: 5px;
+   font-weight: bold;
+   border: 1px solid red;
+}
+</style>
+</head>
+<body>
+<header role="banner">
+   <a class="skip-link" href="#main">Skip to Main Content</a>
+   <div class="row">
+      <div class="col-xs-12 col-lg-4">
+         <img class="imark" src="../images/techsvc-logo-bw.svg" alt="Technology Sevices at Illinois I-mark">
+      </div>
+      <div class="col-xs-12 col-lg-8">
+         <h1>Accessible Widget Examples</h1>
+      </div>
+   </div>
+   <div class="sitenav row">
+      <nav role="navigation" aria-label="site">
+         <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../aria.html">ARIA</a></li>
+            <li><a href="../bootstrap.html">Bootstrap</a></li>
+            <li><a href="../examples.html" class="active">Examples</a></li>
+         </ul>
+      </nav>
+   </div>
+</header>
+<main id="main" role="main" class="container">
+<h1>Accessibility Examples: Form Validation</h1>
+<p>Form validation is an are of web accessibility that can be tricky to get right. The main reason for this is that the common techniques for handling errors are not accessible for users who are blind. As such, it is necessary to keep accessibility firmly in mind when designing a form.</p>
+<p>There are four methods of supplying error feedback in common use today:</p>
+<ul>
+   <li>Error messages are placed above the form on form submission.</li>
+   <li>As the user fills out the form, error messages appear after (or otherwise near) an invalid form field.</li>
+   <li>Error messages appear after (or otherwise near) invalid form fields on form submission.</li>
+   <li>A pop-up dialog listing the errors is displayed on form submission.</li>
+</ul>
+<h2>Errors Placed Above The Form</h2>
+<div class="example-wrap">
+
+   <form id="contact-mail-page" accept-charset="UTF-8" method="post" onsubmit="contactSubmit(event);">
+
+      <p id="form-caption">You can leave a message using the contact form below.</p>
+      <div id="form_errMsg" role="alert" tabindex="-1"></div>
+         <div class="form-group">
+            <label for="edit-name" title="This field is required">Your name:</label>
+            <input id="edit-name" maxlength="255" name="name" size="60" class="form-control" type="text" aria-required="true">
+         </div>
+         <div class="form-group">
+            <label for="edit-mail" title="This field is required">Your e-mail address:</label>
+            <input id="edit-mail" maxlength="255" name="mail" size="60" class="form-control" type="email" aria-required="true">
+         </div>
+         <div class="form-group">
+            <label for="edit-subject" title="This field is required">Subject:</label>
+            <input id="edit-subject" maxlength="255" name="subject" size="60" class="form-control" type="text" aria-required="true">
+         </div>
+         <div class="form-group">
+            <label for="edit-message" title="This field is required">Message:</label>
+            <textarea id="edit-message" cols="60" rows="5" name="message" class="form-control" aria-required="true"></textarea>
+         </div>
+
+         <button type="submit" class="btn btn-default">Send e-mail</button>
+      </div>
+   </form>
+
+   <!--
+   <h3>Required HTML Markup</h3>
+   <p>A menu toggle must indicate whether its associated menu is expanded or collapsed. This requires the following ARIA attributes:</p>
+   <ul>
+      <li><code>aria-expanded</code> &ndash; Set to true if the menu is expanded; false if the menu is collapsed.</li>
+      <li><code>aria-controls</code> &ndash; Set to the HTML id of the menu toggled by this button.</li>
+      <li><code>aria-haspopup</code> &ndash; Set to true. This attribute informs a user that the button is a menu button.</li>
+      <li><code>aria-hidden</code> &ndash; Placed on the controlled menu. Set to false when expanded; true when collapsed.</li>
+   </ul>
+   <p>Below is a code snippet showing simplified markup for implementing an accessible menu toggle button. The values of the <code>aria-expanded</code> and the <code>aria-hidden</code> attributes would be for the collapsed state.</p>
+   <pre>
+&lt;button <strong>aria-expanded="false" aria-haspopup="true" aria-controls="menu-id"</strong>&gt;Toggle Menu&lt;/button&gt;     
+&lt;ul id="menu-id" <strong>aria-hidden="true"</strong>&gt;
+   . . .
+&lt;/ul&gt;
+   </pre>
+   <p>Here is the snippet with the ARIA attributes in the expanded state:</p>
+   <pre>
+&lt;button <strong>aria-expanded="true" aria-haspopup="true" aria-controls="menu-id"</strong>&gt;Toggle Menu&lt;/button&gt;     
+&lt;ul id="menu-id" <strong>aria-hidden="false"</strong>&gt;
+   . . .
+&lt;/ul&gt;
+   </pre>
+   <p>JavaScript is needed to toggle the values of the <code>aria-expanded</code> and <code>aria-hidden</code> attributes. Note that the values of <code>aria-controls</code> and <code>aria-haspopup</code> do not change.
+   -->
+</div>
+
+</main>
+<footer role="contentinfo">
+   <p class="copy">Copyright &copy; 2016 University of Illinois Board of Trustees</p>
+</footer>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/accessible_bootstrap-0.3.0.js"></script>
+</body>
+</html>
