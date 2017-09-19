@@ -424,7 +424,7 @@
 
    /////////////////////////////////////////////////////
    // Carousel
-   $('.carousel').each(function (index) {
+   $('.carousel').attr({'role': 'region'}).each(function (index) {
       var $this = $(this)
         , $prev = $this.find('[data-slide="prev"]')
         , $next = $this.find('[data-slide="next"]')

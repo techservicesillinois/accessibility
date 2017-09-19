@@ -52,3 +52,16 @@
 .selected {
    background-color: #F99 !important;
 }
+.carousel-indicators li:hover,
+.carousel-indicators li:focus {
+   border-color: #ff0;
+   box-shadow: 0 0 2px 3px #ff0;
+   outline: none;
+}
+.carousel-indicators li:focus {
+   background-color: #ff0;
+}
+.carousel-control:hover .glyphicon,
+.carousel-control:focus {
+   color: #ff0;
+}
