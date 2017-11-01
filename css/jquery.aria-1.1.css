@@ -23,16 +23,147 @@
    height: 30px;
    width: 30px;
    margin: -1px;
-   background-color: #99a;
+   background-color: #f2f1ec;
    border: 1px solid #666;
+   z-index: 10;
 }
-.slider-handle:hover,
-.slider-handle:focus,
-.slider-handle.focus {
-
+/*** Multi-thumb handle styles ***/
+.slider-multi .slider-handle:first-child .slider-text {
+   position: absolute;
+   top: -75px;
+   left: -10px;
+}
+.slider-multi .slider-handle:nth-child(2) .slider-text {
+   position: absolute;
+   top: 15px;
+   left: -10px;
+}
+.slider-multi .slider-range {
+   position: absolute;
+   margin-left: 10px;
+   height: 100%;
+   background-color: #aabfe0;
+}
+.slider-multi .slider-handle:first-child {
+   /* Triangle border */
+   height: 0;
+   width: 0;
+   border-left: 11px solid transparent;
+   border-right: 11px solid transparent;
+   border-top: 20px solid #666;
+   border-bottom: none;
+   background-color: transparent;
+   content: "";
+}
+.slider-multi .slider-handle:first-child:before {
+   /* Handle Block */
+   display: block;
+   position: absolute;
+   top: -34px;
+   left: -10px;
+   height: 15px;
+   width: 20px;
+   background-color: #f2f1ec;
+   border: 1px solid #666;
+   border-bottom: none; 
+   content: "";
+}
+.slider-multi .slider-handle:first-child:after {
+   /* Triangle fill */
+   position: absolute;
+   top: -19px;
+   left: -9px;
+   height: 0;
+   width: 0;
+   border-left: 9px solid transparent;
+   border-right: 9px solid transparent;
+   border-top: 17px solid #f2f1ec;
+   border-bottom: none;
+   background-color: transparent;
+   content: "";
+}
+.slider-multi .slider-handle:nth-child(2) {
+   /* Triangle border */
+   height: 0;
+   width: 0;
+   border-left: 11px solid transparent;
+   border-right: 11px solid transparent;
+   border-bottom: 20px solid #666;
+   border-top: none;
+   background-color: transparent;
+   content: "";
+}
+.slider-multi .slider-handle:nth-child(2):before {
+   /* Triangle fill */
+   position: absolute;
+   top: 2px;
+   left: -9px;
+   height: 0;
+   width: 0;
+   border-left: 9px solid transparent;
+   border-right: 9px solid transparent;
+   border-bottom: 17px solid #f2f1ec;
+   border-top: none;
+   background-color: transparent;
+   content: "";
+}
+.slider-multi .slider-handle:nth-child(2):after {
+   /* Handle Block */
+   display: block;
+   position: absolute;
+   top: 19px;
+   left: -10px;
+   height: 15px;
+   width: 20px;
+   background-color: #f2f1ec;
+   border: 1px solid #666;
+   border-top: none; 
+   content: "";
+}
+.slider-multi .slider-handle:first-child:hover,
+.slider-multi .slider-handle:first-child:focus,
+.slider-multi .slider-handle.focus:first-child {
+   /* arrow border */
+   background-color: transparent;
+   border-color: transparent;
+   border-top-color: #222;
+}
+.slider-handle:first-child:hover,
+.slider-handle:first-child:focus,
+.slider-multi .slider-handle:first-child:hover:before,
+.slider-multi .slider-handle:first-child:focus:before,
+.slider-multi .slider-handle.focus:first-child:before,
+.slider-multi .slider-handle:nth-child(2):hover:after,
+.slider-multi .slider-handle:nth-child(2):focus:after,
+.slider-multi .slider-handle.focus:nth-child(2):after {
+   /* handle block */
    background-color: #ff0;
    border-color: #222;
-   border-width: 2px;
+}
+.slider-multi .slider-handle:first-child:hover:after,
+.slider-multi .slider-handle:first-child:focus:after,
+.slider-multi .slider-handle.focus:first-child:after {
+   /* arrow fill */
+   border-top-color: #ff0;
+}
+.slider-multi .slider-handle:nth-child(2):hover:before,
+.slider-multi .slider-handle:nth-child(2):focus:before,
+.slider-multi .slider-handle:nth-child(2).focus:before {
+   /* arrow fill */
+   border-bottom-color: #ff0;
+}
+.slider-multi .slider-handle:nth-child(2):hover,
+.slider-multi .slider-handle:nth-child(2):focus,
+.slider-multi .slider-handle:nth-child(2).focus {
+   /* arrow border */
+   border-bottom-color: #222;
+}
+.slider-multi .slider-handle:first-child:focus,
+.slider-multi .slider-handle:first-child.focus,
+.slider-multi .slider-handle:nth-child(2):focus,
+.slider-multi .slider-handle:nth-child(2).focus {
+   outline: none;
+   z-index: 100;
 }
 @media screen and (min-width: 768px) {
    .slider-container {
@@ -54,6 +185,9 @@
 .treeview {
    font-size: 2rem;
 }
+.treeview-multi {
+   margin-left: 30px;
+}
 [role=tree],
 .treeview [role=group] {
    list-style-type: none;
@@ -67,17 +201,40 @@
 [role=treeitem] {
    margin: 0;
    padding: 5px 10px;
+   outline: none;
+   position: relative;
 }
 [role=treeitem]:hover > span,
 [role=treeitem]:focus > span {
    border-bottom: 2px solid #009;
    font-weight: bold;
 }
-.treeview-img {
-   height: 13px;
-   width: 13px;
-   margin: 0 5px 0 0;
+.treeview-img,
+.treeview-chkbox {
+   position: absolute;
+   left: -20px;
+   top: 0.5em;
+   height: 26px;
+   width: 26px;
    border: none !important;
+}
+.treeview-multi .treeview-img {
+   left: -50px;
+}
+
+@media screen and (min-width: 768px) {
+   .treeview-multi {
+      margin-left: 0;
+   }
+   .treeview-img,
+   .treeview-chkbox {
+      height: 16px;
+      width: 16px;
+      left: -10px;
+   }
+   .treeview-multi .treeview-img {
+      left: -30px;
+   }
 }
 /***** End Treeview *****/
 /***** Tab Panel *****/
