@@ -1,6 +1,7 @@
 //window.myBookmarklet = true;
 var a11yBookmarklet = a11yBookmarklet || {};
 a11yBookmarklet.bDone = false;
+a11yBookmarklet.url = 'https://cites-illinois.github.io/accessibility/a11yinspector/';
 function Inspect() {
    if (!a11yBookmarklet.bDone
          && a11yBookmarklet.css
@@ -23,7 +24,7 @@ function Inspect() {
 
 var evalScriptAttempt = 0;
 function getOAAEvaluation() {
-   $.getScript('http://localhost/a11yinspector/library/oaa_a11y_evaluation.js', function(oaa_evaluation) {
+   $.getScript(a11yBookmarklet.url + 'library/oaa_a11y_evaluation.js', function(oaa_evaluation) {
       a11yBookmarklet.oaa_evaluation = oaa_evaluation;
       Inspect();
    }).fail(function(jqxhr, settings, exception) {
@@ -35,7 +36,7 @@ function getOAAEvaluation() {
 }
 var rulesScriptAttempt = 0;
 function getOAARules() {
-   $.getScript('http://localhost/a11yinspector/library/oaa_a11y_rules.js', function(oaa_rules) {
+   $.getScript(a11yBookmarklet.url + 'library/oaa_a11y_rules.js', function(oaa_rules) {
       a11yBookmarklet.oaa_rules = oaa_rules;
       Inspect();
    }).fail(function(jqxhr, settings, exception) {
@@ -47,7 +48,7 @@ function getOAARules() {
 }
 var rulesetsScriptAttempt = 0;
 function getOAARulesets() {
-   $.getScript('http://localhost/a11yinspector/library/oaa_a11y_rulesets.js', function(oaa_rulesets) {
+   $.getScript(a11yBookmarklet.url + 'library/oaa_a11y_rulesets.js', function(oaa_rulesets) {
       a11yBookmarklet.oaa_rulesets = oaa_rulesets;
       Inspect();
    }).fail(function(jqxhr, settings, exception) {
@@ -59,14 +60,14 @@ function getOAARulesets() {
 }
 
 function getInspectCSS() {
-   $.get('http://localhost/a11yinspector/inspect.css', function(css) {
+   $.get(a11yBookmarklet.url + 'inspect.css', function(css) {
       a11yBookmarklet.css = css;
       Inspect();
    });
 }
 var inspectScriptAttempt = 0;
 function getInspectScript() {
-   $.getScript('http://localhost/a11yinspector/inspect.js', function(inspect) {
+   $.getScript(a11yBookmarklet.url + 'inspect.js', function(inspect) {
       a11yBookmarklet.inspect = inspect;
       Inspect();
    }).fail(function(jqxhr, settings, exception) {
