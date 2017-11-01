@@ -1,7 +1,6 @@
 //window.myBookmarklet = true;
 var a11yBookmarklet = a11yBookmarklet || {};
 a11yBookmarklet.bDone = false;
-a11yBookmarklet.url = 'https://cites-illinois.github.io/accessibility/a11yinspector/';
 function Inspect() {
    if (!a11yBookmarklet.bDone
          && a11yBookmarklet.css
@@ -24,55 +23,55 @@ function Inspect() {
 
 var evalScriptAttempt = 0;
 function getOAAEvaluation() {
-   $.getScript(a11yBookmarklet.url + 'library/oaa_a11y_evaluation.js', function(oaa_evaluation) {
+   $.getScript('http://localhost/a11yinspector/library/oaa_a11y_evaluation.js', function(oaa_evaluation) {
       a11yBookmarklet.oaa_evaluation = oaa_evaluation;
       Inspect();
    }).fail(function(jqxhr, settings, exception) {
       if(evalScriptAttempt < 10) {
-         setTimeout(getOAAEvaluation, 10);
+         setTimeout(getOAAEvaluation, 40);
       }
       evalScriptAttempt++;
    });
 }
 var rulesScriptAttempt = 0;
 function getOAARules() {
-   $.getScript(a11yBookmarklet.url + 'library/oaa_a11y_rules.js', function(oaa_rules) {
+   $.getScript('http://localhost/a11yinspector/library/oaa_a11y_rules.js', function(oaa_rules) {
       a11yBookmarklet.oaa_rules = oaa_rules;
       Inspect();
    }).fail(function(jqxhr, settings, exception) {
       if(rulesScriptAttempt < 10) {
-         setTimeout(getOAARules, 10);
+         setTimeout(getOAARules, 40);
       }
       rulesScriptAttempt++;
    });
 }
 var rulesetsScriptAttempt = 0;
 function getOAARulesets() {
-   $.getScript(a11yBookmarklet.url + 'library/oaa_a11y_rulesets.js', function(oaa_rulesets) {
+   $.getScript('http://localhost/a11yinspector/library/oaa_a11y_rulesets.js', function(oaa_rulesets) {
       a11yBookmarklet.oaa_rulesets = oaa_rulesets;
       Inspect();
    }).fail(function(jqxhr, settings, exception) {
       if(rulesetsScriptAttempt < 10) {
-         setTimeout(getOAARulesets, 10);
+         setTimeout(getOAARulesets, 40);
       }
       rulesetsScriptAttempt++;
    });
 }
 
 function getInspectCSS() {
-   $.get(a11yBookmarklet.url + 'inspect.css', function(css) {
+   $.get('http://localhost/a11yinspector/inspect.css', function(css) {
       a11yBookmarklet.css = css;
       Inspect();
    });
 }
 var inspectScriptAttempt = 0;
 function getInspectScript() {
-   $.getScript(a11yBookmarklet.url + 'inspect.js', function(inspect) {
+   $.getScript('http://localhost/a11yinspector/inspect.js', function(inspect) {
       a11yBookmarklet.inspect = inspect;
       Inspect();
    }).fail(function(jqxhr, settings, exception) {
       if(inspectScriptAttempt < 10) {
-         setTimeout(getInspectScript, 10);
+         setTimeout(getInspectScript, 40);
       } 
       inspectScriptAttempt++;
    });
