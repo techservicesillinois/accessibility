@@ -29,7 +29,7 @@ function getOAAEvaluation() {
       Inspect();
    }).fail(function(jqxhr, settings, exception) {
       if(evalScriptAttempt < 10) {
-         setTimeout(getOAAEvaluation, 40);
+         setTimeout(getOAAEvaluation, 100);
       }
       evalScriptAttempt++;
    });
@@ -41,7 +41,7 @@ function getOAARules() {
       Inspect();
    }).fail(function(jqxhr, settings, exception) {
       if(rulesScriptAttempt < 10) {
-         setTimeout(getOAARules, 40);
+         setTimeout(getOAARules, 100);
       }
       rulesScriptAttempt++;
    });
@@ -53,7 +53,7 @@ function getOAARulesets() {
       Inspect();
    }).fail(function(jqxhr, settings, exception) {
       if(rulesetsScriptAttempt < 10) {
-         setTimeout(getOAARulesets, 40);
+         setTimeout(getOAARulesets, 100);
       }
       rulesetsScriptAttempt++;
    });
@@ -72,7 +72,7 @@ function getInspectScript() {
       Inspect();
    }).fail(function(jqxhr, settings, exception) {
       if(inspectScriptAttempt < 10) {
-         setTimeout(getInspectScript, 40);
+         setTimeout(getInspectScript, 100);
       } 
       inspectScriptAttempt++;
    });
