@@ -24,7 +24,7 @@ function Inspect() {
 
 var evalScriptAttempt = 0;
 function getOAAEvaluation() {
-   $.getScript(a11yBookmarklet.url + 'oaa_a11y_evaluation.js', function(oaa_evaluation) {
+   $.getScript(a11yBookmarklet.url + 'library/oaa_a11y_evaluation.js', function(oaa_evaluation) {
       a11yBookmarklet.oaa_evaluation = oaa_evaluation;
       Inspect();
    }).fail(function(jqxhr, settings, exception) {
