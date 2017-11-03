@@ -13533,7 +13533,8 @@ OpenAjax.a11y.cache.DOMCache.prototype.updateDOMElements = function (node, paren
       if (dom_element.tag_name === 'frame') this.frame_count += 1;
       else this.iframe_count += 1;
 
-      var frame_doc = node.contentWindow.document;
+      //var frame_doc = node.contentWindow.document;
+      var frame_doc = node.contentDocument;
 
 //      OpenAjax.a11y.logger.debug("frame: " + node.src + " " + frame_doc);
 
