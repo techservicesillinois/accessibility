@@ -13533,8 +13533,10 @@ OpenAjax.a11y.cache.DOMCache.prototype.updateDOMElements = function (node, paren
       if (dom_element.tag_name === 'frame') this.frame_count += 1;
       else this.iframe_count += 1;
 
-      //var frame_doc = node.contentWindow.document;
-      var frame_doc = node.contentDocument;
+      /* KH_MOD */
+      try {
+      /* END KH_MOD */
+      var frame_doc = node.contentDocument; //node.contentWindow.document; /* KH_MOD - CORS fix */
 
 //      OpenAjax.a11y.logger.debug("frame: " + node.src + " " + frame_doc);
 
@@ -13543,6 +13545,12 @@ OpenAjax.a11y.cache.DOMCache.prototype.updateDOMElements = function (node, paren
           this.updateDOMElements( n, dom_element, null);
         } // end loop
       }
+      /* KH_MOD */
+      }
+      catch(err) {
+         OpenAjax.a11y.logger.debug("frame: " + node.src + " - Cannot access iframe due to CORS restriction.");
+      }
+      /* END KH_MOD */
       break;
 
     default:
