@@ -127,6 +127,8 @@ a11yInspector.init = function() {
    // Get the evaluator
    this.evaluator = this.evalFactory.newEvaluator();
 
+   this.bInitialized = true;
+
    this.evaluate();
    this.buildPanel();
   
@@ -243,6 +245,8 @@ a11yInspector.getRuleGroupConst = function (viewIndex) {
 };
 
 a11yInspector.buildPanel = function () {
+   var thisObj = this;
+
    this.$panel = $('<div>')
       .attr({
          'role': 'dialog',
@@ -253,14 +257,45 @@ a11yInspector.buildPanel = function () {
 
    this.$title = $('<h2>')
       .text('a11yINSPECTOR')
-      .addClass('a11y-title');
+      .addClass('a11y-title')
+      .appendTo(this.$panel);
 
-   this.$panel.append(this.$title);
+   this.$bnClose = $('<div>')
+      .attr({
+         'role': 'button',
+         'aria-label': 'Dismiss',
+         'tabindex': '0'
+      })
+      .addClass('a11y-close')
+      .appendTo(this.$panel)
+      .on('click', function(e) {
+         thisObj.destroyPanel();
+         return false;
+      })
+      .on('keydown', function(e) {
+         if (e.which == thisObj.keys.enter || e.which == thisObj.keys.space) {
+            thisObj.destroyPanel();
+            return false;
+         }
+         return true;
+      });
 
    this.addFilterButtonsToPanel();
    this.buildSummaryTabpanel();
 
    $('body').prepend(this.$panel);
+};
+a11yInspector.destroyPanel = function() {
+   this.$panel.remove();
+   this.$panel = $();
+   this.$title = $();
+   this.$bnClose = $();
+   this.$summary = $();
+   this.$filters = $();
+   this.$summaryTablist = $();
+   this.$summaryTabs = $();
+   this.$summaryPanels = $();
+   this.$summaryViews = $();
 };
 
 a11yInspector.addFilterButtonsToPanel = function () {
@@ -288,13 +323,22 @@ a11yInspector.addFilterButtonsToPanel = function () {
          thisObj.bShowViolations = !thisObj.bShowViolations;
          thisObj.populateSummary();
          return false;
+      })
+      .on('keydown', function(e) {
+         if (e.which == thisObj.keys.enter || e.which == thisObj.keys.space) {
+            thisObj.toggleChecked($(this));
+            thisObj.bShowViolations = !thisObj.bShowViolations;
+            thisObj.populateSummary();
+            return false;
+         }
+         return true;
       });
 
 
    var $btn = $('<div>')
       .attr({
          'role': 'menuitemcheckbox',
-         'tabindex': '-1',
+         'tabindex': '0',
          'aria-checked': 'true'
       })
       .addClass('a11y-filter-button a11y-filter-warnings')
@@ -305,6 +349,15 @@ a11yInspector.addFilterButtonsToPanel = function () {
          thisObj.bShowWarnings = !thisObj.bShowWarnings;
          thisObj.populateSummary();
          return false;
+      })
+      .on('keydown', function(e) {
+         if (e.which == thisObj.keys.enter || e.which == thisObj.keys.space) {
+            thisObj.toggleChecked($(this));
+            thisObj.bShowWarnings = !thisObj.bShowWarnings;
+            thisObj.populateSummary();
+            return false;
+         }
+         return true;
       });
 
    this.$filters = this.$filters.add($btn);
@@ -312,7 +365,7 @@ a11yInspector.addFilterButtonsToPanel = function () {
    $btn = $('<div>')
       .attr({
          'role': 'menuitemcheckbox',
-         'tabindex': '-1',
+         'tabindex': '0',
          'aria-checked': 'true'
       })
       .addClass('a11y-filter-button a11y-filter-manualchecks')
@@ -323,6 +376,15 @@ a11yInspector.addFilterButtonsToPanel = function () {
          thisObj.bShowManualChecks = !thisObj.bShowManualChecks;
          thisObj.populateSummary();
          return false;
+      })
+      .on('keydown', function(e) {
+         if (e.which == thisObj.keys.enter || e.which == thisObj.keys.space) {
+            thisObj.toggleChecked($(this));
+            thisObj.bShowManualChecks = !thisObj.bShowManualChecks;
+            thisObj.populateSummary();
+            return false;
+         }
+         return true;
       });
 
    this.$filters = this.$filters.add($btn);

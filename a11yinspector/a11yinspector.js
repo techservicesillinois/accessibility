@@ -1,8 +1,5 @@
-//window.myBookmarklet = true;
 var a11yBookmarklet = a11yBookmarklet || {};
 a11yBookmarklet.bDone = false;
-a11yBookmarklet.repeat = 100;
-a11yBookmarklet.timeout = 300;
 a11yBookmarklet.url = 'https://cites-illinois.github.io/accessibility/a11yinspector/';
 
 function Inspect() {
@@ -68,6 +65,11 @@ function getInspectScript() {
                   });
                });
             });
+         }
+         else if (a11yInspector.bInitialized) {
+            if (!a11yInspector.$panel.length) {
+               a11yInspector.buildPanel();
+            }
          }
 
       })();
