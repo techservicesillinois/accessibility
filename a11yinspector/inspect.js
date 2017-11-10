@@ -98,26 +98,8 @@ var a11yInspector = {
 a11yInspector.init = function() {
 
    // Get document info from browser context
-  if (window.content) {
-     try {
-       this.doc = window.content.document;
-       this.url = window.content.location.href;
-     }
-     catch (e) {
-       this.doc = window.opener.parent.content.document;
-       this.url = window.opener.parent.location.href;
-     }
-  }
-   else {
-     try {
-       this.doc = window.document;
-       this.url = window.location.href;
-     }
-     catch (e) {
-       this.doc = window.opener.parent.content.document;
-       this.url = window.opener.parent.location.href;
-     }
-   }
+   this.doc = window.document;
+   this.url = window.location.href;
 
    // Configure evaluator parameters
    this.evalFactory.setParameter('ruleset', OpenAjax.a11y.RulesetManager.getRuleset('ARIA_STRICT'));

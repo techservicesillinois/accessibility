@@ -1,16 +1,18 @@
 #a11y-panel,
 #a11y-panel *,
 #a11y-panel *:before,
-#a11y-panel *:after {
+#a11y-panel *:after { /* Styles reset */
    box-sizing: border-box;
    font-weight: normal;
    font-size: 16px;
    font-family: times, serif;
+   line-height: 1.2em;
    color: #000;
    padding: 0;
    margin: 0;
    border: 0;
    background: none;
+   position: static;
 }
 #a11y-panel {
    position: absolute;
