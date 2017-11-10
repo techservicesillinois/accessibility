@@ -249,11 +249,11 @@ a11yInspector.buildPanel = function () {
 
    this.$panel = $('<div>')
       .attr({
+         'id': 'a11y-panel',
          'role': 'dialog',
          'aria-label': 'a11y inspector',
          'tabindex': '0'
       })
-      .addClass('a11y-panel');
 
    this.$title = $('<h2>')
       .text('a11yINSPECTOR')
@@ -296,6 +296,9 @@ a11yInspector.destroyPanel = function() {
    this.$summaryTabs = $();
    this.$summaryPanels = $();
    this.$summaryViews = $();
+   this.bShowViolations = true;
+   this.bShowWarnings = true;
+   this.bShowManualChecks = true;
 };
 
 a11yInspector.addFilterButtonsToPanel = function () {
@@ -642,6 +645,8 @@ a11yInspector.populateResults = function(groupNdx, $panel) {
 
    for (var ndx = 0; ndx < results.rule_results.length; ndx++) {
       var rule = results.rule_results[ndx];
+      var resultVal = OpenAjax.a11y.RULE_RESULT_VALUE;
+      var ruleType = rule.getResultValue();
 
       if (!rule.element_results_summary.violations
             && !rule.element_results_summary.warnings
@@ -651,9 +656,10 @@ a11yInspector.populateResults = function(groupNdx, $panel) {
          continue;
       }
 
-      if ((rule.element_results_summary.violations && !this.bShowViolations) 
-         || (rule.element_results_summary.warnings && !this.bShowWarnings)
-         || (rule.element_results_summary.manual_checks && !this.bShowManualChecks)) {
+      if (((ruleType == resultVal.VIOLATION) && !this.bShowViolations) 
+         || ((ruleType == resultVal.WARNING) && !this.bShowWarnings) 
+         || ((ruleType == resultVal.MANUAL_CHECK) && !this.bShowManualChecks)
+      ) {
          // Skips any results that are filtered out
          continue;
       }
