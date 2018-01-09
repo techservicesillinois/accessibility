@@ -256,6 +256,13 @@
 #a11y-panel .a11y-results-table tr:nth-child(2n+2) {
    background-color: #f7f7f7;
 }
+#a11y-panel .a11y-results-table tr[tabindex]:hover {
+   outline: 2px solid #ffd84f;
+   background-color: #fff;
+}
+#a11y-panel .a11y-results-table tr:focus {
+   background-color: #ffd84f;
+}
 #a11y-panel .a11y-results-table th {
    margin: 0;
    padding: 0.25em;
@@ -283,7 +290,55 @@
    padding: 0.5em 0 0 0.5em;
    margin: 0 0 1em 0;
 }
+#a11y-panel .a11y-elementresults {
+   width: 100%;
+   position: relative;
+}
+#a11y-panel .a11y-elementhdg {
+   display: block;
+   margin: 0.5em 0.25em;
+   padding-left: 30px;
+   line-height: 1.2em;
+   min-height: 32px;
+   text-transform: unset;
+   font-size: 0.9em;
+   font-weight: bold;
+   text-align: center;
+}
+#a11y-panel .a11y-backbtn {
+   position: absolute;
+   top: -5px;
+   left: 3px;
+   width: 30px;
+   height: 30px;
+   padding: 5px 0;
+   background-color: #eee;
+   border: 1px solid #222;
+   border-radius: 5px;
+   text-align: center;
+   font-size: 0.8em;
+}
+#a11y-panel .a11y-elementresults table {
+   table-layout: fixed;
+}
+#a11y-panel .a11y-elementresults td {
+   overflow: hidden;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+}
+#a11y-panel [role=gridcell]:hover,
+#a11y-panel [role=gridcell]:focus,
+#a11y-panel .a11y-backbtn:hover,
+#a11y-panel .a11y-backbtn:focus {
+   background-color: #ffd84f;
+}
 
+#a11y-hlcontainer .a11y-elem-hl {
+   box-sizing: border-box;
+   position: absolute;
+   z-index: 10000;
+   border: 2px solid #f00;
+}
 [aria-hidden=true] {
    display: none;
 }

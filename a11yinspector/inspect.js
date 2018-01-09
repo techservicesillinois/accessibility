@@ -100,6 +100,10 @@ a11yInspector.init = function() {
    // Get document info from browser context
    this.doc = window.document;
    this.url = window.location.href;
+   this.viewSize = {
+      height: $(window).height(),
+      width: $(window).width()
+   };
 
    // Configure evaluator parameters
    this.evalFactory.setParameter('ruleset', OpenAjax.a11y.RulesetManager.getRuleset('ARIA_STRICT'));
@@ -111,6 +115,7 @@ a11yInspector.init = function() {
 
    this.bInitialized = true;
 
+   window.scrollTo(0,0);
    this.evaluate();
    this.buildPanel();
   
@@ -236,6 +241,7 @@ a11yInspector.buildPanel = function () {
          'aria-label': 'a11y inspector',
          'tabindex': '0'
       })
+      .css('top', ($(document).scrollTop() + 10) + 'px');
 
    this.$title = $('<h2>')
       .text('a11yINSPECTOR')
@@ -250,12 +256,12 @@ a11yInspector.buildPanel = function () {
       })
       .addClass('a11y-close')
       .appendTo(this.$panel)
-      .on('click', function(e) {
+      .on('click', function() {
          thisObj.destroyPanel();
          return false;
       })
-      .on('keydown', function(e) {
-         if (e.which == thisObj.keys.enter || e.which == thisObj.keys.space) {
+      .on('keydown', function() {
+         if (e.which === thisObj.keys.enter || e.which === thisObj.keys.space) {
             thisObj.destroyPanel();
             return false;
          }
@@ -265,10 +271,18 @@ a11yInspector.buildPanel = function () {
    this.addFilterButtonsToPanel();
    this.buildSummaryTabpanel();
 
-   $('body').prepend(this.$panel);
+   $('body').prepend(this.$panel)
+
+   this.$hlContainer = $('<div>')
+      .attr('id', 'a11y-hlcontainer');
+
+   $('body').prepend(this.$hlContainer);
+
 };
 a11yInspector.destroyPanel = function() {
    this.$panel.remove();
+   this.$hlContainer.remove();
+   this.$hlContainer = $();
    this.$panel = $();
    this.$title = $();
    this.$bnClose = $();
@@ -303,14 +317,14 @@ a11yInspector.addFilterButtonsToPanel = function () {
       .addClass('a11y-filter-button a11y-filter-violations')
       .html('Violations: <br>' + evalSummary.violations)
       .appendTo(this.$summary)
-      .on('click', function(e) {
+      .on('click', function() {
          thisObj.toggleChecked($(this));
          thisObj.bShowViolations = !thisObj.bShowViolations;
          thisObj.populateSummary();
          return false;
       })
       .on('keydown', function(e) {
-         if (e.which == thisObj.keys.enter || e.which == thisObj.keys.space) {
+         if (e.which === thisObj.keys.enter || e.which === thisObj.keys.space) {
             thisObj.toggleChecked($(this));
             thisObj.bShowViolations = !thisObj.bShowViolations;
             thisObj.populateSummary();
@@ -329,14 +343,14 @@ a11yInspector.addFilterButtonsToPanel = function () {
       .addClass('a11y-filter-button a11y-filter-warnings')
       .html('Warnings: <br>' + evalSummary.warnings)
       .appendTo(this.$summary)
-      .on('click', function(e) {
+      .on('click', function() {
          thisObj.toggleChecked($(this));
          thisObj.bShowWarnings = !thisObj.bShowWarnings;
          thisObj.populateSummary();
          return false;
       })
       .on('keydown', function(e) {
-         if (e.which == thisObj.keys.enter || e.which == thisObj.keys.space) {
+         if (e.which === thisObj.keys.enter || e.which === thisObj.keys.space) {
             thisObj.toggleChecked($(this));
             thisObj.bShowWarnings = !thisObj.bShowWarnings;
             thisObj.populateSummary();
@@ -356,14 +370,14 @@ a11yInspector.addFilterButtonsToPanel = function () {
       .addClass('a11y-filter-button a11y-filter-manualchecks')
       .html('Manual Checks: <br>' + evalSummary.manual_checks)
       .appendTo(this.$summary)
-      .on('click', function(e) {
+      .on('click', function() {
          thisObj.toggleChecked($(this));
          thisObj.bShowManualChecks = !thisObj.bShowManualChecks;
          thisObj.populateSummary();
          return false;
       })
       .on('keydown', function(e) {
-         if (e.which == thisObj.keys.enter || e.which == thisObj.keys.space) {
+         if (e.which === thisObj.keys.enter || e.which === thisObj.keys.space) {
             thisObj.toggleChecked($(this));
             thisObj.bShowManualChecks = !thisObj.bShowManualChecks;
             thisObj.populateSummary();
@@ -395,7 +409,7 @@ a11yInspector.buildSummaryTabpanel = function() {
          'tabindex': '0'
       })
       .text('Categories')
-      .addClass('a11y-summary-tab')
+      .addClass('a11y-summary-tab');
 
    var $tab = $('<li>')
       .attr({
@@ -410,7 +424,7 @@ a11yInspector.buildSummaryTabpanel = function() {
    this.$summaryTabs = this.$summaryTabs.add($tab);
 
    // Add event handlers
-   this.$summaryTabs.on('click', function(e) {
+   this.$summaryTabs.on('click', function() {
       thisObj.selectTab($(this));
       return false;
    })
@@ -438,7 +452,7 @@ a11yInspector.buildSummaryTabpanel = function() {
          'id': 'a11y-category-panel',
          'aria-hidden': 'false'
       })
-      .addClass('a11y-summary-panel')
+      .addClass('a11y-summary-panel');
 
    var $panel = $('<div>')
       .attr({
@@ -446,7 +460,7 @@ a11yInspector.buildSummaryTabpanel = function() {
          'id': 'a11y-wcag-panel',
          'aria-hidden': 'true'
       })
-      .addClass('a11y-summary-panel')
+      .addClass('a11y-summary-panel');
 
    this.$summaryPanels = this.$summaryPanels.add($panel);
 
@@ -465,7 +479,7 @@ a11yInspector.populateSummary = function() {
             'role': 'group',
             'aria-label': 'Category List'
          })
-         .addClass('a11y-summary-list')
+         .addClass('a11y-summary-list');
 
       $view = $('<ul>')
          .attr({
@@ -489,7 +503,7 @@ a11yInspector.populateSummary = function() {
 
    for (var ndx = 1; ndx < this.numViews; ndx++) {
 
-      if (ndx == this.viewEnum.ALL_RULES) {
+      if (ndx === this.viewEnum.ALL_RULES) {
          // skip the ALL RULES category
          continue;
       }
@@ -498,9 +512,9 @@ a11yInspector.populateSummary = function() {
          v: this.groupResults[ndx].rule_results_summary.violations,
          w: this.groupResults[ndx].rule_results_summary.warnings,
          mc: this.groupResults[ndx].rule_results_summary.manual_checks
-      }
+      };
 
-      if ((resultCount.v + resultCount.w + resultCount.mc) == 0) {
+      if ((resultCount.v + resultCount.w + resultCount.mc) === 0) {
          // category has no results - skip it
          continue;
       }
@@ -535,7 +549,7 @@ a11yInspector.populateSummary = function() {
          })
          .addClass('a11y-summarylist-button')
          .text(this.groupResults[ndx].rule_group_information.title) // retrieve title from OAA library
-         .on('click', function(e) {
+         .on('click', function() {
             thisObj.toggleAccordian($(this));
             return false;
          })
@@ -545,6 +559,7 @@ a11yInspector.populateSummary = function() {
 
       $heading.append($accordian);
 
+
       // Create and add result totals to the category heading
       var $totals = $('<ul>')
          .attr('id', 'a11y-result-totals-' + ndx);
@@ -553,21 +568,21 @@ a11yInspector.populateSummary = function() {
 
       if (this.bShowViolations) {
          $totalLI = $('<li>')
-            .html('<span aria-label="' + resultCount.v + ' violation' + ((resultCount.v != 1) ? 's' : '') + '.">V: ' + resultCount.v + '</span>')
+            .html('<span aria-label="' + resultCount.v + ' violation' + ((resultCount.v !== 1) ? 's' : '') + '.">V: ' + resultCount.v + '</span>')
             .addClass('a11y-total-violations');
          $totals.append($totalLI);
       }
 
       if (this.bShowWarnings) {
          $totalLI = $('<li>')
-            .html('<span aria-label="' + resultCount.w + ' warning' + ((resultCount.w != 1) ? 's' : '') + '.">W: ' + resultCount.w + '</span>')
+            .html('<span aria-label="' + resultCount.w + ' warning' + ((resultCount.w !== 1) ? 's' : '') + '.">W: ' + resultCount.w + '</span>')
             .addClass('a11y-total-warnings');
          $totals.append($totalLI);
       }
 
       if (this.bShowManualChecks) {
          $totalLI = $('<li>')
-            .html('<span aria-label="' + resultCount.mc + ' manual checks' + ((resultCount.mc != 1) ? 's' : '') + '.">MC: ' + resultCount.mc + '</span>')
+            .html('<span aria-label="' + resultCount.mc + ' manual checks' + ((resultCount.mc !== 1) ? 's' : '') + '.">MC: ' + resultCount.mc + '</span>')
             .addClass('a11y-total-manualchecks');
          $totals.append($totalLI);
       }
@@ -595,6 +610,16 @@ a11yInspector.populateSummary = function() {
 
       thisObj.populateResults(ndx, $panel);
 
+      var $elementResults = $('<div>')
+         .attr({
+            'aria-hidden': 'true',
+            'id': 'a11y-elementresults-' + ndx,
+            'aria-labelledby': 'a11y-elementresults-hdg' + ndx
+         })
+         .addClass('a11y-elementresults');
+
+      $panel.append($elementResults);
+
       $li.append($panelOuter);
 
       // Insert the accordian into the interface
@@ -609,18 +634,24 @@ a11yInspector.populateSummary = function() {
  *    $panel: The accordian panel to populate
  */
 a11yInspector.populateResults = function(groupNdx, $panel) {
+   var thisObj = this;
    var results = this.groupResults[groupNdx];
+
+   var $resultsWrap = $('<div>')
+      .attr('id', 'a11y-ruleresults-' + groupNdx)
+      .addClass('a11y-results');
 
    var $desc = $('<p>')
       .addClass('a11y-results-desc')
       .text(results.rule_group_information.description);
 
 
-   $panel.append('<p id="a11y-results-cue">Click on a rule to view element results.</p>');
+   $resultsWrap.append('<p id="a11y-results-cue">Click on a rule to view element results.</p>');
 
    var $table = $('<table>')
       .attr({
-         'role': 'grid'
+         'role': 'grid',
+         'aria-readonly': 'true'
       })
       .addClass('a11y-results-table')
       .html('<caption>Rule Results</caption><thead><tr><th>Rule</th><th>Type</th></tr></thead><tbody>');
@@ -630,49 +661,84 @@ a11yInspector.populateResults = function(groupNdx, $panel) {
       var resultVal = OpenAjax.a11y.RULE_RESULT_VALUE;
       var ruleType = rule.getResultValue();
 
-      if (!rule.element_results_summary.violations
-            && !rule.element_results_summary.warnings
-            && !rule.element_results_summary.manual_checks)
+      if (!rule.element_results_summary.violations &&
+         !rule.element_results_summary.warnings &&
+         !rule.element_results_summary.manual_checks)
       {
          // Skip any result that is not a violation, warning or manual check
          continue;
       }
 
-      if (((ruleType == resultVal.VIOLATION) && !this.bShowViolations) 
-         || ((ruleType == resultVal.WARNING) && !this.bShowWarnings) 
-         || ((ruleType == resultVal.MANUAL_CHECK) && !this.bShowManualChecks)
+      if (((ruleType === resultVal.VIOLATION) && !this.bShowViolations) ||
+         ((ruleType === resultVal.WARNING) && !this.bShowWarnings) ||
+         ((ruleType === resultVal.MANUAL_CHECK) && !this.bShowManualChecks)
       ) {
          // Skips any results that are filtered out
          continue;
       }
 
       var $tr = $('<tr>');
+
       var $td = $('<td>')
+         .attr({
+            'role': 'gridcell',
+            'aria-expanded': 'false',
+            'aria-controls': 'a11y-ruleresults-' + groupNdx + ' a11y-elementresults-' + groupNdx,
+            'tabindex': '0',
+            'data-rulendx': ndx
+         })
          .text(rule.getRuleSummary())
-         .appendTo($tr);
+         .appendTo($tr)
+         .on('click', function() {
+            var ruleNdx = $(this).data('rulendx');
+            thisObj.showElementResults($(this), results.rule_results[ruleNdx]);
+            return false;
+         })
+         .on('keydown', function(e) {
+            switch (e.which) {
+                  case thisObj.keys.enter:
+                  case thisObj.keys.space: {
+                     var ruleNdx = $(this).data('rulendx');
+                     thisObj.showElementResults($(this), results.rule_results[ruleNdx]);
+                     return false;
+                  }
+            }
+            return true;
+         });
 
-      $td = $('<td>');
+      $td = $('<td>')
+         .attr({
+            'role': 'gridcell',
+            'tabindex': '-1'
+         });
 
-      if (rule.element_results_summary.violations) {
-         $td.text('V');
+      //if (rule.element_results_summary.violations) {
+      if (ruleType === resultVal.VIOLATION) {
+         $td.html('<span aria-label="Violation">V</span>');
       }
-      else if (rule.element_results_summary.warnings) {
-         $td.text('W');
+      //else if (rule.element_results_summary.warnings) {
+      else if (ruleType === resultVal.WARNING) {
+         $td.html('<span aria-label="Warning">W</span>');
       }
       else {
-         $td.text('MC');
+         $td.html('<span aria-label="Manual Check">MC</span>');
       }
 
       $td.appendTo($tr);
       $table.append($tr);
+
    }
 
-   $table.append('</thead>');
+   $table.append('</tbody>');
 
-   $panel.append($table);
 
-   $panel.append('<h4 class="a11y-results-heading">Description</h4>');
-   $panel.append($desc);
+   $resultsWrap.append($table);
+
+   $resultsWrap.append('<h4 class="a11y-results-heading">Description</h4>');
+   $resultsWrap.append($desc);
+
+   $panel.append($resultsWrap);
+
 };
 
 /*******
@@ -680,7 +746,7 @@ a11yInspector.populateResults = function(groupNdx, $panel) {
  */
 a11yInspector.moveToNextTab = function($tablist, $tab) {
    if ($tablist.index($tab) < $tablist.length) {
-      this.selectTab($tab.next())
+      this.selectTab($tab.next());
    }
 };
 a11yInspector.moveToPrevTab = function($tablist, $tab) {
@@ -695,7 +761,7 @@ a11yInspector.selectTab = function($tab) {
       'aria-selected': 'false',
       'tabindex': '-1'
       })
-      .each(function(index) {
+      .each(function() {
          $('#' + $(this).attr('aria-controls')).attr('aria-hidden', 'true');
       });
 
@@ -720,13 +786,13 @@ a11yInspector.toggleAccordian = function($accordian) {
    var $siblings = $accordian.parentsUntil('ul').last().parent().find('.a11y-summarylist-button').not($accordian);
    var thisObj = this;
 
-   $siblings.each(function(index) {
+   $siblings.each(function() {
       var $btn = $(this);
 
       thisObj.closeAccordian($btn);
    });
 
-   if ($accordian.attr('aria-expanded') == 'false') {
+   if ($accordian.attr('aria-expanded') === 'false') {
       this.openAccordian($accordian);
    }
    else {
@@ -739,7 +805,6 @@ a11yInspector.handleAccordianKeydown = function(e) {
    var $newBtn;
    var $accordians = $btn.parentsUntil('ul').last().parent().find('.a11y-summarylist-button');
    var btnIndex = $accordians.index($btn);
-   var thisObj = this;
 
    switch (e.which) {
       case this.keys.enter:
@@ -749,14 +814,14 @@ a11yInspector.handleAccordianKeydown = function(e) {
       }
       case this.keys.down: {
          if (btnIndex < $accordians.length) {
-            var $newBtn = $accordians.eq(btnIndex+1);
+            $newBtn = $accordians.eq(btnIndex+1);
             $newBtn.focus();
          }
          return false;
       }
       case this.keys.up: {
          if (btnIndex > 0) {
-            var $newBtn = $accordians.eq(btnIndex-1);
+            $newBtn = $accordians.eq(btnIndex-1);
             $newBtn.focus();
          }
          return false;
@@ -765,11 +830,195 @@ a11yInspector.handleAccordianKeydown = function(e) {
 
    return true;
 };
+/**********
+ * Element Results Functions
+ */
+a11yInspector.showElementResults = function($trigger, rule) {
+
+   var $controls = $trigger.attr('aria-controls').split(' ');
+   var $rulesPanel = $('#' + $controls[0]);
+   var $elementPanel = $('#' + $controls[1]);
+
+   this.populateElementResults($elementPanel, $rulesPanel, $trigger, rule);
+
+   $rulesPanel.attr('aria-hidden', 'true');
+   $elementPanel.attr('aria-hidden', 'false');
+
+   // set focus on the back button of the element results panel
+   $elementPanel.find('.a11y-backbtn').focus();
+};
+
+a11yInspector.hideElementResults = function($elementPanel, $rulesPanel, $trigger) {
+   $rulesPanel.attr('aria-hidden', 'false');
+   $elementPanel.attr('aria-hidden', 'true').empty();
+
+   // set focus on the rule item in the category grid
+   $trigger.focus();
+};
+
+a11yInspector.populateElementResults = function($elementPanel, $rulesPanel, $trigger, rule) {
+   var thisObj = this;
+   var resultVal = OpenAjax.a11y.RULE_RESULT_VALUE;
+   var ruleType = rule.getResultValue();
+   var ruleObj;
+
+   if (ruleType === resultVal.VIOLATION) {
+      ruleTypeVal = 'V';
+   }
+   //else if (rule.element_results_summary.warnings) {
+   else if (ruleType === resultVal.WARNING) {
+      ruleTypeVal = 'W';
+   }
+   else {
+      ruleTypeVal = 'MC';
+   }
+
+   var $backBtn = $('<div>')
+      .addClass('a11y-backbtn')
+      .attr({
+         'role': 'button',
+         'tabindex': 0,
+         'title': 'Back to rule results',
+         'aria-label': 'Back to rule results'
+      })
+      .text('<<')
+      .on('click', function() {
+         thisObj.hideElementResults($elementPanel, $rulesPanel, $trigger);
+         return false;
+      })
+      .on('keydown', function(e) {
+         switch (e.which) {
+            case thisObj.keys.enter:
+            case thisObj.keys.space: {
+               thisObj.hideElementResults($elementPanel, $rulesPanel, $trigger);
+               return false;
+            }
+         }
+         return true;
+      })
+      .appendTo($elementPanel);
+
+   $elementPanel.append('<h4 id="a11y-elementresults-hdg' + $trigger.data('rulendx') + '" class="a11y-elementhdg">' + $trigger.text() + ' (' + ruleTypeVal + ')</h4>');
+
+   switch (ruleType) {
+      case resultVal.VIOLATION: {
+         ruleObj = rule.element_results_violations;
+         break;
+      }
+      case resultVal.WARNING: {
+         ruleObj = rule.element_results_warnings;
+         break;
+      }
+      case resultVal.MANUAL_CHECK: {
+         ruleObj = rule.element_results_manual_checks;
+         break;
+      }
+   }
+
+   var $resultsTable = $('<table>')
+      .attr({
+         'role': 'grid',
+         'aria-readonly': 'true'
+      })
+      .addClass('a11y-results-table')
+      .html('<caption>Element Results</caption><thead><tr><th>Element</th><th><abbr title="Document Position">Pos</abbr></th><tbody>');
+
+   for (var ndx = 0; ndx < ruleObj.length; ndx++) {
+      var element = ruleObj[ndx];
+
+      var style = {
+         'left': element.cache_item.getStyle()[14].value,
+         'top': element.cache_item.getStyle()[15].value,
+         'width': element.cache_item.getStyle()[16].value,
+         'height': element.cache_item.getStyle()[17].value
+      };
+
+      var $tr = $('<tr>');
+
+      var $td = $('<td>')
+         .attr({
+            'role': 'gridcell',
+            //'aria-controls': 'a11y-ruleresults-' + groupNdx + ' a11y-elementresults-' + groupNdx,
+            'tabindex': '0',
+            'title': element.element_identifier,
+            'data-elementndx': ndx,
+            'data-left': element.cache_item.getStyle()[14].value,
+            'data-top': element.cache_item.getStyle()[15].value,
+            'data-width': element.cache_item.getStyle()[16].value,
+            'data-height': element.cache_item.getStyle()[17].value
+         })
+         .text(element.element_identifier)
+         .appendTo($tr)
+         .on('click', function() {
+
+            thisObj.handleOverlay($(this));
+            return false;
+         })
+         .on('keydown', function(e) {
+            switch (e.which) {
+               case thisObj.keys.enter:
+               case thisObj.keys.space: {
+                  return false;
+               }
+            }
+            return true;
+         });
+
+      $td = $('<td>')
+         .attr({
+            'role': 'gridcell',
+            'tabindex': '-1'
+         })
+         .text(element.getOrdinalPosition())
+         .appendTo($tr);
+
+      $resultsTable.append($tr);
+   }
+
+   $resultsTable.append('</tbody>');
+   $elementPanel.append($resultsTable);
+};
+
+a11yInspector.handleOverlay = function($elem) {
+
+   var elemTop = $elem.data('top');
+   var elemLeft = $elem.data('left');
+   var elemWidth = $elem.data('width');
+   var elemHeight = $elem.data('height');
+   var scrollTop = $(document).scrollTop();
+
+   if (elemTop < 0) {
+      return;
+   }
+
+   this.$hlContainer.empty();
+
+   $('<div>')
+      .addClass('a11y-elem-hl')
+      .css({
+         'top': (elemTop - 1) + 'px',
+         'left': (elemLeft - 1) + 'px',
+         'width': (elemWidth + 2)  + 'px',
+         'height': (elemHeight + 2) + 'px'
+      })
+      .appendTo(this.$hlContainer);
+
+   if ((elemTop < scrollTop) || ((elemTop + elemHeight) > (scrollTop + this.viewSize.height)) ) {
+      window.scrollTo(elemLeft, elemTop);
+
+      if ( (this.viewSize.height - elemTop) > this.$panel.height() ) {
+         this.$panel.css('top', (elemTop + 10) + 'px');
+      }
+      else {
+         this.$panel.css('top', ($(document).scrollTop() + 10) + 'px');
+      }
+   }
+};
 a11yInspector.toggleChecked = function($btn) {
-         if ($btn.attr('aria-checked') == 'true') {
-            $btn.attr('aria-checked', 'false');
-         }
-         else {
-            $btn.attr('aria-checked', 'true');
-         }
+   if ($btn.attr('aria-checked') === 'true') {
+      $btn.attr('aria-checked', 'false');
+   }
+   else {
+      $btn.attr('aria-checked', 'true');
+   }
 };
