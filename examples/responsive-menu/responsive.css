@@ -56,7 +56,7 @@ div.example-wrap {
 
 .menu button[aria-expanded=true] {
    background-color: #555;
-   color: #fff;
+   color: #ddd;
    transition: color 0.25s;
 }
 .menu button[aria-expanded=true] + .arrow {
