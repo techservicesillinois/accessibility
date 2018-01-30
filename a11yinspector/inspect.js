@@ -241,7 +241,25 @@ a11yInspector.buildPanel = function () {
          'aria-label': 'a11y inspector',
          'tabindex': '0'
       })
-      .css('top', ($(document).scrollTop() + 10) + 'px');
+      .css('top', ($(document).scrollTop() + 10) + 'px')
+      .on('mousedown', function(e) {
+         console.log('mousedown');
+         this.panelPos = {
+            x: e.pageX,
+            y: e.pageY
+         };
+
+         thisObj.$panel.on('mousemove.a11y', function(e) {
+            thisObj.handleDrag(e);
+            return false;
+         });
+
+         return false;
+      })
+      .on('mouseup', function() {
+         thisObj.$panel.off('mousemove.a11y');
+         return false;
+      });
 
    this.$title = $('<h2>')
       .text('a11yINSPECTOR')
@@ -1020,5 +1038,19 @@ a11yInspector.toggleChecked = function($btn) {
    }
    else {
       $btn.attr('aria-checked', 'true');
+   }
+};
+a11yInspector.handleDrag = function(e) {
+   var curPos = {
+      x: e.pageX,
+      y: e.pageY
+   };
+
+   if (Math.abs(curPos.x - this.panelPos.x) > 5) {
+      this.$panel.css('left', curPos.x + 'px');
+   }
+
+   if (Math.abs(curPos.y - this.panelPos.y) > 5) {
+      this.$panel.css('top', curPos.y + 'px');
    }
 };
