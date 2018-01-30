@@ -97,6 +97,8 @@ var a11yInspector = {
 
 a11yInspector.init = function() {
 
+   var thisObj = this;
+
    // Get document info from browser context
    this.doc = window.document;
    this.url = window.location.href;
@@ -119,6 +121,15 @@ a11yInspector.init = function() {
    this.evaluate();
    this.buildPanel();
   
+   // Add and event handler to detect window resize
+   jQuery(window).on('resize.a11y', function() {
+      thisObj.handleResize();
+      return true;
+   })
+   .on('scroll', function(e) {
+      thisObj.handleResize();
+      return true;
+   });
 };
 
 a11yInspector.evaluate = function() {
@@ -241,30 +252,30 @@ a11yInspector.buildPanel = function () {
          'aria-label': 'a11y inspector',
          'tabindex': '0'
       })
-      .css('top', (jQuery(document).scrollTop() + 10) + 'px')
-      .on('mousedown', function(e) {
-         console.log('mousedown');
-         this.panelPos = {
-            x: e.pageX,
-            y: e.pageY
-         };
-
-         thisObj.$panel.on('mousemove.a11y', function(e) {
-            thisObj.handleDrag(e);
-            return false;
-         });
-
-         return false;
-      })
-      .on('mouseup', function() {
-         thisObj.$panel.off('mousemove.a11y');
-         return false;
-      });
+      .css('top', (jQuery(document).scrollTop() + 10) + 'px');
 
    this.$title = jQuery('<h2>')
       .text('a11yINSPECTOR')
       .addClass('a11y-title')
-      .appendTo(this.$panel);
+      .appendTo(this.$panel)
+      .on('mousedown', function(e) {
+         thisObj.clickPos = {
+            x: e.pageX - thisObj.$panel.offset().left,
+            y: e.pageY - thisObj.$panel.offset().top
+         };
+
+         jQuery(document).on('mousemove.a11y', function(e) {
+            thisObj.handleDrag(e);
+            return false;
+         })
+         .on('mouseup.a11y', function() {
+            jQuery(document).off('mousemove.a11y');
+            return false;
+         });
+
+         return false;
+      });
+
 
    this.$bnClose = jQuery('<div>')
       .attr({
@@ -288,6 +299,16 @@ a11yInspector.buildPanel = function () {
 
    this.addFilterButtonsToPanel();
    this.buildSummaryTabpanel();
+
+   this.$elementResultsPanel = jQuery('<div>')
+      .attr({
+         'role': 'region',
+         'aria-label': 'Element Results',
+         'aria-hidden': 'true',
+         'id': 'a11y-elementresults'
+      })
+      .addClass('a11y-results-panel')
+      .appendTo(this.$panel);
 
    jQuery('body').prepend(this.$panel)
 
@@ -470,7 +491,7 @@ a11yInspector.buildSummaryTabpanel = function() {
          'id': 'a11y-category-panel',
          'aria-hidden': 'false'
       })
-      .addClass('a11y-summary-panel');
+      .addClass('a11y-results-panel');
 
    var $panel = jQuery('<div>')
       .attr({
@@ -478,9 +499,10 @@ a11yInspector.buildSummaryTabpanel = function() {
          'id': 'a11y-wcag-panel',
          'aria-hidden': 'true'
       })
-      .addClass('a11y-summary-panel');
+      .addClass('a11y-results-panel');
 
    this.$summaryPanels = this.$summaryPanels.add($panel);
+
 
    this.populateSummary();
 
@@ -490,6 +512,7 @@ a11yInspector.buildSummaryTabpanel = function() {
 a11yInspector.populateSummary = function() {
    var thisObj = this;
    var $view;
+   var bWCAG = false;
 
    if (!this.$summaryViews.length) {
       this.$summaryViews = jQuery('<ul>')
@@ -546,6 +569,7 @@ a11yInspector.populateSummary = function() {
       if (ndx > this.viewEnum.ALL_RULES) {
          // WCAG rule groups follow category groups
          $view = this.$summaryViews.eq(summaryViewEnum.WCAG);
+         bWCAG = true;
       }
 
       var $li = jQuery('<li>')
@@ -626,17 +650,8 @@ a11yInspector.populateSummary = function() {
          .addClass('a11y-summarylist-panel')
          .appendTo($panelOuter);
 
-      thisObj.populateResults(ndx, $panel);
+      thisObj.populateResults(ndx, $panel, bWCAG);
 
-      var $elementResults = jQuery('<div>')
-         .attr({
-            'aria-hidden': 'true',
-            'id': 'a11y-elementresults-' + ndx,
-            'aria-labelledby': 'a11y-elementresults-hdg' + ndx
-         })
-         .addClass('a11y-elementresults');
-
-      $panel.append($elementResults);
 
       $li.append($panelOuter);
 
@@ -651,7 +666,7 @@ a11yInspector.populateSummary = function() {
  *    group: the index of the current rule result group
  *    $panel: The accordian panel to populate
  */
-a11yInspector.populateResults = function(groupNdx, $panel) {
+a11yInspector.populateResults = function(groupNdx, $panel, bWCAG) {
    var thisObj = this;
    var results = this.groupResults[groupNdx];
 
@@ -701,7 +716,7 @@ a11yInspector.populateResults = function(groupNdx, $panel) {
          .attr({
             'role': 'gridcell',
             'aria-expanded': 'false',
-            'aria-controls': 'a11y-ruleresults-' + groupNdx + ' a11y-elementresults-' + groupNdx,
+            'aria-controls': (!bWCAG ? 'a11y-category-panel' : 'a11y-wcag-panel') + ' a11y-elementresults',
             'tabindex': '0',
             'data-rulendx': ndx
          })
@@ -730,11 +745,9 @@ a11yInspector.populateResults = function(groupNdx, $panel) {
             'tabindex': '-1'
          });
 
-      //if (rule.element_results_summary.violations) {
       if (ruleType === resultVal.VIOLATION) {
          $td.html('<span aria-label="Violation">V</span>');
       }
-      //else if (rule.element_results_summary.warnings) {
       else if (ruleType === resultVal.WARNING) {
          $td.html('<span aria-label="Warning">W</span>');
       }
@@ -883,7 +896,6 @@ a11yInspector.populateElementResults = function($elementPanel, $rulesPanel, $tri
    if (ruleType === resultVal.VIOLATION) {
       ruleTypeVal = 'V';
    }
-   //else if (rule.element_results_summary.warnings) {
    else if (ruleType === resultVal.WARNING) {
       ruleTypeVal = 'W';
    }
@@ -944,14 +956,14 @@ a11yInspector.populateElementResults = function($elementPanel, $rulesPanel, $tri
    for (var ndx = 0; ndx < ruleObj.length; ndx++) {
       var element = ruleObj[ndx];
 
-      var style = {
-         'left': element.cache_item.getStyle()[14].value,
-         'top': element.cache_item.getStyle()[15].value,
-         'width': element.cache_item.getStyle()[16].value,
-         'height': element.cache_item.getStyle()[17].value
-      };
-
       var $tr = jQuery('<tr>');
+      /*
+      var styleFunc = element.cache_item.getStyle;
+
+      if (!styleFunc) {
+         styleFunc = element.cache_item.dom_element.getStyle;
+      }
+      */
 
       var $td = jQuery('<td>')
          .attr({
@@ -959,12 +971,8 @@ a11yInspector.populateElementResults = function($elementPanel, $rulesPanel, $tri
             //'aria-controls': 'a11y-ruleresults-' + groupNdx + ' a11y-elementresults-' + groupNdx,
             'tabindex': '0',
             'title': element.element_identifier,
-            'data-elementndx': ndx,
-            'data-left': element.cache_item.getStyle()[14].value,
-            'data-top': element.cache_item.getStyle()[15].value,
-            'data-width': element.cache_item.getStyle()[16].value,
-            'data-height': element.cache_item.getStyle()[17].value
          })
+         .data('elem', element.getDOMElement())
          .text(element.element_identifier)
          .appendTo($tr)
          .on('click', function() {
@@ -976,6 +984,7 @@ a11yInspector.populateElementResults = function($elementPanel, $rulesPanel, $tri
             switch (e.which) {
                case thisObj.keys.enter:
                case thisObj.keys.space: {
+                  thisObj.handleOverlay(jQuery(this));
                   return false;
                }
             }
@@ -999,25 +1008,43 @@ a11yInspector.populateElementResults = function($elementPanel, $rulesPanel, $tri
 
 a11yInspector.handleOverlay = function($elem) {
 
-   var elemTop = $elem.data('top');
-   var elemLeft = $elem.data('left');
-   var elemWidth = $elem.data('width');
-   var elemHeight = $elem.data('height');
+   var dom_element = $elem.data('elem');
+   var style = dom_element.computed_style;
+   var VISIBILITY = OpenAjax.a11y.VISIBILITY;
    var scrollTop = jQuery(document).scrollTop();
 
-   if (elemTop < 0) {
-      return;
+   if (dom_element.node) {
+      switch (style.is_visible_onscreen) {
+         case VISIBILITY.VISIBLE: {
+            break;
+         }
+         case VISIBILITY.HIDDEN: {
+            // TO DO: Create an overlay for hidden items
+            return;
+         }
+         case VISIBILITY.UNKNOWN: {
+            return;
+         }
+      }
    }
+   else {
+      console.log('no node');
+   }
+
+   var elemTop = style.top;
+   var elemLeft = style.left;
+   var elemWidth = style.width;
+   var elemHeight = style.height;
 
    this.$hlContainer.empty();
 
-   jQuery('<div>')
+   $hl = jQuery('<div>')
       .addClass('a11y-elem-hl')
       .css({
-         'top': (elemTop - 1) + 'px',
-         'left': (elemLeft - 1) + 'px',
-         'width': (elemWidth + 2)  + 'px',
-         'height': (elemHeight + 2) + 'px'
+         'top': elemTop + 'px',
+         'left': elemLeft + 'px',
+         'width': elemWidth  + 'px',
+         'height': elemHeight + 'px'
       })
       .appendTo(this.$hlContainer);
 
@@ -1041,16 +1068,70 @@ a11yInspector.toggleChecked = function($btn) {
    }
 };
 a11yInspector.handleDrag = function(e) {
-   var curPos = {
-      x: e.pageX,
-      y: e.pageY
+
+   var docScroll = {
+      left: jQuery(document).scrollLeft(),
+      top: jQuery(document).scrollTop()
    };
 
-   if (Math.abs(curPos.x - this.panelPos.x) > 5) {
-      this.$panel.css('left', curPos.x + 'px');
+   var newPos = {
+      x: e.pageX - this.clickPos.x,
+      y: e.pageY - this.clickPos.y
+   };
+
+   if (newPos.x < (docScroll.left + 10)) {
+      newPos.x = docScroll.leftx + 10;
+   }
+   else if (newPos.x > this.viewSize.width - this.$panel.width() - 10) {
+      newPos.x = this.viewSize.width - this.$panel.width() - 10;
    }
 
-   if (Math.abs(curPos.y - this.panelPos.y) > 5) {
-      this.$panel.css('top', curPos.y + 'px');
+   if (newPos.y < (docScroll.top + 10)) {
+      newPos.y = docScroll.top + 10;
+   }
+   else if (newPos.y > (this.viewSize.height + docScroll.top - 50)) {
+      newPos.y = this.viewSize.height + docScroll.top - 50;
+   }
+
+   this.$panel.css({
+      'left': newPos.x + 'px',
+      'top': newPos.y + 'px'
+   });
+};
+a11yInspector.handleResize = function() {
+
+   var docScroll = {
+      left: jQuery(document).scrollLeft(),
+      top: jQuery(document).scrollTop()
+   };
+
+   // redefine the stored viewSize
+   this.viewSize = {
+      width: jQuery(window).width(),
+      height: jQuery(window).height()
+   };
+
+   // Check that the panel is still on screen
+   var panelPos = {
+      left: this.$panel.offset().left,
+      top: this.$panel.offset().top
+   };
+
+   if ((panelPos.left - docScroll.left) > this.viewSize.width - this.$panel.width() - 10) {
+      this.$panel.css('left','');
+   }
+
+   if (panelPos.top > (this.viewSize.height + docScroll.top - this.$panel.height() - 10)) {
+      var newPos = docScroll.top + this.viewSize.height - this.$panel.height() - 10;
+
+      if (newPos < docScroll.top + 10) {
+         newPos = docScroll.top + 10;
+      }
+
+      this.$panel.css('top', newPos + 'px');
+
+   }
+   else if(panelPos.top < (docScroll.top + 10)) {
+      this.$panel.css('top', (docScroll.top + 10) + 'px');
    }
 };
