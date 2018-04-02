@@ -1,0 +1,586 @@
+body {
+	margin: 0;
+	padding: 0;
+	background: url("../images/bggradient.png") no-repeat fixed 50% -115px;
+}
+div#container {
+	margin: 0 auto;
+	width: 1010px;
+	font-family: arial, helvetica, sans-serif;
+	font-size: 14px;
+}
+div#header {
+	overflow: visible;
+	height: 140px;
+	clear: right;
+	width: 100%;
+}
+div#top-nav {
+	padding: 0;
+	width: 100%;
+	height: 32px;
+	background-color: #790000;
+}
+
+ul#topmenu {
+  margin:0;
+  padding: 0;
+  width: 100%;
+  float: left;
+  list-style: none outside none;
+  z-index: 5;
+}
+
+ul#topmenu li {
+	margin: 0;
+	padding-left: 0;
+	float: left;
+	display: inline;
+	position: relative;
+}
+
+ul#topmenu li.menu-parent ul {
+	margin: 0;
+	padding: 0;
+	width: 12.5em;
+	float: left;
+	display: inline;
+	position: absolute;
+	left: 0;
+	overflow: visible;
+	background-color: #790000;
+	border: 1px solid #ffe27f;
+}
+ul#topmenu li.menu-parent ul ul{
+	left: 12.5em;
+	top: 0;
+}
+
+ul#topmenu li.menu-parent ul li {
+	width: 100%;
+}
+ul#topmenu li.menu-item a,
+ul#topmenu li.menu-parent a {
+	padding: 8px 1em;
+	text-decoration: none;
+	font-size: 0.9em;
+	font-weight: bold;
+	color: #ffe27f;
+	display: block;
+}
+
+ul#topmenu li.menu-hover {
+	background-color: #aa0000;
+}
+ul#topmenu li.menu-focus {
+	background-color: #990000;
+}
+
+ul.vmenu {
+	background: url("../images/menu-gradient.png") no-repeat #ffe27f;
+	margin: 0;
+	padding: 0;
+	list-style: none outside none;
+	font-weight: bold;
+	border: 1px solid #ffe27f;
+	z-index: 5;
+}
+ul.vmenu li {
+	margin: 0;
+	padding: 0;
+	border-bottom: 2px solid #ffe27f;
+}
+ul.vmenu li a {
+	padding: 0 10px;
+	text-decoration: none;
+	height: 37px;
+	width: 180px;
+	line-height: 37px;
+	color: #000;
+	display: block;
+}
+ul.vmenu ul {
+	list-style: none outside none;
+	margin: -32px 0 0 199px;
+	width: 220px;
+	padding-left: 0;
+	position: absolute;
+	background-color: #ffe27f;
+	border: 1px solid #fff;
+}
+ul.vmenu li li {
+	border-bottom: 1px solid #fff;
+}
+ul.vmenu ul a {
+	font-size: 0.8em;
+	height: 25px;
+	width: 100%;
+	line-height: 25px;
+}
+ul.vmenu li.menu-hover {
+	background-color: #fffecf;
+}
+ul.vmenu li.menu-focus {
+	background-color: #ffffff;
+}
+.menu-parent ul .menu-parent {
+   background: url('../images/submenu_arrow.png') no-repeat right;
+}
+
+div#Site-Banner {
+	margin: 20px 15px;
+	height: 66px;
+	font-weight: bold;
+}
+img#mw-Logo {
+	float: left;
+}
+div#MCC-Logo {
+	float: left;
+	margin: 5px 15px;
+	display: block;
+}
+p#MCC-Title {
+	margin: 0;
+	padding-top: 0;
+	font-family: "Adobe Garamond", garamond, times, serif;
+	font-size: 2em;
+	text-transform: uppercase;
+}
+p#MCC-Title .title{
+	font-size: 1.8em;
+}
+
+div#mainbody {
+	font-size: 16px;
+}
+
+div#mainmenucolumn {
+   margin: 0;
+	margin-left:15px;
+	padding: 0;
+	float: left;
+	display: block;
+	width: 200px;
+	margin-bottom: 30px;
+}
+
+div#maincontent {
+   margin: 0;
+   padding-left: 15px;
+	padding-bottom: 30px;
+	float: left;
+	display: block;
+	font-size: 14px;
+	width: 780px;
+}
+
+div#maincontent-bgfill {
+   background: url("../images/bgfill_white_780px.png") repeat-y;
+}
+
+div#maincontent h1 {
+   margin: 0;
+   padding: 0.2em 0.5em;
+   font-family: "Times new Roman", Times, serif;
+   font-size: 1.9em;
+   line-height: 1.4em;
+   height: 38px;
+   width: 739px;
+   background-color: #ffe27f;
+}
+
+div#open-hours {
+	font-size: 0.8em;
+	font-weight: bold;
+}
+div#open-hours span.office_hours {
+	font-size: 1.2em;
+	font-weight: bold;
+	border-bottom: 1px solid black;
+}
+div#open-hours span.drop-in {
+	font-weight: bold;
+	text-decoration: underline;
+}
+div#open-hours span.hours {
+	font-weight: normal;
+	margin-left: 5px;
+}
+div#open-hours a {
+	color: black;
+	font-size: 1.2em;
+}
+div#footer {
+	padding: 0.7em 10px;
+	background-color: #790000;
+	clear: both;
+	color: #ffe27f;
+	font-family: arial, helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 0.8em;
+	height: 1em;
+}
+div#footer span {
+	margin-left: 10px;
+}
+
+.offscreen {
+   position: absolute !important;
+   top: -30em !important;
+   left: -300em !important;
+}
+
+/**********************  Home page styles **********************/
+
+div#main-image {
+	float: left;
+}
+
+div#maincontent h1#welcome {
+   width: 517px;
+}
+
+div#featured-items {
+	margin: 0 15px 0 5px;
+	float: right;
+	width: 200px;
+}
+
+div#featured-items ul {
+	list-style: none outside none;
+	margin-top: -5px;
+	padding: 0 10px;
+}
+div#featured-items ul li {
+	display: block;
+	padding-bottom: 1.3em;
+	height: 2.3em;
+	text-align: left;
+	vertical-align: top;
+}
+div#featured-items img {
+	float: left;
+	clear: both;
+	margin-right: 10px;
+}
+div#featured-items a {
+	color: #000;
+	font-family: arial,helvetica,sans-serif;
+	font-size: 0.75em;
+	font-weight: bold;
+	text-align: left;
+}
+div#quicktabs {
+	padding-top: 10px;
+	font-family: arial,helvetica,sans-serif;
+	float: left;
+	width: 543px;
+	z-index: -1;
+}
+ul#quicktabs_tabs {
+	margin: 0;
+	padding: 0;
+  	list-style: none outside none;
+	width: 100%;
+	height: 32px;
+}
+ul#quicktabs_tabs li {
+	margin: 0 10px 0 0;
+	padding-left: 0;
+	padding-top: 8px;
+	float: left;
+	width: 140px;
+	height: 23px;
+	background-color: #fff6d7;
+	font-weight: bold;
+	color: #000;
+	text-align: center;
+	border-top: 1px solid #790000;
+	border-left: 1px solid #790000;
+	border-right: 1px solid #790000;
+}
+ul#quicktabs_tabs li:hover {
+	color: #ffe27f !important;
+	background-color: #790000 !important;
+}
+li.active-tab {
+	color: #ffe27f !important;
+	background-color: #790000 !important;
+	border-bottom: 1px solid #fff6d7;
+}
+div.quicktabs_tabpage {
+	padding: 10px;
+	background-color: #fff6d7;
+	border: 1px solid #790000;
+}
+div.announcement-title {
+	margin-bottom: 10px;
+	font-weight: bold;
+}
+span.announcement-timestamp {
+	margin-right: 10px;
+}
+div.announcement-title a {
+	color: #790000;
+}
+div.announcement-title a:hover {
+	color: #bb0000;
+}
+div.quicktab-col {
+	margin-right: 10px;
+	float: left;
+	width: 48%;
+}
+div.quicktabs_tabpage h3 {
+	color: #790000;
+	font-size: 1.3em;
+}
+div.newspanecontent {
+	margin-left: 10px;
+}
+div.newspanecontent a {
+	font-weight: bold;
+	font-size: 1.1em;
+	color: black;
+}
+div.newspanecontent a:hover,
+div.scholarship-title a:hover {
+	color: #bb0000;
+}
+div.event-timestamp {
+	font-weight: bold;
+	color: #790000;
+}
+div.event-wrapper a {
+	font-weight: bold;
+	font-size: 1.1em;
+	color: black;
+}
+div.advising-title {
+	margin-bottom: 10px;
+	font-weight: bold;
+}
+span.advising-timestamp {
+	margin-right: 10px;
+}
+div.advising-title a {
+	color: black;
+}
+div.advising-title a:hover {
+	color: #bb0000;
+}
+div.scholarship-title a {
+	font-weight: bold;
+	font-size: 0.9em;
+	color: black;
+}
+div.event-wrapper a:hover {
+	color: #790000;
+}
+div#pager {
+	width: 100%;
+	height: 1.5em;
+}
+ul.pager {
+	margin-left: 6em;
+	list-style: none outside none;
+}
+ul.pager li {
+	float: left;
+	text-align: center;
+	font-weight: bold;
+}
+li.pager-next {
+	margin-left: 1em;
+}
+li.pager-next a {
+	color: black;
+	font-weight: bold;
+}
+div#scholarships ul {
+	padding-left: 15px;
+}
+li.scholarship {
+	color: #790000;
+}
+div.tab-spacer {
+	clear: both;
+}
+
+div#student-profile {
+	float: right;
+	background-color: #ffe27f;
+	margin-right: 15px;
+	padding: 2px 5px;
+	width: 185px;
+}
+div#student-profile #profile-header {
+	color: #790000;
+	text-align: center;
+}
+div#student-profile img {
+   border: none;
+}
+
+a.imageLink {
+
+   text-decoration: none;
+}
+
+/**********************  Jobs page styles **********************/
+
+h2.announcement {
+   padding: 0.3em 10px;
+   font-size: 1.4em;
+   font-family: "Times new Roman", Times, serif;
+   width: 739px;
+}
+h2.announcement a {
+   color: #790000;
+}
+h2#SearchHeading {
+   padding: 0.3em 10px;
+   font-size: 1.4em;
+   font-family: "Times new Roman", Times, serif;
+   width: 739px;
+   border-top: 1px solid #790000;
+}
+div.search_filter {
+   margin: 10px;
+   float: left;
+}
+p.instruction {
+   clear: both;
+}
+h2#CategoryListHeading {
+   padding: 0.3em 10px;
+   font-size: 1.4em;
+   font-family: "Times new Roman", Times, serif;
+   width: 739px;
+   border-top: 1px solid #790000;
+}
+h2.categoryHeading {
+   padding: 0.3em 10px;
+   font-size: 1.4em;
+   font-family: "Times new Roman", Times, serif;
+   width: 639px;
+   height: 1.2em;
+   border: 1px solid #790000;
+   background-color: #ffe27f;
+}
+h2.categoryHeading span {
+   float: left;
+}
+h2.categoryHeading img {
+   float: right;
+   width: 25px;
+   height: 25px;
+}
+h2.categoryHeading:hover {
+   color: #bb0000;
+}
+img.moreInfo {
+   border: none;
+}
+dt.jobLink {
+   margin: 15px 0 5px 20px;
+}
+dt.jobLink a {
+   color: black;
+   font-weight: bold;
+}
+dt.jobLink a:hover {
+   color: #bb0000;
+}
+dd.jobDescription {
+   width: 700px;
+}
+
+option[aria-selected="true"],
+option.selected {
+   font-weight: bold;
+   background-color: #ffe27f;
+}
+
+/**********************  Contact page styles **********************/
+
+div.description {
+	margin: 10px 0;
+}
+.form-text {
+   margin-bottom: 10px;
+   float: left;
+}
+form label {
+   clear: both;
+}
+form#contact-mail-page label  {
+   display: block;
+	font-weight: bold;
+}
+form#contact-mail-page {
+   margin-top: 20px;
+}
+.form_error {
+   background-color: #faa;
+}
+div#form_errMsg {
+   margin-right: 20px;
+   padding: 5px;
+   font-weight: bold;
+   border: 1px solid red;
+}
+.errTip {
+   margin-left: 10px;
+   margin-top: -2px;
+   padding: 2px 5px;
+   float: left;
+   display: inline;
+   z-index: 10;
+   border: 1px solid red;
+   background-color: white;
+}
+
+div#captcha {
+	margin: 10px 0;
+   clear: both;
+}
+#recaptcha_table {
+   border-color: #000 !important;
+}
+
+/**********************  Placeholder page styles **********************/
+div#maincontent h1#placeholder_heading {
+   width: 951px;
+}
+table#pageLinks {
+   cell-spacing: 0;
+   background-color: #fff;
+   border-collapse: collapse;
+   width: 951px;
+}
+table#pageLinks th {
+   padding: 2px 5px;
+   border: 1px solid black;
+}
+table#pageLinks td {
+   padding: 2px 5px;
+   text-align: center;
+   border: 1px solid black;
+}
+.left-align {
+   text-align: left !important;
+}
+table#pageLinks td ul {
+   margin: 0;
+   padding-left: 20px;
+}
+table#pageLinks td li {
+   margin: 3px 0 2px 0;
+}
+span.no {
+   font-size: 80%;
+   color: #666;
+}
+   
