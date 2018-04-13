@@ -1,21 +1,27 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script type="text/javascript" src="/js/jquery.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="text/javascript" src="../../../js/jquery-3.1.0.min.js"></script>
 <script type="text/javascript" src="../js/aria.js"></script>
 <script type="text/javascript" src="../js/menu_aria.js"></script>
+<script type="text/javascript" src="../../../js/tabpanel.js"></script>
+<script>
+   $('document').ready(function() {
+         $('.tablist').tabpanel();
+   });
+</script>
 <link rel="stylesheet" href="../css/aria.css" type="text/css">
 <title>Midwest Career Center - Welcome</title>
 </head>
 <body>
 <div id="container">
 
-   <div id="header" role="banner">
+   <header id="header"role="banner">
       <div id="mainnavigation">
-         <div id="top-nav" role="navigation" aria-label="Site Menu">
+         <nav id="top-nav" role="navigation" aria-label="Site Menu">
             <div class="content">
-               <ul id="topmenu" class="root-level" role="menu" aria-labelledby="topmenu_label">
+               <ul id="topmenu" class="root-level" role="menu">
                   <li id="home" class="menu-item" role="presentation"><a role="menuitem" tabindex="0" href="../index.html#1">Home</a></li>
                   <li id="about" class="menu-parent" role="presentation"><a role="menuitem" aria-haspopup="true" aria-expanded="false" tabindex="-1" href="../index.html#2" >About Us</a>
                   <ul role="menu" aria-labelledby="about" aria-hidden="true">
@@ -69,12 +75,12 @@
                   <li id="links" class="menu-item" role="presentation"><a role="menuitem" tabindex="-1" href="../index.html#33" >A-Z Links</a></li>
                </ul>
             </div>
-         </div> <!-- /block -->
+         </nav> <!-- /block -->
 
       </div> <!-- /mainnavigation --> 
 
 
-      <div id="Site-Banner" role="banner">
+      <div id="Site-Banner">
          <div>
             <img id="mw-Logo" src="../images/midwest_logo.png" alt="Midwest University Page" class="logo">
             <div id="MCC-Logo">
@@ -86,13 +92,13 @@
             </div>
          </div>
       </div> <!-- /site-logo -->
-   </div> <!-- /header -->
+   </header> <!-- /header -->
        
    <div id="mainbody">
       <div id="mainmenucolumn">
-         <div id="mainmenu" role="navigation" aria-label="Primary Menu">
+         <nav id="mainmenu" role="navigation" aria-label="Primary Menu">
             <div class="primary-menu">
-               <ul id="main-menu" class="vmenu root-level" aria-labelledby="main_menu_label" role="menu">
+               <ul id="main-menu" class="vmenu root-level" role="menu">
                   <li id="majors" class="menu-parent" role="presentation"><a role="menuitem" aria-haspopup="true" aria-expanded="false" tabindex="0" href="../index.html#34" >Majors &amp; Careers</a>
                   <ul role="menu" aria-labelledby="majors" aria-hidden="true">
                      <li id="fits" class="menu-item" role="presentation"><a role="menuitem" tabindex="-1" href="../index.html#35" title="What fits me? Exploring interests, skills and values.">What Fits Me?</a></li>
@@ -160,53 +166,33 @@
                   </li>
                </ul> 
             </div> <!-- /primary-menu -->
-         </div>
+         </nav>
          <div id="open-hours" role="complementary" aria-label="Hours and Contact">
             <div id="tophours">
-               <p><span class="office_hours">Office Hours:</span></p>
+               <h2>Office Hours:</h2>
                <p>M-F 8:30am - 5pm</p>
-               <p><span class="drop-in">Fall Drop-in hours:</span></p>
-               <p>General: <span class="hours">M-Th 11-5; F 11-3</span><br>
-                 Pre-health: <span class="hours">T&amp;W 1:30-3</span><br>
-                 Resume critiques: <span class="hours"> M-F 2-4:30</span>
-                      </p>
+               <h2>Fall Drop-in hours:</h2>
+               <ul>
+                  <li>General: <span class="hours">M-Th 11-5; F 11-3</span></li>
+                  <li>Pre-health: <span class="hours">T&amp;W 1:30-3</span></li>
+                  <li>Resume critiques: <span class="hours"> M-F 2-4:30</span></li>
+               </ul>
                <p><a href="../index.html#105">Contact Us</a></p>
             </div>
          </div>
       </div>
 
-      <div id="maincontent" role="main">
+      <main id="maincontent" role="main">
          <div id="main-image">
                <img src="../images/main-image.png" alt="Front Page Image">
          </div> <!-- /main-image -->
-         <div id="featured-items" role="complementary" aria-label="Featured Items">
-            <ul>
-               <li>
-                  <img alt="Career-Link logo" src="../images/networking.png">
-                  <a href="../index.html#24">Find Jobs with Career-Link</a>
-               </li>
-               <li>
-                  <img alt="Workshops logo" src="../images/workshop.png">
-                  <a href="../index.html#107">Attend a Workshop</a>
-               </li>
-               <li>
-                  <img alt="Career exploration logo" src="../images/explore.png">
-                  <a href="../index.html#85">Find the Path to Career Success</a>
-               </li>
-               <li>
-                  <img alt="Letters of evaluation logo" src="../images/evaluation.png">
-                  <a href="../index.html#31">Online Letters of Evaluation</a>
-               </li>
+         <div id="quicktabs" class="tabpanel-container">
+            <ul id="quicktabs_tabs" class="tablist" aria-label="Quick Tabs">
+               <li id="tab1" class="quicktab tab">Announcements</li>
+               <li id="tab2" class="quicktab tab">News &amp; Events</li>
+               <li id="tab3" class="quicktab tab">Virtual Advising</li>
             </ul>
-         </div> <!-- /featured-items -->
-         <div id="quicktabs">
-            <ul id="quicktabs_tabs">
-               <li id="quicktab-1" class="quicktab active-tab" tabindex="0" aria-controls="quicktab1" role="button">Announcements</li>
-               <li id="quicktab-2" class="quicktab" tabindex="0" aria-controls="quicktab2" role="button">News &amp; Events</li>
-               <li id="quicktab-3" class="quicktab" tabindex="0" aria-controls="quicktab3" role="button">Virtual Advising</li>
-            </ul>
-            <div id="quicktab1" class="quicktabs_tabpage" aria-labelledby="quicktab-1" aria-hidden="false" aria-expanded="true" tabindex="-1">
-               <h2 class="offscreen">Announcements</h2>
+            <div id="tab1-panel" class="quicktabs_tabpage tabpanel">
                <div class="announcement">
                   <div class="announcement-title">
                      <span class="announcement-timestamp">10/18/2010</span>
@@ -243,8 +229,7 @@
                   </div>
                </div>
             </div> <!-- /quicktab1 -->
-            <div id="quicktab2" class="quicktabs_tabpage tab-hidden" aria-labelledby="quicktab-2" aria-hidden="true" aria-expanded="false" tabindex="-1">
-               <h2 class="offscreen">News & Events</h2>
+            <div id="tab2-panel" class="quicktabs_tabpage tabpanel">
                <div class="quicktab-col">
                   <h3 class="quicktab-title">E-Newsletters</h3>
                   <div class="newspanecontent">
@@ -301,8 +286,7 @@
                 </div> <!-- /quicktab-col2 -->
                <div class="tab-spacer"></div>
             </div> <!-- /quicktab2 -->
-            <div id="quicktab3" class="quicktabs_tabpage tab-hidden" aria-labelledby="quicktab-3" aria-hidden="true" aria-expanded="false" tabindex="-1">
-               <h2 class="offscreen">Advising</h2>
+            <div id="tab3-panel" class="quicktabs_tabpage tabpanel">
                <h3 id="advising title">General Advising Board</h3>
                <div class="advising-title">
                   <span class="advising-timestamp">09/27/2010</span>
@@ -316,9 +300,31 @@
                </div>
             </div> <!-- /quicktab3 -->
          </div> <!-- /quicktabs -->
+      </main> <!-- /maincontent -->
+      <div class="right-col">
+         <div id="featured-items" role="complementary" aria-label="Featured Items">
+            <ul>
+               <li>
+                  <img alt="Career-Link logo" src="../images/networking.png">
+                  <a href="../index.html#24">Find Jobs with Career-Link</a>
+               </li>
+               <li>
+                  <img alt="Workshops logo" src="../images/workshop.png">
+                  <a href="../index.html#107">Attend a Workshop</a>
+               </li>
+               <li>
+                  <img alt="Career exploration logo" src="../images/explore.png">
+                  <a href="../index.html#85">Find the Path to Career Success</a>
+               </li>
+               <li>
+                  <img alt="Letters of evaluation logo" src="../images/evaluation.png">
+                  <a href="../index.html#31">Online Letters of Evaluation</a>
+               </li>
+            </ul>
+         </div> <!-- /featured-items -->
          <div id="student-profile" role="complementary" aria-label="Success Stories">
             <div id="profile-header">
-               <h3 class="pane-title">Student Success Stories</h3>
+               <h2 class="pane-title">Student Success Stories</h2>
             </div>
             <div class="profile-content">
                <p>
@@ -333,8 +339,8 @@
                <p style="text-align: center; margin-bottom: 5px;"><a href="../index.html#122">Read more...</a></p>
             </div>
          </div> <!-- /student profile -->
-      </div> <!-- /maincontent -->
-   </div> <!-- // mainbody -->
+      </div> <!-- /right col -->
+   </div> <!-- / mainbody -->
 
    <div id="footer" role="contentinfo">
          <span>1212 S. Some St., Midwest, IL, 12345</span>

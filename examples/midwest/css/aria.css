@@ -2,27 +2,27 @@ body {
 	margin: 0;
 	padding: 0;
 	background: url("../images/bggradient.png") no-repeat fixed 50% -115px;
+	font-size: 1em;
 }
-div#container {
+#container {
 	margin: 0 auto;
 	width: 1010px;
 	font-family: arial, helvetica, sans-serif;
-	font-size: 14px;
 }
-div#header {
+#header {
 	overflow: visible;
 	height: 140px;
 	clear: right;
 	width: 100%;
 }
-div#top-nav {
+#top-nav {
 	padding: 0;
 	width: 100%;
 	height: 32px;
 	background-color: #790000;
 }
 
-ul#topmenu {
+#topmenu {
   margin:0;
   padding: 0;
   width: 100%;
@@ -31,7 +31,7 @@ ul#topmenu {
   z-index: 5;
 }
 
-ul#topmenu li {
+#topmenu li {
 	margin: 0;
 	padding-left: 0;
 	float: left;
@@ -39,7 +39,7 @@ ul#topmenu li {
 	position: relative;
 }
 
-ul#topmenu ul {
+#topmenu ul {
 	margin: 0;
 	padding: 0;
 	width: 12.5em;
@@ -50,16 +50,16 @@ ul#topmenu ul {
 	background-color: #790000;
 	border: 1px solid #ffe27f;
 }
-ul#topmenu li.menu-parent ul ul{
+#topmenu li.menu-parent ul ul{
 	left: 12.5em;
 	top: 0;
 }
 
-ul#topmenu li.menu-parent ul li {
+#topmenu li.menu-parent ul li {
 	width: 100%;
 }
-ul#topmenu li.menu-item a,
-ul#topmenu li.menu-parent a {
+#topmenu li.menu-item a,
+#topmenu li.menu-parent a {
 	padding: 8px 1em;
 	text-decoration: none;
 	font-size: 0.9em;
@@ -69,14 +69,14 @@ ul#topmenu li.menu-parent a {
    height: 100%;
 }
 
-ul#topmenu [role=menuitem]:hover {
+#topmenu [role=menuitem]:hover {
 	background-color: #aa0000;
 }
-ul#topmenu [role=menuitem]:focus {
+#topmenu [role=menuitem]:focus {
 	background-color: #990000;
 }
 
-ul.vmenu {
+.vmenu {
 	background: url("../images/menu-gradient.png") no-repeat #ffe27f;
 	margin: 0;
 	padding: 0;
@@ -85,12 +85,12 @@ ul.vmenu {
 	border: 1px solid #ffe27f;
 	z-index: 5;
 }
-ul.vmenu li {
+.vmenu li {
 	margin: 0;
 	padding: 0;
 	border-bottom: 2px solid #ffe27f;
 }
-ul.vmenu li a {
+.vmenu li a {
 	padding: 0 10px;
 	text-decoration: none;
 	height: 37px;
@@ -99,7 +99,7 @@ ul.vmenu li a {
 	color: #000;
 	display: block;
 }
-ul.vmenu ul {
+.vmenu ul {
 	list-style: none outside none;
 	margin: -32px 0 0 199px;
 	width: 220px;
@@ -108,55 +108,51 @@ ul.vmenu ul {
 	background-color: #ffe27f;
 	border: 1px solid #fff;
 }
-ul.vmenu li li {
+.vmenu li li {
 	border-bottom: 1px solid #fff;
 }
-ul.vmenu ul a {
+.vmenu ul a {
    display: block;
 	font-size: 0.8em;
 	width: 200px;
 	height: 25px;
 	line-height: 25px;
 }
-ul.vmenu li a:hover {
+.vmenu li a:hover {
 	background-color: #fffecf;
 }
-ul.vmenu li a:focus {
+.vmenu li a:focus {
 	background-color: #ffffff;
 }
 .menu-parent ul .menu-parent {
    background: url('../images/submenu_arrow.png') no-repeat right;
 }
 
-div#Site-Banner {
+#Site-Banner {
 	margin: 20px 15px;
 	height: 66px;
 	font-weight: bold;
 }
-img#mw-Logo {
+#mw-Logo {
 	float: left;
 }
-div#MCC-Logo {
+#MCC-Logo {
 	float: left;
 	margin: 5px 15px;
 	display: block;
 }
-p#MCC-Title {
+#MCC-Title {
 	margin: 0;
 	padding-top: 0;
 	font-family: "Adobe Garamond", garamond, times, serif;
 	font-size: 2em;
 	text-transform: uppercase;
 }
-p#MCC-Title .title{
+#MCC-Title .title{
 	font-size: 1.8em;
 }
 
-div#mainbody {
-	font-size: 16px;
-}
-
-div#mainmenucolumn {
+#mainmenucolumn {
    margin: 0;
 	margin-left:15px;
 	padding: 0;
@@ -166,21 +162,20 @@ div#mainmenucolumn {
 	margin-bottom: 30px;
 }
 
-div#maincontent {
+#maincontent {
    margin: 0;
    padding-left: 15px;
 	padding-bottom: 30px;
 	float: left;
 	display: block;
-	font-size: 14px;
 	width: 780px;
 }
 
-div#maincontent-bgfill {
+#maincontent-bgfill {
    background: url("../images/bgfill_white_780px.png") repeat-y;
 }
 
-div#maincontent h1 {
+#maincontent h1 {
    margin: 0;
    padding: 0.2em 0.5em;
    font-family: "Times new Roman", Times, serif;
@@ -191,28 +186,28 @@ div#maincontent h1 {
    background-color: #ffe27f;
 }
 
-div#open-hours {
+#open-hours {
 	font-size: 0.8em;
 	font-weight: bold;
 }
-div#open-hours span.office_hours {
+#open-hours span.office_hours {
 	font-size: 1.2em;
 	font-weight: bold;
 	border-bottom: 1px solid black;
 }
-div#open-hours span.drop-in {
+#open-hours span.drop-in {
 	font-weight: bold;
 	text-decoration: underline;
 }
-div#open-hours span.hours {
+#open-hours span.hours {
 	font-weight: normal;
 	margin-left: 5px;
 }
-div#open-hours a {
+#open-hours a {
 	color: black;
 	font-size: 1.2em;
 }
-div#footer {
+#footer {
 	padding: 0.7em 10px;
 	background-color: #790000;
 	clear: both;
@@ -222,7 +217,7 @@ div#footer {
 	font-size: 0.8em;
 	height: 1em;
 }
-div#footer span {
+#footer span {
 	margin-left: 10px;
 }
 
@@ -234,65 +229,65 @@ div#footer span {
 
 /**********************  Home page styles **********************/
 
-div#main-image {
+#main-image {
 	float: left;
 }
 
-div#maincontent h1#welcome {
+#maincontent h1#welcome {
    width: 517px;
 }
 
-div#featured-items {
+#featured-items {
 	margin: 0 15px 0 5px;
 	float: right;
 	width: 200px;
 }
 
-div#featured-items ul {
+#featured-items ul {
 	list-style: none outside none;
 	margin-top: -5px;
 	padding: 0 10px;
 }
-div#featured-items ul li {
+#featured-items ul li {
 	display: block;
 	padding-bottom: 1.3em;
 	height: 2.3em;
 	text-align: left;
 	vertical-align: top;
 }
-div#featured-items ul li a:hover,
-div#featured-items ul li a:active,
-div#featured-items ul li a:focus {
+#featured-items ul li a:hover,
+#featured-items ul li a:active,
+#featured-items ul li a:focus {
    color: #b00;
    font-weight: bold;
 }
-div#featured-items img {
+#featured-items img {
 	float: left;
 	clear: both;
 	margin-right: 10px;
 }
-div#featured-items a {
+#featured-items a {
 	color: #000;
 	font-family: arial,helvetica,sans-serif;
 	font-size: 0.75em;
 	font-weight: bold;
 	text-align: left;
 }
-div#quicktabs {
+#quicktabs {
 	padding-top: 10px;
 	font-family: arial,helvetica,sans-serif;
 	float: left;
 	width: 543px;
 	z-index: -1;
 }
-ul#quicktabs_tabs {
+#quicktabs_tabs {
 	margin: 0;
 	padding: 0;
   	list-style: none outside none;
 	width: 100%;
 	height: 32px;
 }
-ul#quicktabs_tabs li {
+.tab {
 	margin: 0 10px 0 0;
 	padding-left: 0;
 	padding-top: 8px;
@@ -307,176 +302,215 @@ ul#quicktabs_tabs li {
 	border-left: 1px solid #790000;
 	border-right: 1px solid #790000;
 }
-ul#quicktabs_tabs li:hover {
-	color: #ffe27f !important;
-	background-color: #790000 !important;
+.tab:hover,
+.tab[aria-selected="true"]:hover {
+	color: #ffe27f;
+	background-color: #bb0000;
 }
-li.active-tab {
-	color: #ffe27f !important;
-	background-color: #790000 !important;
+.active-tab {
+	color: #ffe27f;
+	background-color: #790000;
 	border-bottom: 1px solid #fff6d7;
 }
-div.quicktabs_tabpage {
+.quicktabs_tabpage {
 	padding: 10px;
 	background-color: #fff6d7;
 	border: 1px solid #790000;
 }
-div.announcement-title {
+.announcement-title {
 	margin-bottom: 10px;
 	font-weight: bold;
 }
-span.announcement-timestamp {
+.announcement-timestamp {
 	margin-right: 10px;
 }
-div.announcement-title a {
+.announcement-title a {
 	color: #790000;
 }
-div.announcement-title a:hover,
-div.announcement-title a:active,
-div.announcement-title a:focus {
+.announcement-title a:hover,
+.announcement-title a:active,
+.announcement-title a:focus {
 	color: #bb0000;
 }
-div.quicktab-col {
+.quicktab-col {
 	margin-right: 10px;
 	float: left;
 	width: 48%;
 }
-div.quicktabs_tabpage h3 {
+.quicktabs_tabpage h3 {
 	color: #790000;
 	font-size: 1.3em;
 }
-div.newspanecontent {
+.newspanecontent {
 	margin-left: 10px;
 }
-div.newspanecontent a {
+.newspanecontent a {
 	font-weight: bold;
-	font-size: 1.1em;
 	color: black;
 }
-div.newspanecontent a:hover,
-div.newspanecontent a:focus,
-div.newspanecontent a:active,
-div.scholarship-title a:hover,
-div.scholarship-title a:focus,
-div.scholarship-title a:active {
+.newspanecontent a:hover,
+.newspanecontent a:focus,
+.newspanecontent a:active,
+.scholarship-title a:hover,
+.scholarship-title a:focus,
+.scholarship-title a:active {
 	color: #bb0000;
 }
-div.event-timestamp {
+.event-timestamp {
 	font-weight: bold;
 	color: #790000;
 }
-div.event-wrapper a {
+.event-wrapper a {
 	font-weight: bold;
 	font-size: 1.1em;
 	color: black;
 }
-div.advising-title {
+.advising-title {
 	margin-bottom: 10px;
 	font-weight: bold;
 }
-span.advising-timestamp {
+.advising-timestamp {
 	margin-right: 10px;
 }
-div.advising-title a {
+.advising-title a {
 	color: black;
 }
-div.advising-title a:hover,
-div.advising-title a:focus,
-div.advising-title a:active {
+.advising-title a:hover,
+.advising-title a:focus,
+.advising-title a:active {
 	color: #bb0000;
 }
-div.scholarship-title a {
+.scholarship-title a {
 	font-weight: bold;
 	font-size: 0.9em;
 	color: black;
 }
-div.event-wrapper a:hover,
-div.event-wrapper a:focus,
-div.event-wrapper a:active {
+.event-wrapper a:hover,
+.event-wrapper a:focus,
+.event-wrapper a:active {
 	color: #bb0000;
 }
-div#pager {
+#pager {
 	width: 100%;
 	height: 1.5em;
 }
-ul.pager {
+.pager {
 	margin-left: 6em;
 	list-style: none outside none;
 }
-ul.pager li {
+.pager li {
 	float: left;
 	text-align: center;
 	font-weight: bold;
 }
-li.pager-next {
+.pager-next {
 	margin-left: 1em;
 }
-li.pager-next a {
+.pager-next a {
 	color: black;
 	font-weight: bold;
 }
-div#scholarships ul {
+#scholarships ul {
 	padding-left: 15px;
 }
-li.scholarship {
+.scholarship {
 	color: #790000;
 }
-div.tab-spacer {
+.tab-spacer {
 	clear: both;
 }
 
-div#student-profile {
+#student-profile {
 	float: right;
 	background-color: #ffe27f;
 	margin-right: 15px;
 	padding: 2px 5px;
 	width: 185px;
 }
-div#student-profile #profile-header {
+#student-profile #profile-header {
 	color: #790000;
 	text-align: center;
 }
-div#student-profile img {
+#student-profile img {
    border: none;
 }
 
-div#student-profile a {
+#student-profile a {
    color: #790000;
 }
-div#student-profile a:hover,
-div#student-profile a:active,
-div#student-profile a:focus {
+#student-profile a:hover,
+#student-profile a:active,
+#student-profile a:focus {
    color: #b00;
    font-weight: bold;
 }
-a.imageLink {
+.imageLink {
 
    text-decoration: none;
 }
 
+/**************** New Home Page Styles *******************/
+#maincontent {
+   width: 560px;
+}
+.right-col {
+   overflow: hidden;
+   width: 220px;
+   float: right;
+}
+.right-col #featured-items,
+.right-col #student-profile {
+   float: left;
+   width: 190px;
+}
+.tab[aria-selected="true"] {
+	color: #ffe27f;
+	background-color: #790000;
+	border-bottom: 1px solid #fff6d7;
+}
+.tab:focus {
+   outline: none;
+}
+.tabpanel .announcement {
+   font-size: 1em;
+}
+.tabpanel .announcement-description,
+.tabpanel .advising-description {
+   line-height: 1.2em;
+}
+.pane-title {
+   font-size: 1.2em;
+}
+#open-hours h2 {
+   font-size: 1.2em;
+   text-decoration: underline;
+}
+#open-hours ul {
+   list-style-type: none;
+   padding-left: 0;
+}
 /**********************  Jobs page styles **********************/
 
-h2.announcement {
+.announcement {
    padding: 0.3em 10px;
    font-size: 1.4em;
    font-family: "Times new Roman", Times, serif;
-   width: 739px;
 }
-h2.announcement a {
+.announcement a {
    color: #790000;
 }
-h2#SearchHeading {
+#SearchHeading {
    padding: 0.3em 10px;
    font-size: 1.4em;
    font-family: "Times new Roman", Times, serif;
    width: 739px;
    border-top: 1px solid #790000;
 }
-div.search_filter {
+.search_filter {
    margin: 10px;
    float: left;
 }
-p.instruction {
+.instruction {
    clear: both;
 }
 #CategoryListHeading {
@@ -508,22 +542,22 @@ p.instruction {
 .categoryHeading:active {
    color: #bb0000;
 }
-img.moreInfo {
+.moreInfo {
    border: none;
 }
-dt.jobLink {
+.jobLink {
    margin: 15px 0 5px 20px;
 }
-dt.jobLink a {
+.jobLink a {
    color: black;
    font-weight: bold;
 }
-dt.jobLink a:hover,
-dt.jobLink a:focus,
-dt.jobLink a:active {
+.jobLink a:hover,
+.jobLink a:focus,
+.jobLink a:active {
    color: #bb0000;
 }
-dd.jobDescription {
+.jobDescription {
    width: 700px;
 }
 
@@ -539,7 +573,7 @@ option.selected {
 
 /**********************  Contact page styles **********************/
 
-div.description {
+.description {
 	margin: 10px 0;
 }
 .form-text {
@@ -549,11 +583,11 @@ div.description {
 form label {
    clear: both;
 }
-form#contact-mail-page label  {
+#contact-mail-page label  {
    display: block;
 	font-weight: bold;
 }
-form#contact-mail-page {
+#contact-mail-page {
    margin-top: 20px;
 }
 
@@ -586,7 +620,7 @@ table#pageLinks td {
    border: 1px solid black;
 }
 .left-align {
-   text-align: left !important;
+   text-align: left;
 }
 table#pageLinks td ul {
    margin: 0;
@@ -599,4 +633,3 @@ span.no {
    font-size: 80%;
    color: #666;
 }
-   
