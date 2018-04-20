@@ -19,7 +19,7 @@ jQuery(document).ready(function () {
 
  /////////// Progressbar ///////////////
  
-   progBar = new progressbar(jQuery("[role=progressbar]"), 1);
+   progBar = new progressbar(jQuery("[role=progressbar]"), 10);
 
    $progBtn = jQuery("#progress-start").on("click", function(e) {
 
@@ -32,11 +32,11 @@ jQuery(document).ready(function () {
       else { // the example is not running
          if (progBar.isMax()) {
             progBar.reset();
-            $progBtn.html("Start Example");
+            $progBtn.html("Start Progressbar");
          }
          else {
-            intervalID = setInterval("doProgress()", 80);
-            $progBtn.html("Stop Example");
+            intervalID = setInterval("doProgress()", 500);
+            $progBtn.html("Stop Progressbar");
 
             bProgStarted = true;
          }
