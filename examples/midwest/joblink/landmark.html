@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>MCC Job Internship Database - Landmarks</title>
 <script type="text/javascript" src="../../../js/jquery-3.1.0.min.js"></script>
 <script type="text/javascript" src="../js/headers.js"></script>
 <script type="text/javascript" src="../js/menu_basic.js"></script>
@@ -177,46 +178,46 @@
             <h1>Job and Internship Databases</h1>
             <h2 class="announcement"><a href="../index.html#106">Career-Link</a>: Your #1 source for finding jobs and internships.</h2>
             <div>
-               <h2 id="SearchHeading">Search the Job and Internship Websites</h2>
-               <p>Search our Job and Internship database for targeted job sites to help expand your search.</p>
-               <form action="#" method="post" name="searchwebsites">
-                  Enter Keywords:
-                  <input name="searchstring" size="60" type="text"> 
-                  <input name="submit" value="Search" type="submit"><br>
-                  <div class="search_filter">
-                  <em>Limit by:</em>
-                  </div>
-                  <div class="search_filter">
-                  Subject<br/>
-                  <select name="subject">
-                     <option value="All" selected="selected">All</option>
-                     <option value="Business">Business</option>
-                     <option value="Diversity">Diversity</option>
-                     <option value="Education">Education</option>
-                     <option value="Engineering">Engineering</option>
-                     <option value="Finance">Finance</option>
-                     <option value="Health">Health</option>
-                     <option value="Media">Media</option>
-                  </select>
-                  </div>
-                  <div class="search_filter">
-                  Job Type<br/>
-                  <select name="job_internship">
-                     <option value="All" selected="selected">All</option>
-                     <option value="Job">Job</option>
-                     <option value="Internship">Internship</option>
-                  </select> 
-                  </div>
-                  <div class="search_filter">
-                  Scope<br/>
-                  <select name="scope">
-                     <option value="Local">Local</option>
-                     <option value="State">State</option>
-                     <option value="National" selected="selected">National</option>
-                     <option value="International">International</option>
-                  </select>
-                  </div>
-               </form>
+                  <form action="#" method="post" name="searchwebsites" role="search" aria-labelledby="SearchHeading">
+                     <legend><h2 id="SearchHeading" class="announcement">Search the Job and Internship Websites</h2></legend>
+                     <p>Search our Job and Internship database for targeted job sites to help expand your search.</p>
+                     <label for="edtSearch">Enter Keywords: </label>
+                     <input id="edtSearch" name="searchstring" size="60" type="text" /> 
+                     <input name="submit" value="Search" type="submit" /><br/>
+                     <div class="search_filter">
+                     <em>Limit by:</em>
+                     </div>
+                     <div class="search_filter">
+                     <label for="subject">Subject</label><br/>
+                     <select id="subject" name="subject">
+                        <option id="sub1" value="All" selected="selected">All</option>
+                     <option id="sub2" value="Business">Business</option>
+                     <option id="sub3" value="Diversity">Diversity</option>
+                     <option id="sub4" value="Education">Education</option>
+                     <option id="sub5" value="Engineering">Engineering</option>
+                     <option id="sub6" value="Finance">Finance</option>
+                     <option id="sub7" value="Health">Health</option>
+                     <option id="sub8" value="Media">Media</option>
+                     </select>
+                     </div>
+                     <div class="search_filter">
+                     <label for="job_internship">Job Type</label><br/>
+                     <select id="jobType" name="job_internship">
+                        <option id="type1" value="All" selected="selected">All</option>
+                        <option id="type2" value="Job">Job</option>
+                        <option id="type3" value="Internship">Internship</option>
+                     </select> 
+                     </div>
+                     <div class="search_filter">
+                     <label for="scope">Scope</label><br/>
+                     <select id="scope" name="scope">
+                        <option id="scope1" value="Local">Local</option>
+                        <option id="scope2" value="State">State</option>
+                        <option id="scope3" value="National" selected="selected">National</option>
+                        <option id="scope4" value="International">International</option>
+                     </select>
+                     </div>
+                  </form>
                <p class="instruction">
                   Job-seekers have a huge range of resources at their disposal, and the 
                   well-known mega-posting sites are only a small fraction. When conducting

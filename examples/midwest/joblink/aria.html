@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>MCC Job Internship Database - ARIA</title>
 <script type="text/javascript" src="../../../js/jquery-3.1.0.min.js"></script>
 <script type="text/javascript" src="../js/aria.js"></script>
 <script type="text/javascript" src="../js/menu_aria.js"></script>
@@ -179,18 +180,17 @@
             <h1>Job and Internship Databases</h1>
             <div>
                <h2 class="announcement"><a href="../index.html#106">Career-Link</a>: Your #1 source for finding jobs and internships.</h2>
-               <div role="search">
-                  <form action="#" method="post" name="searchwebsites">
+                  <form action="#" method="post" name="searchwebsites" role="search" aria-labelledby="SearchHeading">
                      <legend><h2 id="SearchHeading" class="announcement">Search the Job and Internship Websites</h2></legend>
                      <p>Search our Job and Internship database for targeted job sites to help expand your search.</p>
-                     <label for="#edtSearch">Enter Keywords: </label>
+                     <label for="edtSearch">Enter Keywords: </label>
                      <input id="edtSearch" name="searchstring" size="60" type="text" /> 
                      <input name="submit" value="Search" type="submit" /><br/>
                      <div class="search_filter">
                      <em>Limit by:</em>
                      </div>
                      <div class="search_filter">
-                     <label for="#subject">Subject</label><br/>
+                     <label for="subject">Subject</label><br/>
                      <select id="subject" name="subject">
                         <option id="sub1" value="All" selected="selected">All</option>
                      <option id="sub2" value="Business">Business</option>
@@ -203,7 +203,7 @@
                      </select>
                      </div>
                      <div class="search_filter">
-                     <label for="#job_internship">Job Type</label><br/>
+                     <label for="jobType">Job Type</label><br/>
                      <select id="jobType" name="job_internship">
                         <option id="type1" value="All" selected="selected">All</option>
                         <option id="type2" value="Job">Job</option>
@@ -211,7 +211,7 @@
                      </select> 
                      </div>
                      <div class="search_filter">
-                     <label for="#scope">Scope</label><br/>
+                     <label for="scope">Scope</label><br/>
                      <select id="scope" name="scope">
                         <option id="scope1" value="Local">Local</option>
                         <option id="scope2" value="State">State</option>
@@ -220,7 +220,6 @@
                      </select>
                      </div>
                   </form>
-               </div>
                <p class="instruction">
                   Job-seekers have a huge range of resources at their disposal, and the 
                   well-known mega-posting sites are only a small fraction. When conducting
