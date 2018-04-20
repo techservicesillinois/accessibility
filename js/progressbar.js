@@ -7,11 +7,6 @@ function doProgress() {
    if (!progBar.isMax()) {
       progBar.increment();
    }
-   else {
-      clearInterval(intervalID);
-      $progBtn.html("Reset Example");
-      bProgStarted = false;
-   }
 }
  /////////// End Progressbar Globals ///////////////
 
@@ -70,12 +65,14 @@ jQuery(document).ready(function () {
    progressbar.prototype.increment = function() {
 
       if (!this.isMax()) {
-
          this.valuenow += this.incAmt;
-         this.$elem.attr("aria-valuenow", this.valuenow);
-
-         this.$fill.css('width', this.valuenow + "%");
       }
+      else {
+         this.valuenow = this.valuemin;
+      }
+
+      this.$elem.attr("aria-valuenow", this.valuenow);
+      this.$fill.css('width', this.valuenow + "%");
    };
 
    progressbar.prototype.isMax = function() {
