@@ -9,7 +9,7 @@ function doProgress() {
    }
    else {
       clearInterval(intervalID);
-      $progBtn.html("Reset Example");
+      $progBtn.html("Reset Progressbar");
       bProgStarted = false;
    }
 }
@@ -19,12 +19,12 @@ jQuery(document).ready(function () {
 
  /////////// Progressbar ///////////////
  
-   progBar = new progressbar(jQuery("[role=progressbar]"), 10);
+   progBar = new progressbar(jQuery("[role=progressbar]"), 1);
 
    $progBtn = jQuery("#progress-start").on("click", function(e) {
 
       if (bProgStarted) { // the example is running
-         $progBtn.html("Start Example");
+         $progBtn.html("Start Progressbar");
 
          clearInterval(intervalID);
          bProgStarted = false;
@@ -35,7 +35,7 @@ jQuery(document).ready(function () {
             $progBtn.html("Start Progressbar");
          }
          else {
-            intervalID = setInterval("doProgress()", 500);
+            intervalID = setInterval("doProgress()", 80);
             $progBtn.html("Stop Progressbar");
 
             bProgStarted = true;
