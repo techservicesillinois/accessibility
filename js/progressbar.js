@@ -58,7 +58,7 @@ jQuery(document).ready(function () {
 
  /////////// Progressbar ///////////////
  
-   progBar = new progressbar(jQuery("[role=progressbar]"), 1);
+   progBar = new progressbar(jQuery("[role=progressbar]"), 10);
 
    $progBtn = jQuery("#progress-start").on("click", function(e) {
 
@@ -74,7 +74,7 @@ jQuery(document).ready(function () {
             $progBtn.html("Start Progressbar");
          }
          else {
-            intervalID = setInterval("doProgress()", 80);
+            intervalID = setInterval("doProgress()", 500);
             $progBtn.html("Stop Progressbar");
 
             bProgStarted = true;
