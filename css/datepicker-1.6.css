@@ -1,0 +1,99 @@
+.datepicker {
+   margin: 10px;
+   padding: 2px;
+   background-color: #fff;
+   position: absolute;
+   top: 1.2em;
+   left: 4em;
+   width: 261px;
+   border: 1px solid #ccc;
+   -webkit-border-radius: 4px;
+   -moz-border-radius: 4px;
+   border-radius: 4px;
+   z-index: 100;
+}
+.month-wrap {
+   height: 30px;
+   background-color: #ddd;
+   border: 1px solid black;
+   -webkit-border-radius: 4px;
+   -moz-border-radius: 4px;
+   border-radius: 4px;
+}
+.bn_prev {
+   margin: 3px;
+   float: left;
+   width: 24px;
+   height: 24px;
+}
+.bn_next {
+   margin: 3px;
+   float: right;
+   width: 24px;
+   height: 24px;
+}
+
+.bn_prev:hover,
+.bn_prev:focus,
+.bn_next:hover,
+.bn_next:focus {
+   margin: 2px;
+   background-color: #fc3;
+   border: 1px solid #800;
+   -webkit-border-radius: 4px;
+   -moz-border-radius: 4px;
+   border-radius: 4px;
+}
+.bn_img {
+   margin: 0;
+   padding: 2px;
+}
+.month {
+   float: left;
+   padding-top: 6px;
+   width: 199px;
+   height: 24px;
+   text-align: center;
+   font-weight: bold;
+   font-size: 1.2em;
+}
+.cal {
+   width: 261px;
+   font-size: 1.2em;
+   text-align: center;
+}
+.cal th,
+.cal td {
+   width: 35px;
+   height: 30px;
+   padding: 0;
+}
+.cal td {
+   background-color: #ddd;
+   border: 1px solid #999;
+}
+
+.cal .today {
+   background-color: #FFF0C4;
+   border: 1px solid #999;
+}
+
+.cal .empty {
+   background-color: #f9f9f9;
+   border: 1px solid #eee;
+}
+
+.cal td:hover,
+.cal .focus {
+   border-color: #800;
+   background-color: #fc3;
+}
+
+.cal .empty:hover {
+   background-color: #f9f9f9;
+   border: 1px solid #eee;
+}
+
+[aria-hidden="true"] {
+   display: none;
+}

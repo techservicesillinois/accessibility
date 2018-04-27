@@ -103,6 +103,7 @@ if (typeof Object.create !== 'function') {
          thisObj.$dialog = $('<div>').attr({
                'id': pluginName + thisObj.uuid + '-dialog',
                'role': 'dialog',
+               'aria-modal': 'true',
                'aria-labelledby': pluginName + thisObj.uuid + '-title',
                'aria-describedby': pluginName + thisObj.uuid + '-msg',
                'aria-hidden': 'true'
@@ -146,7 +147,6 @@ if (typeof Object.create !== 'function') {
             .html(thisObj.options.title);
 
          thisObj.$dialogMsg = $('<p>').attr({
-               'role': 'document',
                'id': pluginName + thisObj.uuid + '-msg',
             })
             .addClass('dialog-msg')
