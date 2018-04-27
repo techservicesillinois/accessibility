@@ -51,8 +51,8 @@ function datepicker(editId, buttonId, bModal) {
 
 
    this.name = 'dp-' + editId; // desired id of the datepicker container
-   this.$edit = $('#' + editId); // div or text box that will receive the selected date string and focus
-   this.$button = $('#' + buttonId); // control that will display the widget
+   this.$edit = jQuery('#' + editId); // div or text box that will receive the selected date string and focus
+   this.$button = jQuery('#' + buttonId); // control that will display the widget
    this.bModal = bModal; // true if datepicker should appear in a modal dialog box.
 
    this.monthNames = ['January', 'February', 'March', 'April','May','June',
@@ -80,7 +80,7 @@ function datepicker(editId, buttonId, bModal) {
       this.$edit.after(widget);
    }
 
-   this.$widgetId = $('#' + this.name); // container element for the widget
+   this.$widgetId = jQuery('#' + this.name); // container element for the widget
    this.$monthObj = this.$widgetId.find('div.month');
    this.$prev = this.$widgetId.find('div.bn_prev');
    this.$next = this.$widgetId.find('div.bn_next');
@@ -163,7 +163,7 @@ datepicker.prototype.popGrid = function() {
    // insert the days of the month.
    for (curDay = 1; curDay <= numDays; curDay++) {
 
-      if (curDay == this.date && this.currentDate == true) {
+      if (curDay === this.date && this.currentDate === true) {
 
          gridCells += '\t\t<td id="' + this.name + '-day' + curDay + '" class="today" headers="row' +
                       rowCount + ' ' + this.dayNames[weekday] + '" role="gridcell" aria-selected="false">' + curDay + '</td>';
@@ -175,7 +175,7 @@ datepicker.prototype.popGrid = function() {
       }
 
 
-      if (weekday == 6 && curDay < numDays) {
+      if (weekday === 6 && curDay < numDays) {
          // This was the last day of the week, close it out
          // and begin a new one
          rowCount++;
@@ -196,7 +196,7 @@ datepicker.prototype.popGrid = function() {
    gridCells += '\t</tr>';
 
    $tbody.append(gridCells);
-}
+};
 
 //
 // calcNumDays() is a member function to calculate the number of days in a given month
@@ -206,7 +206,7 @@ datepicker.prototype.popGrid = function() {
 datepicker.prototype.calcNumDays = function(year, month) {
    
    return 32 - new Date(year, month, 32).getDate();
-}
+};
 
 //
 // calcstartWeekday() is a member function to calculate the day of the week the first day of a
@@ -218,7 +218,7 @@ datepicker.prototype.calcStartWeekday = function(year, month) {
    
    return  new Date(year, month, 1).getDay();
 
-} // end calcStartWeekday()
+}; // end calcStartWeekday()
 
 //
 // showPrevMonth() is a member function to show the previous month
@@ -230,7 +230,7 @@ datepicker.prototype.calcStartWeekday = function(year, month) {
 //
 datepicker.prototype.showPrevMonth = function(offset) {
    // show the previous month
-   if (this.month == 0) {
+   if (this.month === 0) {
       this.month = 11;
       this.year--;
    }
@@ -238,7 +238,7 @@ datepicker.prototype.showPrevMonth = function(offset) {
       this.month--;
    }
    
-   if (this.month != this.curMonth || this.year != this.curYear) {
+   if (this.month !== this.curMonth || this.year !== this.curYear) {
       this.currentDate = false;
    }
    else {
@@ -251,15 +251,15 @@ datepicker.prototype.showPrevMonth = function(offset) {
    this.$monthObj.html(this.monthNames[this.month] + ' ' + this.year);
 
    // if offset was specified, set focus on the last day - specified offset
-   if (offset != null) {
+   if (offset !== null) {
       var numDays = this.calcNumDays(this.year, this.month);
       var day = this.name + '-day' + (numDays - offset);
       
       this.$grid.attr('aria-activedescendant', day);
-      $('#' + day).addClass('focus').attr('aria-selected', 'true');
+      jQuery('#' + day).addClass('focus').attr('aria-selected', 'true');
    }
 
-} // end showPrevMonth()
+}; // end showPrevMonth()
 
 //
 // showNextMonth() is a member function to show the next month
@@ -272,7 +272,7 @@ datepicker.prototype.showPrevMonth = function(offset) {
 datepicker.prototype.showNextMonth = function(offset) {
 
    // show the next month
-   if (this.month == 11) {
+   if (this.month === 11) {
       this.month = 0;
       this.year++;
    }
@@ -280,7 +280,7 @@ datepicker.prototype.showNextMonth = function(offset) {
       this.month++;
    }
 
-   if (this.month != this.curMonth || this.year != this.curYear) {
+   if (this.month !== this.curMonth || this.year !== this.curYear) {
       this.currentDate = false;
    }
    else {
@@ -293,14 +293,14 @@ datepicker.prototype.showNextMonth = function(offset) {
    this.$monthObj.html(this.monthNames[this.month] + ' ' + this.year);
 
       // if offset was specified, set focus on the first day + specified offset
-      if (offset != null) {
+      if (offset !== null) {
          var day = this.name + '-day' + offset;
          
          this.$grid.attr('aria-activedescendant', day);
-         $('#' + day).addClass('focus').attr('aria-selected', 'true');
+         jQuery('#' + day).addClass('focus').attr('aria-selected', 'true');
       }
 
-} // end showNextMonth()
+}; // end showNextMonth()
 
 //
 // showPrevYear() is a member function to show the previous year
@@ -312,7 +312,7 @@ datepicker.prototype.showPrevYear = function() {
       // decrement the year
       this.year--;
       
-      if (this.month != this.curMonth || this.year != this.curYear) {
+      if (this.month !== this.curMonth || this.year !== this.curYear) {
          this.currentDate = false;
       }
       else {
@@ -324,7 +324,7 @@ datepicker.prototype.showPrevYear = function() {
 
       this.$monthObj.html(this.monthNames[this.month] + ' ' + this.year);
 
-} // end showPrevYear()
+}; // end showPrevYear()
 
 //
 // showNextYear() is a member function to show the next year
@@ -336,7 +336,7 @@ datepicker.prototype.showNextYear = function() {
    // increment the year
    this.year++;
 
-   if (this.month != this.curMonth || this.year != this.curYear) {
+   if (this.month !== this.curMonth || this.year !== this.curYear) {
       this.currentDate = false;
    }
    else {
@@ -348,7 +348,7 @@ datepicker.prototype.showNextYear = function() {
 
    this.$monthObj.html(this.monthNames[this.month] + ' ' + this.year);
 
-} // end showNextYear()
+}; // end showNextYear()
 
 //
 // bindHandlers() is a member function to bind event handlers for the widget
@@ -361,7 +361,7 @@ datepicker.prototype.bindHandlers = function() {
 
    ////////////////// bind a click handler for the controlling button ////////////
    if (this.bModal) {
-      $(this.$button).click(function(e) {
+      jQuery(this.$button).click(function(e) {
          thisObj.showDlg();
          return false;
       });
@@ -411,7 +411,7 @@ datepicker.prototype.bindHandlers = function() {
       return false;
    });
 
-} // end bindHandlers();
+}; // end bindHandlers();
 
 //
 // handlePrevClick() is a member function to process click events for the prev month button
@@ -440,7 +440,7 @@ datepicker.prototype.handlePrevClick = function(e) {
 
    return false;
 
-} // end handlePrevClick()
+}; // end handlePrevClick()
 
 //
 // handleNextClick() is a member function to process click events for the next month button
@@ -469,7 +469,7 @@ datepicker.prototype.handleNextClick = function(e) {
 
    return false;
 
-} // end handleNextClick()
+}; // end handleNextClick()
 
 //
 // handlePrevKeyDown() is a member function to process keydown events for the prev month button
@@ -512,7 +512,7 @@ datepicker.prototype.handlePrevKeyDown = function(e) {
 
    return true;
 
-} // end handlePrevKeyDown()
+}; // end handlePrevKeyDown()
 
 //
 // handleNextKeyDown() is a member function to process keydown events for the next month button
@@ -544,7 +544,7 @@ datepicker.prototype.handleNextKeyDown = function(e) {
 
    return true;
 
-} // end handleNextKeyDown()
+}; // end handleNextKeyDown()
 
 //
 // handleGridKeyDown() is a member function to process keydown events for the datepicker grid
@@ -556,7 +556,7 @@ datepicker.prototype.handleNextKeyDown = function(e) {
 datepicker.prototype.handleGridKeyDown = function(e) {
 
       var $rows = this.$grid.find('tbody tr');
-      var $curDay = $('#' + this.$grid.attr('aria-activedescendant'));
+      var $curDay = jQuery('#' + this.$grid.attr('aria-activedescendant'));
       var $days = this.$grid.find('td').not('.empty');
       var $curRow = $curDay.parent();
 
@@ -705,12 +705,12 @@ datepicker.prototype.handleGridKeyDown = function(e) {
                this.showPrevMonth();
             }
 
-            if ($('#' + active).attr('id') == undefined) {
+            if (jQuery('#' + active).attr('id') == undefined) {
                var lastDay = this.name + '-day' + this.calcNumDays(this.year, this.month);
-               $('#' + lastDay).addClass('focus').attr('aria-selected', 'true');
+               jQuery('#' + lastDay).addClass('focus').attr('aria-selected', 'true');
             }
             else {
-               $('#' + active).addClass('focus').attr('aria-selected', 'true');
+               jQuery('#' + active).addClass('focus').attr('aria-selected', 'true');
             }
 
             return false;
@@ -730,12 +730,12 @@ datepicker.prototype.handleGridKeyDown = function(e) {
                this.showNextMonth();
             }
 
-            if ($('#' + active).attr('id') == undefined) {
+            if (jQuery('#' + active).attr('id') == undefined) {
                var lastDay = this.name + '-day' + this.calcNumDays(this.year, this.month);
-               $('#' + lastDay).addClass('focus').attr('aria-selected', 'true');
+               jQuery('#' + lastDay).addClass('focus').attr('aria-selected', 'true');
             }
             else {
-               $('#' + active).addClass('focus').attr('aria-selected', 'true');
+               jQuery('#' + active).addClass('focus').attr('aria-selected', 'true');
             }
 
             return false;
@@ -748,7 +748,7 @@ datepicker.prototype.handleGridKeyDown = function(e) {
 
             $curDay.removeClass('focus').attr('aria-selected', 'false');
 
-            $('#' + this.name + '-day1').addClass('focus').attr('aria-selected', 'true');
+            jQuery('#' + this.name + '-day1').addClass('focus').attr('aria-selected', 'true');
 
             this.$grid.attr('aria-activedescendant', this.name + '-day1');
 
@@ -764,7 +764,7 @@ datepicker.prototype.handleGridKeyDown = function(e) {
 
             $curDay.removeClass('focus').attr('aria-selected', 'false');
 
-            $('#' + lastDay).addClass('focus').attr('aria-selected', 'true');
+            jQuery('#' + lastDay).addClass('focus').attr('aria-selected', 'true');
 
             this.$grid.attr('aria-activedescendant', lastDay);
 
@@ -774,7 +774,7 @@ datepicker.prototype.handleGridKeyDown = function(e) {
 
       return true;
 
-} // end handleGridKeyDown()
+}; // end handleGridKeyDown()
 
 //
 // handleGridKeyPress() is a member function to consume keypress events for browsers that
@@ -809,7 +809,7 @@ datepicker.prototype.handleGridKeyPress = function(e) {
 
       return true;
 
-} // end handleGridKeyPress()
+}; // end handleGridKeyPress()
 
 //
 // handleGridClick() is a member function to process mouse click events for the datepicker grid
@@ -821,7 +821,7 @@ datepicker.prototype.handleGridKeyPress = function(e) {
 // @return (boolean) false if consuming event, true if propagating
 //
 datepicker.prototype.handleGridClick = function(id, e) {
-   var $cell = $(id);
+   var $cell = jQuery(id);
 
    if ($cell.is('.empty')) {
       return true;
@@ -831,7 +831,7 @@ datepicker.prototype.handleGridClick = function(id, e) {
    $cell.addClass('focus').attr('aria-selected', 'true');
    this.$grid.attr('aria-activedescendant', $cell.attr('id'));
 
-   var $curDay = $('#' + this.$grid.attr('aria-activedescendant'));
+   var $curDay = jQuery('#' + this.$grid.attr('aria-activedescendant'));
 
    // update the edit box
    this.$edit.val((this.month < 9 ? '0' : '') + (this.month+1) + '/' + ($curDay.html() < 9 ? '0' : '') + $curDay.html() + '/' + this.year);
@@ -841,7 +841,7 @@ datepicker.prototype.handleGridClick = function(id, e) {
 
    return false;
 
-} // end handleGridClick()
+}; // end handleGridClick()
 
 //
 // handleGridFocus() is a member function to process focus events for the datepicker grid
@@ -853,17 +853,17 @@ datepicker.prototype.handleGridClick = function(id, e) {
 datepicker.prototype.handleGridFocus = function(e) {
    var active = this.$grid.attr('aria-activedescendant');
 
-   if ($('#' + active).attr('id') == undefined) {
+   if (jQuery('#' + active).attr('id') == undefined) {
       var lastDay = this.name + '-day' + this.calcNumDays(this.year, this.month);
-      $('#' + lastDay).addClass('focus').attr('aria-selected', 'true');
+      jQuery('#' + lastDay).addClass('focus').attr('aria-selected', 'true');
    }
    else {
-      $('#' + active).addClass('focus').attr('aria-selected', 'true');
+      jQuery('#' + active).addClass('focus').attr('aria-selected', 'true');
    }
 
    return true;
 
-} // end handleGridFocus()
+}; // end handleGridFocus()
 
 //
 // handleGridBlur() is a member function to process blur events for the datepicker grid
@@ -873,11 +873,11 @@ datepicker.prototype.handleGridFocus = function(e) {
 // @return (boolean) true
 //
 datepicker.prototype.handleGridBlur = function(e) {
-   $('#' + this.$grid.attr('aria-activedescendant')).removeClass('focus').attr('aria-selected', 'false');
+   jQuery('#' + this.$grid.attr('aria-activedescendant')).removeClass('focus').attr('aria-selected', 'false');
 
    return true;
 
-} // end handleGridBlur()
+}; // end handleGridBlur()
 
 // isValidDate() is a member function to check that the date entered in the input field is valid. Will not check for valid february date, but
 // the date function will correctly select the date in the picker.
@@ -888,7 +888,7 @@ datepicker.prototype.handleGridBlur = function(e) {
 //
 datepicker.prototype.isValidDate = function(date) {
     return date.match(/^(0[1-9]|1[012])\/(0[1-9]|[12][0-9]|3[01])\/(19|20)\d\d$/) // mm/dd/yyyy
-} // end isValidDate()
+}; // end isValidDate()
 
 //
 // showDlg() is a member function to show the datepicker and give it focus. This function is only called if
@@ -902,7 +902,7 @@ datepicker.prototype.showDlg = function() {
 
 
 	// Bind a click listener to dismiss the dialog
-	$(document).bind('click.dpEvent', function(e) {
+	jQuery(document).bind('click.dpEvent', function(e) {
       // hide the dialog
       thisObj.hideDlg();
 
@@ -937,7 +937,7 @@ datepicker.prototype.showDlg = function() {
    }
 
    // Bind an event listener to the document to capture all mouse events to make dialog modal
-   $(document).bind('mousedown.dpEvent mouseup.dpEvent mousemove.dpEvent mouseover.dpEvent', function(e) {
+   jQuery(document).bind('mousedown.dpEvent mouseup.dpEvent mousemove.dpEvent mouseover.dpEvent', function(e) {
       //ensure focus remains on the dialog
       thisObj.$grid.focus();
 
@@ -950,7 +950,7 @@ datepicker.prototype.showDlg = function() {
 
    this.$grid.focus();
 
-} // end showDlg()
+}; // end showDlg()
 
 //
 // hideDlg() is a member function to hide the datepicker and remove focus. This function only sets focus
@@ -964,7 +964,7 @@ datepicker.prototype.hideDlg = function() {
 
    if (this.bModal) {
       // unbind the modal event sinks
-      $(document).unbind('click.dpEvent mousedown.dpEvent mouseup.dpEvent mousemove.dpEvent mouseover.dpEvent');
+      jQuery(document).unbind('click.dpEvent mousedown.dpEvent mouseup.dpEvent mousemove.dpEvent mouseover.dpEvent');
 
       // hide the dialog
       this.$widgetId.attr('aria-hidden', 'true');
@@ -973,4 +973,4 @@ datepicker.prototype.hideDlg = function() {
    // set focus on the focus edit box
    this.$edit.focus();
 
-} // end hideDlg()
+}; // end hideDlg()
