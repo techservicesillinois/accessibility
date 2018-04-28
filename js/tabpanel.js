@@ -177,7 +177,7 @@ if (typeof Object.create !== 'function') {
             $panel.attr({
                'role': 'tabpanel',
                'aria-hidden': !(index == 0),
-               'aria-labelledy': $panel.attr('id').split('-')[0]
+               'aria-labelledby': $panel.attr('id').split('-')[0]
             });
 
             if ($panel.outerHeight() > panelHeight)  {
