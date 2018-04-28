@@ -480,7 +480,8 @@ if (typeof Object.create !== 'function') {
             thisObj.$button = $('<img>')
                .attr({
                   'id': thisObj.uniqueId + '-button',
-                  'src': 'data:image/svg+xml,%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20xmlns%3Axlink%3D%22http%3A//www.w3.org/1999/xlink%22%20x%3D%220px%22%20y%3D%220px%22%20viewBox%3D%220%200%2025.3%2016%22%20style%3D%22enable-background%3Anew%200%200%2025.3%2016%3B%22%20xml%3Aspace%3D%22preserve%22%3E%20%3Cpath%20d%3D%22M12.7%2C11.4L2.7%2C1.1c-1.3-1.3-3.3%2C0.7-2%2C2l11.9%2C12.3l12-12.3c1.3-1.4-0.8-3.4-2.1-2L12.7%2C11.4z%22/%3E%20%3C/svg%3E'
+                  'src': 'data:image/svg+xml,%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20xmlns%3Axlink%3D%22http%3A//www.w3.org/1999/xlink%22%20x%3D%220px%22%20y%3D%220px%22%20viewBox%3D%220%200%2025.3%2016%22%20style%3D%22enable-background%3Anew%200%200%2025.3%2016%3B%22%20xml%3Aspace%3D%22preserve%22%3E%20%3Cpath%20d%3D%22M12.7%2C11.4L2.7%2C1.1c-1.3-1.3-3.3%2C0.7-2%2C2l11.9%2C12.3l12-12.3c1.3-1.4-0.8-3.4-2.1-2L12.7%2C11.4z%22/%3E%20%3C/svg%3E',
+                  'alt': ''
                })
                .addClass('cb-button')
                .on('click tap', function(e) {
