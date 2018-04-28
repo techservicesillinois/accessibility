@@ -39,6 +39,7 @@ if (typeof Object.create !== 'function') {
       bShowCue: false,
       bShowLabel: true,
       bShowRange: false,
+      label: "Slider Example",
       cue: "You can use the arrow, page up, page down, home and end keys to change the slider value."
 
    };
@@ -185,6 +186,7 @@ if (typeof Object.create !== 'function') {
             
             $curHandle.attr({
                'role': 'slider',
+               'aria-labelledby': thisObj.options.label,
                'aria-valuemin': thisObj.min,
                'aria-valuemax': thisObj.max,
                'aria-valuenow': thisObj.val[index],
