@@ -186,7 +186,7 @@ if (typeof Object.create !== 'function') {
             
             $curHandle.attr({
                'role': 'slider',
-               'aria-labelledby': thisObj.options.label,
+               'aria-label': thisObj.options.label,
                'aria-valuemin': thisObj.min,
                'aria-valuemax': thisObj.max,
                'aria-valuenow': thisObj.val[index],
