@@ -109,6 +109,7 @@ header h1 {
 .sitenav li a:hover,
 .sitenav li a:focus {
    background-color: #bdc3cd;
+   outline: none;
 }
 .sitenav li a.active {
    text-decoration: underline;
@@ -155,6 +156,10 @@ th, td {
     font-size: 2em;
     margin-right: 5px;
     margin-top: -0.2em;
+}
+.btn:hover,
+.btn:focus {
+   outline: none;
 }
 
 /************ Treeview example styles ************/

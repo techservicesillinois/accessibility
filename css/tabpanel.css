@@ -40,6 +40,7 @@
 [role=tab]:focus,
 [role=tab]:focus[aria-selected=true] {
    background-color: #f2f1ec;
+   outline: none;
 }
 [role=tab][aria-selected=true],
 [role=tab]:hover {
@@ -50,6 +51,7 @@
    border-bottom: 1px solid #040;
    font-weight: bold;
    color: #040;
+   outline: none;
 }
 
 .tabpanel-container [aria-hidden=true] {

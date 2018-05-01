@@ -28,6 +28,7 @@
 [role=treeitem]:focus > span {
    border-bottom: 2px solid #009;
    font-weight: bold;
+   outline: none;
 }
 .treeview-img,
 .treeview-chkbox {
