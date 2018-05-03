@@ -1,0 +1,235 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Responsive Navigation Menus - Technology Services Accessibility Examples</title>
+<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../css/examples.css">
+<script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
+<style>
+/******** Example Menu Button ******/
+   #menu-toggle {
+      display: block;
+      margin: 0 auto;
+   }
+   #menu-toggle:focus .menu-thumb {
+      background-color: #e06a27;
+   }
+   .menu-thumb {
+      display: block;
+      width: 40px;
+      height: 3px;
+      background-color: #222;
+      margin: 0;
+      padding: 0;
+   }
+   .menu-thumb:nth-child(2) {
+      margin: 4px 0;
+   }
+/******** End Example Menu Button ******/
+/******** Example Nav Menu ******/
+   .aria-nav {
+      position: relative;
+      width: 100%;
+      height: 3em;
+      margin: 3em 0;
+   }
+   #nav-menu {
+      margin: 1em 0 0;
+      padding: 0;
+      list-style-type: none;
+      border: 1px solid #ccc;
+      background-color: #fff;
+      border-radius: 4px;
+      box-shadow: rgba(0, 0, 0, 0.176) 0px 6px 12px 0px;
+   }
+   #nav-menu li a {
+      position: relative;
+      display: block;
+      width: 100%;
+      padding: .25em .75em;
+      color: #222;
+      text-align: center;
+      font-size: 1.2em;
+      line-height: 2em;
+   }
+   #nav-menu li a:hover,
+   #nav-menu li a:focus {
+      outline: none;
+      text-decoration: none;
+      background-color: #e7e7e7;
+   }
+   #nav-menu li a:focus:before,
+   #nav-menu li a:focus:after {
+      content: " ";
+      position: absolute;
+      top: 50%;
+      width: 1em;
+      height: 2px;
+      background-color: #222;
+   }
+   #nav-menu li a:focus:before {
+      left: 1.5em;
+   }
+   #nav-menu li a:focus:after {
+      right: 1.5em;
+   }
+   .collapsed {
+      display: none;
+   }
+/******** End Example Nav Menu ******/
+   @media all and (min-width: 768px) {
+      #menu-toggle {
+         display: none;
+      }
+      .aria-nav {
+         top: 0;
+         width: 100%;
+      }
+      #nav-menu {
+         border-radius: 0;
+         box-shadow: none;
+         overflow: hidden;
+      }
+      #nav-menu li {
+         float: left;
+         width: calc(100%/4);
+      }
+      #nav-menu li a {
+         width: 100%;
+         font-size: 1.1em;
+         line-height: 1.2em;
+      }
+      .collapsed {
+         display: block;
+      }
+   {
+</style>
+</head>
+<body>
+<header role="banner">
+   <a class="skip-link" href="#main">Skip to Main Content</a>
+   <div class="row">
+      <div class="col-xs-12 col-lg-4">
+         <img class="imark" src="../images/techsvc-logo-bw.svg" alt="Technology Sevices at Illinois I-mark">
+      </div>
+      <div class="col-xs-12 col-lg-8">
+         <h1>Accessible Widget Examples</h1>
+      </div>
+   </div>
+   <div class="sitenav row">
+      <nav role="navigation" aria-label="site">
+         <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../aria.html">ARIA</a></li>
+            <li><a href="../bootstrap.html">Bootstrap</a></li>
+            <li><a href="../examples.html" class="active">Examples</a></li>
+         </ul>
+      </nav>
+   </div>
+</header>
+<main id="main" role="main" class="container">
+<h1>Accessibility Examples: Responsive Navigation Menus</h1>
+<p>This example showcases a responsive navigation menu with a hamburger button to toggle the menu in a mobile view. In this type of disclosure pattern, it can be undesirable to implement a full ARIA menu, as is shown in the <a href="nav.html">Menu Toggle Button</a> example. Rather, an <a href="https://www.w3.org/TR/wai-aria-practices-1.1/#disclosure"</a>ARIA disclosure pattern</a> followed by standard HTML navigation menu is all that is necessary.</p>
+<div class="example-wrap">
+   <h2>Responsive Menu with Toggle Button</h2>
+   <nav class="aria-nav">
+      <button id="menu-toggle" class="btn btn-default" aria-controls="nav-menu" aria-expanded="false" aria-haspopup="true" aria-label="Toggle Menu" title="Toggle Menu">
+         <span class="menu-thumb"></span>
+         <span class="menu-thumb"></span>
+         <span class="menu-thumb"></span>
+      </button>
+      <ul id="nav-menu" class="collapsed">
+         <li><a href="../index.html">Home</a></li>
+         <li><a href="../aria.html">ARIA</a></li>
+         <li><a href="../bootstrap.html">Bootstrap</a></li>
+         <li><a href="../examples.html">Examples</a></li>
+      </ul>
+   </nav>
+</div>
+
+   <h2>Required HTML Markup</h2>
+   <p>A menu toggle must indicate whether its associated menu is expanded or collapsed. This requires the following ARIA attributes:</p>
+   <ul>
+      <li><code>aria-expanded</code> &ndash; Set to true if the menu is expanded; false if the menu is collapsed.</li>
+      <li><code>aria-controls</code> &ndash; Set to the HTML id of the menu toggled by this button.</li>
+      <li><code>aria-haspopup</code> &ndash; Set to true. This attribute informs a user that the button is a menu button.</li>
+   </ul>
+   <p>JavaScript is needed to toggle the values of the <code>aria-expanded</code> state and to update the visual state of the menu. Note that the values of <code>aria-controls</code> and <code>aria-haspopup</code> properties do not change.</p>
+   <h3>Interaction Pattern</h3>
+   <p>The following interaction pattern must be scripted for a simple responsive menu disclosure pattern:</p>
+   <ul>
+      <li>When a user activates the menu toggle, the menu must expand or collapse. The value of aria-expanded must be toggled appropriately to match the menu's visual state.</li>
+      <li>If the menu is expanded and the user clicks somewhere else on the page, the menu must collapse. This is done by attached a click handler to the document. You must ensure that your click handler does nothing if the user clicked on the toggle button.</li>
+      <li>If the user shift-tabs away from the menu toggle, the menu must collapse if it was expanded. This is done by attached a keydown handler to the menu toggle. This handler must close the menu if the shift key and tab key are pressed.</li>
+      <li>If the user tabs away from the last menu item, the menu must collapse. This can be done by attaching a keydown handler to the last menu item; closing the menu if the user presses the tab key (but not the shift key).</li>
+</ul>
+<p><strong>Note:</strong> In all of the cases above, be sure to set the value of aria-expanded to match the visual state of the menu: true if expanded, and false if collapsed.</p>
+   <h4>Handling Window Resize</h4>
+   <p>An illegal state can be created if the user on a desktop device resizes the window to be narrower while focus is on one of the menu items. The problem is that, if a menu item is in focus in the desktop view, switching to the mobile view will cause the menu to be hidden. It is an illegal state for browser focus to be on an item that is hidden. Creating this state can cause confusion and inconsistent behavior (including crashes) from assistive technology. If focus is on a menu item in the desktop view, the menu must remain open in the mobile view when the window is resized.</p>
+   <p>To keep the menu open when resizing to the mobile view, attach a focus handler to each of the menu items. This handler should set aria-expanded to true and apply any necessary CSS to expand the menu when a menu item receives focus. If your CSS is correct, no visual change will occur in the dekstop view. The effect will be to keep the menu expanded if a user resizes the window from desktop to mobile view.</p>
+</main>
+<footer role="contentinfo">
+   <p class="copy">Copyright &copy; 2016 University of Illinois Board of Trustees</p>
+</footer>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/accessible_bootstrap-0.3.0.js"></script>
+<script>
+   var $toggle = $('#menu-toggle');
+   var $menu = $('#nav-menu');
+   var $menuItems = $menu.find('a');
+
+   $toggle.on('click', function(e) {
+      if ($toggle.attr('aria-expanded') === 'false') {
+         $toggle.attr('aria-expanded', 'true');
+         $menu.removeClass('collapsed');
+      }
+      else {
+         $toggle.attr('aria-expanded', 'false');
+         $menu.addClass('collapsed');
+      }
+
+      return false;
+   })
+   .on('keydown', function(e) {
+      if ((e.keyCode || e.which) === 9) {
+
+         if (e.shiftKey && $toggle.attr('aria-expanded') === 'true') {
+            $toggle.attr('aria-expanded', 'false');
+            $menu.addClass('collapsed');
+         }
+
+         return true;
+      }
+   });
+
+   $menuItems.on('focus', function(e) {
+      // Cheat to ensure that menu is expanded on resize if menu item had focus
+      $toggle.attr('aria-expanded', 'true');
+      $menu.removeClass('collapsed');
+      return true;
+   });
+
+   $menuItems.last().on('keydown', function(e) {
+      if (!e.shiftKey && (e.keyCode || e.which) === 9) {
+         $toggle.attr('aria-expanded', 'false');
+         $menu.addClass('collapsed');
+      }
+      return true;
+   });
+
+   $(document).on('click', function(e) {
+      var $toggleElems = $toggle.find('span');
+
+      // If the click target is not the toggle button or any element thereof, close the menu
+      if (e.target != $toggle[0] && $toggleElems.index($(e.target)) === -1) {
+         $toggle.attr('aria-expanded', 'false');
+         $menu.addClass('collapsed');
+      }
+      return true;
+   });
+
+</script>
+</body>
+</html>
