@@ -192,8 +192,8 @@
       </nav>
 
    </div>
-
-   <h3>Required HTML Markup</h3>
+</div>
+   <h2>Required HTML Markup</h2>
    <p>A menu toggle must indicate whether its associated menu is expanded or collapsed. This requires the following ARIA attributes:</p>
    <ul>
       <li><code>aria-expanded</code> &ndash; Set to true if the menu is expanded; false if the menu is collapsed.</li>
@@ -216,15 +216,13 @@
 &lt;/ul&gt;
    </pre>
    <p>JavaScript is needed to toggle the values of the <code>aria-expanded</code> and <code>aria-hidden</code> attributes. Note that the values of <code>aria-controls</code> and <code>aria-haspopup</code> do not change.
-   <h3>Interaction Pattern</h3>
+   <h2>Interaction Pattern</h2>
    <ul>
       <li>Activating the menu button will toggle the menu open and closed. If the menu is closed, activating the button will open the menu and move focus to the first menu item.</li>
       <li>Use the up and down arrow keys to move between menu items.</li>
       <li>Pressing the tab key while in the menu will move focus out of the menu, either to the next focusable element in the page or to the menu button, if shift-tab.</li>
       <li>Pressing the escape key while focus is in the menu will close the menu and return focus to the menu button.</li>
    </ul>
-</div>
-
 </main>
 <footer role="contentinfo">
    <p class="copy">Copyright &copy; 2016 University of Illinois Board of Trustees</p>
