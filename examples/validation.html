@@ -170,7 +170,7 @@ div#form_errMsg:not(:empty) {
 </header>
 <main id="main" role="main" class="container">
 <h1>Accessibility Examples: Form Validation</h1>
-<p>Form validation is an are of web accessibility that can be tricky to get right. The main reason for this is that the common techniques for handling errors are not accessible for users who are blind. As such, it is necessary to keep accessibility firmly in mind when designing a form.</p>
+<p>Form validation is an area of web accessibility that can be tricky to get right. The main reason for this is that the common techniques for handling errors are not accessible for users who are blind. As such, it is necessary to keep accessibility firmly in mind when designing a form.</p>
 <p>There are four methods of supplying error feedback in common use today:</p>
 <ul>
    <li>Error messages are placed above the form on form submission.</li>
@@ -180,57 +180,29 @@ div#form_errMsg:not(:empty) {
 </ul>
 <h2>Errors Placed Above The Form</h2>
 <div class="example-wrap">
-
    <form id="contact-mail-page" accept-charset="UTF-8" method="post" onsubmit="contactSubmit(event);">
 
       <p id="form-caption">You can leave a message using the contact form below.</p>
       <div id="form_errMsg" role="alert" tabindex="-1"></div>
-         <div class="form-group">
-            <label for="edit-name" title="This field is required">Your name:</label>
-            <input id="edit-name" maxlength="255" name="name" size="60" class="form-control" type="text" aria-required="true">
-         </div>
-         <div class="form-group">
-            <label for="edit-mail" title="This field is required">Your e-mail address:</label>
-            <input id="edit-mail" maxlength="255" name="mail" size="60" class="form-control" type="email" aria-required="true">
-         </div>
-         <div class="form-group">
-            <label for="edit-subject" title="This field is required">Subject:</label>
-            <input id="edit-subject" maxlength="255" name="subject" size="60" class="form-control" type="text" aria-required="true">
-         </div>
-         <div class="form-group">
-            <label for="edit-message" title="This field is required">Message:</label>
-            <textarea id="edit-message" cols="60" rows="5" name="message" class="form-control" aria-required="true"></textarea>
-         </div>
-
-         <button type="submit" class="btn btn-default">Send e-mail</button>
+      <div class="form-group">
+         <label for="edit-name" title="This field is required">Your name:</label>
+         <input id="edit-name" maxlength="255" name="name" size="60" class="form-control" type="text" aria-required="true">
       </div>
-   </form>
+      <div class="form-group">
+         <label for="edit-mail" title="This field is required">Your e-mail address:</label>
+         <input id="edit-mail" maxlength="255" name="mail" size="60" class="form-control" type="email" aria-required="true">
+      </div>
+      <div class="form-group">
+         <label for="edit-subject" title="This field is required">Subject:</label>
+         <input id="edit-subject" maxlength="255" name="subject" size="60" class="form-control" type="text" aria-required="true">
+      </div>
+      <div class="form-group">
+         <label for="edit-message" title="This field is required">Message:</label>
+         <textarea id="edit-message" cols="60" rows="5" name="message" class="form-control" aria-required="true"></textarea>
+      </div>
 
-   <!--
-   <h3>Required HTML Markup</h3>
-   <p>A menu toggle must indicate whether its associated menu is expanded or collapsed. This requires the following ARIA attributes:</p>
-   <ul>
-      <li><code>aria-expanded</code> &ndash; Set to true if the menu is expanded; false if the menu is collapsed.</li>
-      <li><code>aria-controls</code> &ndash; Set to the HTML id of the menu toggled by this button.</li>
-      <li><code>aria-haspopup</code> &ndash; Set to true. This attribute informs a user that the button is a menu button.</li>
-      <li><code>aria-hidden</code> &ndash; Placed on the controlled menu. Set to false when expanded; true when collapsed.</li>
-   </ul>
-   <p>Below is a code snippet showing simplified markup for implementing an accessible menu toggle button. The values of the <code>aria-expanded</code> and the <code>aria-hidden</code> attributes would be for the collapsed state.</p>
-   <pre>
-&lt;button <strong>aria-expanded="false" aria-haspopup="true" aria-controls="menu-id"</strong>&gt;Toggle Menu&lt;/button&gt;     
-&lt;ul id="menu-id" <strong>aria-hidden="true"</strong>&gt;
-   . . .
-&lt;/ul&gt;
-   </pre>
-   <p>Here is the snippet with the ARIA attributes in the expanded state:</p>
-   <pre>
-&lt;button <strong>aria-expanded="true" aria-haspopup="true" aria-controls="menu-id"</strong>&gt;Toggle Menu&lt;/button&gt;     
-&lt;ul id="menu-id" <strong>aria-hidden="false"</strong>&gt;
-   . . .
-&lt;/ul&gt;
-   </pre>
-   <p>JavaScript is needed to toggle the values of the <code>aria-expanded</code> and <code>aria-hidden</code> attributes. Note that the values of <code>aria-controls</code> and <code>aria-haspopup</code> do not change.
-   -->
+      <button type="submit" class="btn btn-default">Send e-mail</button>
+   </form>
 </div>
 
 </main>
