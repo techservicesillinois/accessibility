@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<title>Voluntary Product Accessibility Template</title>
+
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
+<script type="text/javascript" src="js/vpat.js"></script>
+</head>
+<body>
+<div class="container">
+   <header role="banner">
+      <a href="#vpat" class="skip-link">Skip to form</a>
+      <a class="branding" href="http://www.cites.illinois.edu"><img alt="Technology Services at Illinois" src="images/techsvc-logo.svg"></a>
+   <h1>Voluntary Product Accessibility Template</h1>
+   </header>
+   <main role="main">
+   <p class="intro">The Voluntary Product Accessibility Template (VPAT) is targeted at functional conformance to the Web Content Accessibility Guidelines (WCAG) 2.0, levels A and AA. This format was chosen to provide greater conceptual understanding of WCAG 2.0 accessibility requirements than that provided by the standard VPAT 2.0 format, which merely lists requirements in a checklist form.</p>
+   <p><strong>Note:</strong> While this VPAT form allows for an abbreviated description of product accessibility, products will be evaluated by the university for comformance with the WCAG 2.0 Success Criteria. As such, each of the twelve WCAG 2.0 Guidelines below include a list of the Success Criteria for that Guideline.
+
+   <h2>A word about accessibility</h2>
+   <p>The term "accessible" has been defined by the Department of Justice (DOJ) to mean that "... a person with a disability is afforded the opportunity to acquire the same information, engage in the same interactions, and enjoy the same services as a person without a disability in an equally effective and equally integrated manner, with substantially equivalent ease of use. The person with a disability must be able to obtain the information as fully, equally and independently as a person without a disability."</p>
+<p>Regardless of conformance with any given accessibility law or guideline, a user with a given disability must be able to accomplish tasks without undue difficulty.</p>
+
+   <h2 name="vpat" id="vpat">VPAT Form</h2>
+   <form id="checklist" method="post" onsubmit="event.preventDefault(); validateForm();">
+      <p>This form contains a checklist of twelve accessibility requirement guidelines, matching those from the WCAG 2.0 Guidelines.</p>
+      <p><strong>For each guideline below:</strong></p>
+      <ol>
+         <li>Designate whether the application conforms, does not conform, or if the guideline is not applicable.</li>
+         <li>Briefly describe how the application conforms to the guideline. <strong>If the application does not conform to a guideline</strong>, describe how the non-conformance will be resolved or supply a rationale for why the nonconformance is acceptable.</li>
+      </ol>
+
+      <section class="principle">
+         <div class="principle-heading">
+            <h2>1&mdash;Perceivable</h2>
+            <p class="section-desc">Information and user interface components must be presentable to users in ways they can perceive.</p>
+         </div>
+         <div class="principle-body">
+            <fieldset class="well">
+               <div id="req11" class="req-container">
+                  <div class="req"><legend>1.1 Text Alternatives</legend></div>
+                  <div class="status">
+                     <select id="select11" aria-controls="desc11" aria-describedby="req11-desc" aria-label="1.1 Conformance">
+                        <option value="0" selected>Conforms</option>
+                        <option value="1">Does Not Conform</option>
+                        <option value="2">n/a</option>
+                     </select>
+                     <textarea id="desc11" class="form-control" aria-describedby="req11-desc" aria-label="1.1 Description" maxlength="4096"></textarea>
+                  </div>
+                  <div class="desc">
+                     <p id="req11-desc">The proposed EIT provides text descriptions for images, graphs, charts, etc. as an alternative to visual content.</p>
+                     <p>To fulfill this requirement, text alternatives must be appropriately descriptive of the non-text content.</p>
+                     <p><a href="http://www.w3.org/TR/UNDERSTANDING-WCAG20/text-equiv.html">Understanding Guideline 1.1</a></p>
+                     <button id="hs11_btn" class="bnDisclosure" aria-expanded="false" aria-controls="hs11">Full Requirements<span class="sr-only">for 1.1</span></button>
+                  </div>
+               </div>
+               <div class="disclosure" id="hs11" aria-labelledby="list11" role="region" tabindex="-1">
+                  <h3 id="list11">Success Criteria for Guideline 1.1</h3>
+                  <p>Provide text alternatives for any non-text content so that it can be changed into other forms people need, such as large print, braille, speech, symbols or simpler language.</p>
+                  <ul class="reqlist">
+                     <li><strong><span class="reqlabel wcag">WCAG 1.1.1</span> &ndash; Non-text Content <small class="text-muted">(Level A)</small>:</strong> Provide for text alternatives of images and other non-text content, including user interface components.</li>
+                  </ul>
+               </div>
+            </fieldset>
+
+            <fieldset class="well">
+               <div id="req12" class="req-container">
+                  <div class="req"><legend>1.2 Time-Based Media</legend></div>
+                  <div class="status">
+                     <select id="select12" aria-controls="desc12" aria-describedby="req12desc" aria-label="1.2 Conformance">
+                        <option value="0" selected>Conforms</option>
+                        <option value="1">Does Not Conform</option>
+                        <option value="2">n/a</option>
+                     </select>
+                     <textarea id="desc12" class="form-control" aria-describedby="req12desc" aria-label="1.2 Description" maxlength="4096"></textarea>
+                  </div>
+                  <div class="desc">
+                     <p id="req12-desc">If the product contains audio or video media, it makes captions, transcripts, and audio description available to the user.</p>
+                     <p>University supplied multimedia content may be provided in an accessible method.</p>
+                     <p>Automated captions, such as those provided by YouTube, are not of sufficient quality. Captions must use correct grammar and punctuation and (where appropriate) identify the speaker and other audio cues.</p>
+                     <p><a href="http://www.w3.org/TR/UNDERSTANDING-WCAG20/media-equiv.html">Understanding Guideline 1.2</a></p>
+                     <button id="hs12_btn" class="bnDisclosure" aria-expanded="false" aria-controls="hs12">Full Requirements <span class="sr-only">for 1.2</span></button>
+                  </div>
+               </div>
+               <div class="disclosure" id="hs12" aria-labelledby="list12" role="region" tabindex="-1">
+                  <h3 id="list12">Success Criteria for Guideline 1.2</h3>
+                  <p>Provide alternatives for time-based media.</p>
+                  <ul class="reqlist">
+                     <li><strong><span class="reqlabel wcag">WCAG 1.2.1</span> &ndash; Prerecorded Audio-only and Video-only <small class="text-muted">(Level A)</small>:</strong> Provides that prerecorded audio is available in a visible format and that silent animations are available in an audible format.</li>
+                     <li><strong><span class="reqlabel wcag">WCAG 1.2.2</span> &ndash; Captions (Prerecorded) <small class="text-muted">(Level A)</small>:</strong> Provide for synchronized captioning of prerecorded video and multimedia.</li>
+                     <li><strong><span class="reqlabel wcag">WCAG 1.2.3</span> &ndash; Audio Description or Media Alternative (Prerecorded) <small class="text-muted">(Level A)</small>:</strong> Provide for audio description of prerecorded video and multimedia.</li>
+                     <li><strong><span class="reqlabel wcag">WCAG 1.2.4</span> &ndash; Captions (Live) <small class="text-muted">(Level AA)</small>:</strong> Provide for captioning of live video and multimedia.</li>
+                     <li><strong><span class="reqlabel wcag">WCAG 1.2.5</span> &ndash; Audio Description (Live) <small class="text-muted">(Level AA)</small>:</strong> Provide for audio description of live video and multimedia.</li>
+                  </ul>
+               </div>
+            </fieldset>
+
+            <fieldset class="well">
+               <div id="req13" class="req-container">
+                  <div class="req"><legend>1.3 Adaptable</legend></div>
+                  <div class="status">
+                     <select id="select13" aria-controls="desc13" aria-describedby="req13-desc" aria-label="1.3 Conformance">
+                        <option value="0" selected>Conforms</option>
+                        <option value="1">Does Not Conform</option>
+                        <option value="2">n/a</option>
+                     </select>
+                     <textarea id="desc13" class="form-control" aria-describedby="req13-desc" aria-label="1.3 Description" maxlength="4096"></textarea>
+                  </div>
+                  <div class="desc">
+                     <p id="req13-desc">The proposed EIT allows users to view and interact with content in a way that they prefer or require.</p>
+                     <p>Users who are blind require the information, structure and relationships in an application page to be presented in ways that do not require vision to perceive (e.g. programmatically) and is logical without the ability to see the screen. Sighted users with low-mobility (e.g. keyboard-only interaction) require keyboard navigation that makes sense for the application.</p>
+                     <p><a href="http://www.w3.org/TR/UNDERSTANDING-WCAG20/content-structure-separation.html">Understanding Guideline 1.3</a></p>
+                     <button id="hs13_btn" class="bnDisclosure" aria-expanded="false" aria-controls="hs13">Full Requirements <span class="sr-only">for 1.3</span></button>
+                  </div>
+               </div>
+               <div class="disclosure" id="hs13" aria-labelledby="list13" role="region" tabindex="-1">
+                  <h3 id="list13">Success Criteria for Guideline 1.3</h3>
+                  <p>Create content that can be presented in different ways (for example simpler layout) without losing information or structure.</p>
+                  <ul class="reqlist">
+                     <li><strong><span class="reqlabel wcag">WCAG 1.3.1</span> &ndash; Information and Relationships <small class="text-muted">(Level A)</small>:</strong> Provides that information, structure, and relationships conveyed visually are available to users of assistive technology.
+                     <p>Provides that semantic markup be used for headings, lists, emphasized or special text, and tabular data, including the association of data cells with their headers.
+                     </p></li>
+                     <li><strong><span class="reqlabel wcag">WCAG 1.3.2</span> &ndash; Meaningful Sequence <small class="text-muted">(Level A)</small>:</strong> Provide for a reasonable and logical reading order when using assistive technology.</li>
+                     <li><strong><span class="reqlabel wcag">WCAG 1.3.3</span> &ndash; Sensory Characteristics <small class="text-muted">(Level A)</small>:</strong> Provides that instructions are not conveyed only through sound, shape, size, or visual orientation.</li>
+                  </ul>
+               </div>
+            </fieldset>
+
+            <fieldset class="well">
+               <div id="req14" class="req-container">
+                  <div class="req"><legend>1.4 Distinguishable</legend></div>
+                  <div class="status">
+                     <select id="select14" aria-controls="desc14" aria-describedby="req14-desc" aria-label="1.4 Conformance">
+                        <option value="0" selected>Conforms</option>
+                        <option value="1">Does Not Conform</option>
+                        <option value="2">n/a</option>
+                     </select>
+                     <textarea id="desc14" class="form-control" aria-describedby="req14-desc" aria-label="1.4 Description" maxlength="4096"></textarea>
+                  </div>
+                  <div class="desc">
+                     <p class="req14-desc">The proposed EIT ensures the most important content is obvious to users with varying abilities.</p>
+                     <p>Some users will be unable to perceive information that is presented only through a change in color, such as an error state, or if color contrast is too low. Others will have difficulty reading page content if there is multimedia content that plays automatically.</p>
+                     <p><a href="http://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast.html">Understanding Guideline 1.4</a></p>
+                     <button id="hs14_btn" class="bnDisclosure" aria-expanded="false" aria-controls="hs14">Full Requirements <span class="sr-only">for 1.4</span></button>
+                  </div>
+               </div>
+               <div class="disclosure" id="hs14" aria-labelledby="list14" role="region" tabindex="-1">
+                  <h3 id="list14">Success Criteria for Guideline 1.4</h3>
+                  <p>Make it easier for users to see and hear content including separating foreground from background.</p>
+                  <ul class="reqlist">
+                     <li><strong><span class="reqlabel wcag">WCAG 1.4.1</span> &ndash; Use of Color <small class="text-muted">(Level A)</small>:</strong> Provides that information and prompts are not conveyed only through color.</p>
+                     <p>Provides that semantic markup be used for headings, lists, emphasized or special text, and tabular data, including the association of data cells with their headers.
+                     </p></li>
+                     <li><strong><span class="reqlabel wcag">WCAG 1.4.2</span> &ndash; Audio Control <small class="text-muted">(Level A)</small>:</strong> Provides that there is a way to stop, pause, mute, or adjust volume with audio that plays automatically.</li>
+                     <li><strong><span class="reqlabel wcag">WCAG 1.4.3</span> &ndash; Contrast (Minimum) <small class="text-muted">(Level AA)</small>:</strong> Provide for specified contrast between foreground and background of text and images of text.</li>
+                     <li><strong><span class="reqlabel wcag">WCAG 1.4.4</span> &ndash;  Resize Text <small class="text-muted">(Level AA)</small>:</strong> Provides tor content that remains readable and functional when the font size is doubled.</li>
+                     <li><strong><span class="reqlabel wcag">WCAG 1.4.5</span> &ndash;  Images of Text <small class="text-muted">(Level AA)</small>:</strong> Provide for the use of text, as opposed to images of text.</li>
+                  </ul>
+               </div>
+            </fieldset>
+         </div>
+      </section>
+      <section class="principle">
+         <div class="principle-heading">
+            <h2>2&mdash;Operable</h2>
+            <p class="section-desc">User interface components and navigation must be operable.</p>
+         </div>
+         <div class="principle-body">
+
+         <fieldset class="well">
+            <div id="req21" class="req-container">
+               <legend class="req">2.1 Keyboard Accessible</legend>
+               <div class="status">
+                  <select id="select21" aria-controls="desc21" aria-describedby="req21-desc" aria-label="2.1 Conformance">
+                     <option value="0" selected>Conforms</option>
+                     <option value="1">Does Not Conform</option>
+                     <option value="2">n/a</option>
+                  </select>
+                  <textarea id="desc21" class="form-control" aria-describedby="req21-desc" aria-label="2.1 Description" maxlength="4096"></textarea>
+               </div>
+               <div class="desc">
+                  <p id="req21-desc">The proposed EIT ensures that the most important tasks can be completed easily with only the keyboard (tab, arrow keys, spacebar/enter).</p>
+
+                  <p>Users who are blind and some users with low-mobility use only the keyboard to interact with a computer. To fulfill this requirement, keyboard shortcuts and/or mouse keys cannot be the primary way that a user can complete necessary tasks using only the keyboard.</p>
+                  <p><a href="http://www.w3.org/TR/UNDERSTANDING-WCAG20/keyboard-operation.html">Understanding Guideline 2.1</a></p>
+                  <button id="hs21_btn" class="bnDisclosure" aria-expanded="false" aria-controls="hs21">Full Requirements <span class="sr-only">for 2.1</span></button>
+               </div>
+            </div>
+            <div class="disclosure" id="hs21" aria-labelledby="list21" role="region" tabindex="-1">
+               <h3 id="list21">Success Criteria for Guideline 2.1</h3>
+               <p>Make all functionality available from a keyboard.</p>
+               <ul class="reqlist">
+                  <li><strong><span class="reqlabel wcag">WCAG 2.1.1</span> &ndash; Keyboard <small class="text-muted">(Level A)</small>:</strong> Provide for functionality when using only the keyboard interface.</li>
+                  <li><strong><span class="reqlabel wcag">WCAG 2.1.2</span> &ndash; No Keyboard Trap <small class="text-muted">(Level A)</small>:</strong> Provides that the keyboard focus is not trapped when the keyboard is used for navigation.</li>
+               </ul>
+            </div>
+         </fieldset>
+
+         <fieldset class="well">
+            <div id="req22" class="req-container">
+               <div class="req"><legend>2.2 Enough Time</legend></div>
+               <div class="status">
+                  <select id="select22" aria-controls="desc22" aria-describedby="req22-desc" aria-label="2.2 Conformance">
+                     <option value="0" selected>Conforms</option>
+                     <option value="1">Does Not Conform</option>
+                     <option value="2">n/a</option>
+                  </select>
+                  <textarea id="desc22" class="form-control" aria-describedby="req22-desc" aria-label="2.2 Description" maxlength="4096"></textarea>
+               </div>
+               <div class="desc">
+                  <p id="req22-desc">The proposed EIT provides enough time for users with varying abilities to interact with content.</p>
+                  <p>Some users require more time to read content and perform actions than do others. For example, it can take a user who is blind up to three times longer to complete a task than some sighted users. Others require the ability to pause or stop scrolling or auto-updating information.</p>
+                  <p>
+                  <p><a href="http://www.w3.org/TR/UNDERSTANDING-WCAG20/time-limits.html">Understanding Guideline 2.2</a></p>
+                  <button id="hs22_btn" class="bnDisclosure" aria-expanded="false" aria-controls="hs22">Full Requirements <span class="sr-only">for 2.2</span></button>
+               </div>
+            </div>
+            <div class="disclosure" id="hs22" aria-labelledby="list22" role="region" tabindex="-1">
+               <h3 id="list22">Success Criteria for Guideline 2.2</h3>
+               <p>Provide users enough time to read and use content.</p>
+               <ul class="reqlist">
+                  <li><strong><span class="reqlabel wcag">WCAG 2.2.1</span> &ndash; Timing Adjustable <small class="text-muted">(Level A)</small>:</strong> Provide for flexible time limits.</li>
+                  <li><strong><span class="reqlabel wcag">WCAG 2.2.2</span> &ndash; Pause, Stop, Hide <small class="text-muted">(Level A)</small>:</strong> Provide for user control over moving, blinking, scrolling, and information that updates automatically.</li>
+               </ul>
+            </div>
+         </fieldset>
+
+         <fieldset class="well">
+            <div id="req23" class="req-container">
+               <div class="req"><legend>2.3 Seizures</legend></div>
+               <div class="status">
+                  <select id="select23" aria-controls="desc23" aria-describedby="req23-desc" aria-label="2.3 Conformance">
+                     <option value="0" selected>Conforms</option>
+                     <option value="1">Does Not Conform</option>
+                     <option value="2">n/a</option>
+                  </select>
+                  <textarea id="desc23" class="form-control" aria-describedby="req23-desc" aria-label="2.3 Description" maxlength="4096"></textarea>
+               </div>
+               <div class="desc">
+                  <p id="req23-desc">The proposed EIT prevents inducing seizures by limiting components that flash more than three times per second.</p>
+                  <p>Components that flash more than three times per second can induce seizures in some individuals.</p>
+                  <p><a href="http://www.w3.org/TR/UNDERSTANDING-WCAG20/seizure.html">Understanding Guideline 2.3</a></p>
+                  <button id="hs23_btn" class="bnDisclosure" aria-expanded="false" aria-controls="hs23">Full Requirements <span class="sr-only">for 2.3</span></button>
+               </div>
+            </div>
+            <div class="disclosure" id="hs23" aria-labelledby="list23" role="region" tabindex="-1">
+               <h3 id="list23">Success Criteria for Guideline 2.3</h3>
+               <p>Do not design content in a way that is known to cause seizures.</p>
+               <ul class="reqlist">
+                  <li><strong><span class="reqlabel wcag">WCAG 2.3.1</span> &ndash; Three Flashes or Below Threshold <small class="text-muted">(Level A)</small>:</strong> Provides that nothing flashes more than three times per second, unless the flash is very small and does not contain too much red.</li>
+               </ul>
+            </div>
+         </fieldset>
+
+         <fieldset class="well">
+            <div id="req24" class="req-container">
+               <div class="req"><legend>2.4 Navigable</legend></div>
+               <div class="status">
+                  <select id="select24" aria-controls="desc24" aria-describedby="req24-desc" aria-label="2.4 Conformance">
+                     <option value="0" selected>Conforms</option>
+                     <option value="1">Does Not Conform</option>
+                     <option value="2">n/a</option>
+                  </select>
+                  <textarea id="desc24" class="form-control" aria-describedby="req24-desc" aria-label="2.4 Description" maxlength="4096"></textarea>
+               </div>
+               <div class="desc">
+                  <p id="req24-desc">The proposed EIT provides ways that help users who cannot use a mouse or have visual impairments to navigate, find content, and determine where they are.</p>
+                  <p>To fulfill this requirement, navigation via the keyboard (i.e. tab and arrow keys) must be logical. Features such as visual focus indicators and good heading structure are required.</p>
+                  <p><a href="http://www.w3.org/TR/UNDERSTANDING-WCAG20/navigation-mechanisms.html">Understanding Guideline 2.4</a></p>
+                  <button id="hs24_btn" class="bnDisclosure" aria-expanded="false" aria-controls="hs24">Full Requirements <span class="sr-only">for 2.4</span></button>
+               </div>
+            </div>
+            <div class="disclosure" id="hs24" aria-labelledby="list24" role="region" tabindex="-1">
+               <h3 id="list24">Success Criteria for Guideline 2.4</h3>
+               <p>Provide ways to help users navigate, find content, and determine where they are.</p>
+               <ul class="reqlist">
+                  <li><strong><span class="reqlabel wcag">WCAG 2.4.1</span> &ndash; Bypass Blocks <small class="text-muted">(Level A)</small>:</strong> Provide for a skip navigation link or other means to bypass repetitive content.</li>
+                  <li><strong><span class="reqlabel wcag">WCAG 2.4.2</span> &ndash; Page Title <small class="text-muted">(Level A)</small>:</strong> Provide for descriptive and informative page titles.</li>
+                  <li><strong><span class="reqlabel wcag">WCAG 2.4.3</span> &ndash; Focus Order <small class="text-muted">(Level A)</small>:</strong> Provide for a keyboard-oriented navigation order that is reasonable and logical. Provides that links, form elements, and other user interface controls and components have a reasonable and logical navigation order.</li>
+                  <li><strong><span class="reqlabel wcag">WCAG 2.4.4</span> &ndash; Link Purpose (In Context) <small class="text-muted">(Level A)</small>:</strong> Provides that the purpose of any link is understandable from its text or context.</li>
+                  <li><strong><span class="reqlabel wcag">WCAG 2.4.5</span> &ndash; Multiple Ways <small class="text-muted">(Level AA)</small>:</strong> Provide for two or more means to locate content.</li>
+                  <li><strong><span class="reqlabel wcag">WCAG 2.4.6</span> &ndash; Headings and Labels <small class="text-muted">(Level AA)</small>:</strong> Provides that headings and labels are descriptive.</li>
+                  <li><strong><span class="reqlabel wcag">WCAG 2.4.7</span> &ndash; Focus Visible <small class="text-muted">(Level AA)</small>:</strong> Provides that the keyboard focus is visually apparent when using the keyboard to navigate.</li>
+               </ul>
+            </div>
+         </fieldset>
+         </div>
+      </section>
+      <section class="principle">
+         <div class="principle-heading">
+            <h2>3&mdash;Understandable</h2>
+            <p class="section-desc">Information and the operation of the user interface must be understandable.</p>
+         </div>
+         <div class="principle-body">
+
+         <fieldset class="well">
+            <div id="req31" class="req-container">
+               <div class="req"><legend>3.1 Readable</legend></div>
+               <div class="status">
+                  <select id="select31" aria-controls="desc31" aria-describedby="req31-desc" aria-label="3.1 Conformance">
+                     <option value="0" selected>Conforms</option>
+                     <option value="1">Does Not Conform</option>
+                     <option value="2">n/a</option>
+                  </select>
+                  <textarea id="desc31" class="form-control" aria-describedby="req31-desc" aria-label="3.1 Description" maxlength="4096"></textarea>
+               </div>
+               <div class="desc">
+                  <p id="req31-desc">The proposed EIT ensure that text content can be read by people and by assistive technologies.</p>
+                  <p>In order to read text properly on the web, screen reader software needs the language of a webpage, or part of a webpage for multi-language applications to be specified in the HTML code.</p>
+                  <p><a href="http://www.w3.org/TR/UNDERSTANDING-WCAG20/meaning.html">Understanding Guideline 3.1</a></p>
+                  <button id="hs31_btn" class="bnDisclosure" aria-expanded="false" aria-controls="hs31">Full Requirements <span class="sr-only">for 3.1</span></button>
+               </div>
+            </div>
+            <div class="disclosure" id="hs31" aria-labelledby="list31" role="region" tabindex="-1">
+               <h3 id="list31">Success Criteria for Guideline 3.1</h3>
+               <p>Make text content readable and understandable.</p>
+               <ul class="reqlist">
+                  <li><strong><span class="reqlabel wcag">WCAG 3.1.1</span> &ndash; Language of Page <small class="text-muted">(Level A)</small>:</strong> Provides that the default language of content is exposed  to assistive technology.</li>
+                  <li><strong><span class="reqlabel wcag">WCAG 3.1.2</span> &ndash; Langauage of Parts <small class="text-muted">(Level A)</small>:</strong> Provides that changes in language are exposed to assistive technology.</li>
+               </ul>
+            </div>
+         </fieldset>
+
+         <fieldset class="well">
+            <div id="req32" class="req-container">
+               <div class="req"><legend>3.2 Predictable</legend></div>
+               <div class="status">
+                  <select id="select32" aria-controls="desc32" aria-describedby="req32-desc" aria-label="3.2 Conformance">
+                     <option value="0" selected>Conforms</option>
+                     <option value="1">Does Not Conform</option>
+                     <option value="2">n/a</option>
+                  </select>
+                  <textarea id="desc32" class="form-control" aria-describedby="req32-desc" aria-label="3.2 Description" maxlength="4096"></textarea>
+               </div>
+               <div class="desc">
+                  <p id="req3.2">The proposed EIT appears and operates in predictable and consistent ways.</p>
+                  <p>Predictability is essential for users with cognitive disabilities or those who are blind.</p>
+                  <p><a href="http://www.w3.org/TR/UNDERSTANDING-WCAG20/consistent-behavior.html">Understanding Guideline 3.2</a></p>
+                  <button id="hs32_btn" class="bnDisclosure" aria-expanded="false" aria-controls="hs32">Full Requirements <span class="sr-only">for 3.2</span></button>
+               </div>
+            </div>
+            <div class="disclosure" id="hs32" aria-labelledby="list32" role="region" tabindex="-1">
+               <h3 id="list32">Success Criteria for Guideline 3.2</h3>
+               <p>Make web pages appear and operate in predictable ways.</p>
+               <ul class="reqlist">
+                  <li><strong><span class="reqlabel wcag">WCAG 3.2.1</span> &ndash; On Focus <small class="text-muted">(Level A)</small>:</strong> Provides that user interface components do not initiate a change of context when receiving focus.</li>
+                  <li><strong><span class="reqlabel wcag">WCAG 3.2.2</span> &ndash; On Input <small class="text-muted">(Level A)</small>:</strong> Provides that changing the setting of user interface components does not automatically cause a change of context.</li>
+                  <li><strong><span class="reqlabel wcag">WCAG 3.2.3</span> &ndash; Consistent Navigation <small class="text-muted">(Level AA)</small>:</strong> Provides that repeated navigational components occur in the same relative order each time they are encountered.</li>
+                  <li><strong><span class="reqlabel wcag">WCAG 3.2.4</span> &ndash; Consistent Identification <small class="text-muted">(Level AA)</small>:</strong> Provides that components having the same functionality are identified consistently.</li>
+               </ul>
+            </div>
+         </fieldset>
+
+         <fieldset class="well">
+            <div id="req33" class="req-container">
+               <div class="req"><legend>3.3 Input Assistance</legend></div>
+               <div class="status">
+                  <select id="select33" aria-controls="desc33" aria-describedby="req33-desc" aria-label="3.3 Conformance">
+                     <option value="0" selected>Conforms</option>
+                     <option value="1">Does Not Conform</option>
+                     <option value="2">n/a</option>
+                  </select>
+                  <textarea id="desc33" class="form-control" aria-describedby="req33-desc" aria-label="3.3 Description" maxlength="4096"></textarea>
+               </div>
+               <div class="desc">The proposed EIT assists users to avoid, identify and correct mistakes.</p>
+                  <p>To fulfill this requirement, sufficient instructional cues, unambiguous error messages and other mechanisms that alert users to mistakes or help them avoid mistakes are present. Such mechanisms must be perceivable to users who have visual and/or hearing impairments.</p>
+                  <p id="req33-desc">
+                  <p><a href="http://www.w3.org/TR/UNDERSTANDING-WCAG20/minimize-error.html">Understanding Guideline 3.3</a></p>
+                  <button id="hs33_btn" class="bnDisclosure" aria-expanded="false" aria-controls="hs33">Full Requirements <span class="sr-only">for 3.3</span></button>
+               </div>
+            </div>
+            <div class="disclosure" id="hs33" aria-labelledby="list33" role="region" tabindex="-1">
+               <h3 id="list33">Success Criteria for Guideline 3.3</h3>
+               <p>Help users avoid and correct mistakes.</p>
+               <ul class="reqlist">
+                  <li><strong><span class="reqlabel wcag">WCAG 3.3.1</span> &ndash; Error Identification <small class="text-muted">(Level A)</small>:</strong> Provides that automatically detected input errors are identified and described in text to the user.</li>
+                  <li><strong><span class="reqlabel wcag">WCAG 3.3.2</span> &ndash; Labels or Instructions <small class="text-muted">(Level A)</small>:</strong> Provide for labels or instructions when content requires user input.</li>
+                  <li><strong><span class="reqlabel wcag">WCAG 3.3.3</span> &ndash; Error Suggestions <small class="text-muted">(Level AA)</small>:</strong> Provides that the system makes suggestions for correction when input errors are automatically detected and suggestions are available.</li>
+                  <li><strong><span class="reqlabel wcag">WCAG 3.3.4</span> &ndash; Error Prevention (Legal, Financial, Data) <small class="text-muted">(Level AA)</small>:</strong> Provides that when legal, financial, or test data can be changed or deleted the changes or deletions can be reversed, verified, or confirmed.</li>
+               </ul>
+            </div>
+         </fieldset>
+         </div>
+      </section>
+      <section class="principle">
+         <div class="principle-heading">
+            <h2>4&mdash;Robust</h2>
+            <p class="section-desc">Content must be robust enough that it can be interpreted reliably by a wide variety of user agents, including assistive technologies.</p>
+         </div>
+         <div class="principle-body">
+
+         <fieldset class="well">
+            <div id="req41" class="req-container">
+               <div class="req"><legend>4.1 Compatible</legend></div>
+               <div class="status">
+                  <select id="select41" aria-controls="desc41" aria-describedby="req41-desc" aria-label="4.1 Conformance">
+                     <option value="0" selected>Conforms</option>
+                     <option value="1">Does Not Conform</option>
+                     <option value="2">n/a</option>
+                  </select>
+                  <textarea id="desc41" class="form-control" aria-describedby="req41-desc" aria-label="4.1 Description" maxlength="4096"></textarea>
+               </div>
+               <div class="desc">
+                  <p id="req41-desc">The proposed EIT works with a variety of assistive technologies.</p>
+                  <p>The proposed EIT must utilize programming standards and ensure that the name, role and value of each interface element can be programmatically determined.</p>
+                  <p>To fulfill this requirement, users must not be required to use a particular operating system (if applicable), web browser (with reasonable limitations on version compatibility), or assistive technology.</p>
+                  <p><a href="http://www.w3.org/TR/UNDERSTANDING-WCAG20/minimize-error.html">Understanding Guideline 4.1</a></p>
+                  <button id="hs41_btn" class="bnDisclosure" aria-expanded="false" aria-controls="hs41">Full Requirements <span class="sr-only">for 4.1</span></button>
+               </div>
+            </div>
+            <div class="disclosure" id="hs41" aria-labelledby="list41" role="region" tabindex="-1">
+               <h3 id="list41">Success Criteria for Guideline 4.1</h3>
+               <p>Maximize compatibility with current and future user agents, including assistive technologies.</p>
+               <ul class="reqlist">
+                  <li><strong><span class="reqlabel wcag">WCAG 4.1.1</span> &ndash; Parsing <small class="text-muted">(Level A)</small>:</strong> Provides that significant HTML/XHTML validation and parsing errors in source code are avoided.</li>
+                  <li><strong><span class="reqlabel wcag">WCAG 4.1.2</span> &ndash; Name, Role, Value <small class="text-muted">(Level A)</small>:</strong> Provides that sufficient information (including identity, operation, and state) about user interface components is available to assistive technology.</li>
+               </ul>
+            </div>
+         </fieldset>
+      </div>
+      </section>
+      <p id="instructions">Before submitting this form, please double check that all applicable fields have been filled in and any descriptions are sufficient for third parties to understand how this application conforms or does not conform to accessibility standards.</p>
+      <input id="bnSubmit" class="btn btn-success" type="submit" value="Submit">
+   </form>
+   </main>
+   <footer role="contentinfo">
+      <p>&copy; The Board of Trustees of the University of Illinois</p>
+   </footer>
+</div>
+</body>
+</html>
