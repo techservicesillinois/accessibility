@@ -1,0 +1,208 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>ARIA Combo Box - Technology Services Accessibility Examples</title>
+<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../css/examples.css">
+<link rel="stylesheet" type="text/css" href="../css/combo-1.1.css">
+<script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
+<script async type="text/javascript" src="../js/combo-1.1.js"></script>
+
+<script>
+   $('document').ready(function() {
+      var cb1 = new combobox($('#cb1'), false);
+      var cb2 = new combobox($('#cb2'), true);
+   });
+</script>
+</head>
+<body>
+<header role="banner">
+   <a class="skip-link" href="#main">Skip to Main Content</a>
+   <div class="row">
+      <div class="col-xs-12 col-lg-4">
+         <img class="imark" src="../images/techsvc-logo-bw.svg" alt="Technology Sevices at Illinois I-mark">
+      </div>
+      <div class="col-xs-12 col-lg-8">
+         <h1>Accessible Widget Examples</h1>
+      </div>
+   </div>
+   <div class="sitenav row">
+      <nav role="navigation" aria-label="site">
+         <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../aria.html" class="active">ARIA</a></li>
+            <li><a href="../bootstrap.html">Bootstrap</a></li>
+            <li><a href="../examples.html">Examples</a></li>
+         </ul>
+      </nav>
+   </div>
+</header>
+<main id="main" role="main" class="container">
+<h1>Accessibility Examples: ARIA Combo Box</h1>
+<p>The ARIA combo box widget is a composite widget, consisting of a single-line textbox and a popup element containing suggested values for the textbox. The popup is typically hidden by default, and it may be one of four widget types:</p>
+<ul>
+   <li><a href="https://www.w3.org/TR/wai-aria-practices-1.1/#Listbox">Listbox</a></li>
+   <li><a href="https://www.w3.org/TR/wai-aria-practices-1.1/#grid">Grid</a></li>
+   <li><a href="https://www.w3.org/TR/wai-aria-practices-1.1/#TreeView">Tree</a></li>
+   <li><a href="https://www.w3.org/TR/wai-aria-practices-1.1/#dialog_modal">Modal Dialog</a></li>
+</ul>
+<p>It is common for a combo box widget to also have a button adjacent to the textbox for expanding or collapsing the popup.</p>
+<h2>ARIA 1.1 Implementation</h2>
+<p>Example 1 illustrates an ARIA 1.1 implementation of a combo box with the same features. The ARIA 1.1 implementation pattern is not yet well supported by assistive technologies.
+<p>The combo box has list autocomplete and automatic selection behavior. This means that as the user types, the popup list will expand and display options that correspond to what the user has typed in the textbox. The first option in the list is automatically selected and will become the value of the textbox, unless the user selects another option from the list or changes what has been typed in the textbox.</p>
+<p>See the <a href="https://www.w3.org/TR/wai-aria-practices-1.1/#combobox">Combo Box</a> section of the WAI-ARIA Authoring Practices 1.1 document for more information about the ARIA combo box widget.</p>
+<div class="example-wrap">
+   <h3 id="ex1">Example 1: ARIA 1.1 Combo Box Widget with List Autocomplete and Automatic Selection</h3>
+   <div class="demo" role="region" aria-labelledby="ex1">
+      <div id="cb1-label">Fruit:</div>
+      <div id="cb1-wrapper" aria-labelledby="cb1-label" class="cb-wrapper" role="combobox" aria-expanded="false" aria-haspopup="true">
+         <input id="cb1" type="text" class="cb-edit" aria-label="Fruit" aria-autocomplete="both" aria-controls="cb1-list" aria-activedescendant="">
+         <div id="cb1-btn" class="cb-btn" role="button" aria-label="Toggle list"></div>
+         <span id="cb1-status" role="status" class="cb-status"></span>
+         <div id="cb1-list" role="listbox" class="cb-list cb-collapsible" style="display: none;">
+            <div id="cb1-opt0" role="option" aria-selected="false">Banana</div>
+            <div id="cb1-opt1" role="option" aria-selected="false">Blueberry</div>
+            <div id="cb1-opt2" role="option" aria-selected="false">Apple</div>
+            <div id="cb1-opt3" role="option" aria-selected="false">Orange</div>
+            <div id="cb1-opt4" role="option" aria-selected="false">Strawberry</div>
+            <div id="cb1-opt5" role="option" aria-selected="false">Kiwi</div>
+            <div id="cb1-opt6" role="option" aria-selected="false">Ugli Fruit</div>
+         </div>
+      </div>
+   </div>
+</div>
+<h3>Example 1 Markup</h3>
+The markup for this example is as follows;
+<pre class="highlight">&lt;div id="cb1-label"&gt;Fruit:&lt;/div&gt;
+&lt;div id="cb1-wrapper" aria-labelledby="cb1-label" class="cb-wrapper" role="combobox" aria-expanded="false" aria-haspopup="true"&gt;
+
+   &lt;input id="cb1" type="text" class="cb-edit" aria-autocomplete="both" aria-controls="cb1-list" aria-activedescendant=""&gt;
+   &lt;div id="cb1-btn" class="cb-btn" role="button" aria-label="Toggle list"&gt;&lt;/div&gt;
+
+   &lt;span id="cb1-status" role="status" class="cb-status"&gt;&lt;/span&gt;
+
+   &lt;div id="cb1-list" role="listbox" class="cb-list cb-collapsible" style="display: none;"&gt;
+      &lt;div id="cb1-opt0" role="option" aria-selected="false"&gt;Banana&lt;/div&gt;
+      &lt;div id="cb1-opt1" role="option" aria-selected="false"&gt;Blueberry&lt;/div&gt;
+      &lt;div id="cb1-opt2" role="option" aria-selected="false"&gt;Apple&lt;/div&gt;
+      &lt;div id="cb1-opt3" role="option" aria-selected="false"&gt;Orange&lt;/div&gt;
+      &lt;div id="cb1-opt4" role="option" aria-selected="false"&gt;Strawberry&lt;/div&gt;
+      &lt;div id="cb1-opt5" role="option" aria-selected="false"&gt;Kiwi&lt;/div&gt;
+      &lt;div id="cb1-opt6" role="option" aria-selected="false"&gt;Ugli Fruit&lt;/div&gt;
+   &lt;/div&gt;
+
+&lt;/div&gt;</pre>
+<p>The 
+<h2>ARIA 1.0 Implementation</h2>
+<p>Example 2 illustrates a legacy ARIA 1.0 combo box widget with a listbox popup. Authors may implement the legacy ARIA 1.0 combo box pattern until the ARIA 1.1 pattern achieves better support. There are no plans to deprecate the ARIA 1.0 combo box pattern at this time, so it should be safe to use this pattern if wide user agent support is needed.</p>
+<p>As with Example 1, this combo box has list autocomplete and automatic selection behavior.</p>
+<div class="example-wrap">
+   <h3 id="ex2">Example 2: ARIA 1.0 Combo Box Widget with List Autocomplete and Automatic Selection</h3>
+   <div class="demo" role="region" aria-labelledby="example2">
+      <div id="cb2-label">Exotic Fruit:</div>
+      <div id="cb2-wrapper" class="cb-wrapper">
+         <input id="cb2" type="text" aria-labelledby="cb2-label" class="cb-edit" role="combobox" aria-controls="cb2-list" aria-owns="cb2-list" aria-autocomplete="both" aria-haspopup="true" aria-expanded="false" aria-activedescendant="">
+         <div id="cb2-btn" class="cb-btn" role="button" aria-label="Toggle list"></div>
+         <span id="cb2-status" role="status" class="cb-status"></span>
+         <div id="cb2-list" role="listbox" class="cb-list cb-collapsible" style="display: none;">
+            <div id="cb2-opt0" role="option" aria-selected="false">Chom Chom</div>
+            <div id="cb2-opt1" role="option" aria-selected="false">Dragon fruit</div>
+            <div id="cb2-opt2" role="option" aria-selected="false">Durian</div>
+            <div id="cb2-opt3" role="option" aria-selected="false">Guava</div>
+            <div id="cb2-opt4" role="option" aria-selected="false">Jackfruit</div>
+            <div id="cb2-opt5" role="option" aria-selected="false">Starfruit</div>
+            <div id="cb2-opt6" role="option" aria-selected="false">Persimmon</div>
+         </div>
+      </div>
+   </div>
+</div>
+<h3>Example 2 Markup</h3>
+The markup for Example 2 is as follows;
+<pre class="highlight">&lt;div id="cb2-label"&gt;Exotic Fruit:&lt;/div&gt;
+&lt;div id="cb2-wrapper" class="cb-wrapper"&gt;
+
+   &lt;input id="cb2" type="text" aria-labelledby="cb2-label" class="cb-edit" role="combobox" aria-controls="cb2-list" aria-owns="cb2-list" aria-autocomplete="both" aria-haspopup="true" aria-expanded="false" aria-activedescendant=""&gt;
+   &lt;div id="cb2-btn" class="cb-btn" role="button" aria-label="Toggle list"&gt;&lt;/div&gt;
+
+   &lt;span id="cb2-status" role="status" class="cb-status"&gt;&lt;/span&gt;
+
+   &lt;div id="cb2-list" role="listbox" class="cb-list cb-collapsible" style="display: none;"&gt;
+      &lt;div id="cb2-opt0" role="option" aria-selected="false"&gt;Chom Chom&lt;/div&gt;
+      &lt;div id="cb2-opt1" role="option" aria-selected="false"&gt;Dragon fruit&lt;/div&gt;
+      &lt;div id="cb2-opt2" role="option" aria-selected="false"&gt;Durian&lt;/div&gt;
+      &lt;div id="cb2-opt3" role="option" aria-selected="false"&gt;Guava&lt;/div&gt;
+      &lt;div id="cb2-opt4" role="option" aria-selected="false"&gt;Jackfruit&lt;/div&gt;
+      &lt;div id="cb2-opt5" role="option" aria-selected="false"&gt;Starfruit&lt;/div&gt;
+      &lt;div id="cb2-opt6" role="option" aria-selected="false"&gt;Persimmon&lt;/div&gt;
+   &lt;/div&gt;
+
+&lt;/div&gt;</pre>
+<h2>Keyboard Interaction Pattern</h2>
+<p>The keyboard interaction pattern for the widget is in Table 1, below.</p>
+<table>
+   <caption>Table 1: Keyboard Interaction</caption>
+   <thead>
+      <tr>
+         <th>Key</th>
+         <th>Function</th>
+      </tr>
+   </thead>
+   <tbody>
+      <tr>
+         <th>Tab</th>
+         <td>
+            <ul>
+               <li>Collapse the list box (if expanded), and move focus to next item in the page Tab sequence.</li>
+            </ul>
+            <p><strong>Note:</strong> The combo box button (if present), the popup, and the options in the popup are excluded from the Tab sequence.</p>
+         </td>
+      </tr>
+      <tr>
+         <th>Enter</th>
+         <td>
+            <ul>
+               <li>Choose the currently selected option, collapsing the popup if it is expanded.</li>
+            </ul>
+         </td>
+      </tr>
+      <tr>
+         <th>Esc</th>
+         <td>
+            <ul>
+               <li>Restore the previously selected option (or clear the textbox if no previous selection), collapsing the popup if it is expanded.</li>
+            </ul>
+         </td>
+      </tr>
+      <tr>
+         <th>Down Arrow</th>
+         <td>
+            <ul>
+               <li>If the Alt key is pressed, expand the popup</li>
+               <li>If the popup is collapsed and the editbox is empty, expand the popup and select the first option</li>
+               <li>If the popup is collapsed and the editbox has a value, expand the popup and select that option</li>
+               <li>If the popup is expanded, select the next option</li>
+            </ul>
+         </td>
+      </tr>
+      <tr>
+         <th>Up Arrow</th>
+         <td>
+            <ul>
+               <li>If the Alt key is pressed, collapse the popup</li>
+               <li>If the popup is expanded, select the previous option</li>
+            </ul>
+         </td>
+      </tr>
+   </tbody>
+</table>
+
+</main>
+<footer role="contentinfo">
+   <p class="copy">Copyright &copy; 2018 University of Illinois Board of Trustees</p>
+</footer>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/accessible_bootstrap-0.3.0.js"></script>
+</body>
+</html>

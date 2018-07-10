@@ -175,11 +175,11 @@ div#form_errMsg:not(:empty) {
 <ul>
    <li>Error messages are placed above the form on form submission.</li>
    <li>As the user fills out the form, error messages appear after (or otherwise near) an invalid form field.</li>
-   <li>Error messages appear after (or otherwise near) invalid form fields on form submission.</li>
+   <li>Error messages appear after (or otherwise near) invalid form fields upon form submission.</li>
    <li>A pop-up dialog listing the errors is displayed on form submission.</li>
 </ul>
-<h2>Errors Placed Above The Form</h2>
-<div class="example-wrap">
+<h2 id="ex1-heading">Error Messages Above the Form</h2>
+<div class="example-wrap" role="region" aria-labelledby="ex1-heading">
    <form id="contact-mail-page" accept-charset="UTF-8" method="post" onsubmit="contactSubmit(event);">
 
       <p id="form-caption">You can leave a message using the contact form below.</p>
@@ -205,11 +205,39 @@ div#form_errMsg:not(:empty) {
    </form>
 </div>
 
+<h2 id="ex2-heading">Error Messages as the User Fills Out the Form</h2>
+<div class="example-wrap" role="region" aria-labelledby="ex2-heading">
+   <form class="contact" onsubmit="event.preventDefault(); alert('Thanks for contacting me. I will get back to you as soon as I can.');">
+      <div class="form-group">
+         <label for="name">Name *</label>
+         <input id="name" type="text" class="form-control" name="name" onkeyup="validateField(event);" onblur="validateField(event);" data-errmsg="You must enter your name." aria-required="true" required>
+         <div id="name-err" class="errmsg" role="alert"></div>
+      </div>
+      <div class="form-group">
+         <label for="email">Email *</label>
+         <input id="email" type="email" class="form-control" name="email" onkeyup="validateField(event);" onblur="validateField(event);" data-errmsg="You must enter a valid email address." aria-required="true" required>
+         <div id="email-err" class="errmsg" role="alert"></div>
+      </div>
+      <div class="form-group">
+         <label for="subject">Subject *</label>
+         <input id="subject" type="text" class="form-control" name="subject" onkeyup="validateField(event);" onblur="validateField(event);" data-errmsg="You must enter a subject." aria-required="true" required>
+         <div id="subject-err" class="errmsg" role="alert"></div>
+      </div>
+      <div class="form-group">
+         <label for="msg">Message *</label>
+         <textarea id="msg" class="form-control" rows="10" name="message" onkeyup="validateField(event);" onblur="validateField(event);" data-errmsg="You must enter a message." aria-required="true" required></textarea>
+         <div id="msg-err" class="errmsg" role="alert"></div>
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+   </form>
+</div>
+
 </main>
 <footer role="contentinfo">
    <p class="copy">Copyright &copy; 2016 University of Illinois Board of Trustees</p>
 </footer>
 <script type="text/javascript" src="../js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../js/accessible_bootstrap-0.3.0.js"></script>
+<script type="text/javascript" src="js/validate.js"></script>
 </body>
 </html>

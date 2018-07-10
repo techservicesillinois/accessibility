@@ -128,8 +128,11 @@ div.example-wrap {
    border-radius: 5px;
 }
 
-div.example-wrap h2 {
-   margin: 0;
+div.example-wrap h2:first-child,
+div.example-wrap h3:first-child,
+div.example-wrap h4:first-child,
+div.example-wrap h5:first-child {
+   margin-top: 0;
    padding: 0;
    text-align: center;
 }

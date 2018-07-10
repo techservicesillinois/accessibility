@@ -1,0 +1,73 @@
+.cb-wrapper {
+   position: relative;
+   width: 15em;
+}
+.cb-edit {
+   padding-left: 6px;
+   width: 13em;
+   height: 2em;
+   line-height: 1.2em;
+   border: 1px solid #222;
+   border-right: none;
+   border-radius:  5px 0 0 5px;
+}
+.cb-btn {
+   position: relative;
+   width: 2em;
+   height: 2em;
+   float: right;
+   border: 1px solid #666;
+   border-radius: 0 5px 5px 0;
+}
+.cb-btn:after {
+   position: absolute;
+   right: 0.2em;
+   top: 0.65em;
+   content: '';
+   width: 0;
+   height: 0;
+   border-left: 0.75em solid transparent;
+   border-right: 0.75em solid transparent;
+   border-top: 0.75em solid #000;
+   transition: transform 0.1s, top 0.1s;
+}
+.cb-btn.expanded:after {
+   top: 0.50em;
+   transform: rotate(180deg);
+   transition: transform 0.1s,top 0.1s;
+}
+.cb-list {
+   position: absolute;
+   left: 3px;
+   margin-top: -1px;
+   float: right;
+   width: calc(13em - 2px);
+   z-index: 1000;
+   background-color: #fff;
+   border: 1px solid #222;
+}
+.cb-wrapper [role=option] {
+   width: 100%;
+   padding-left: 0.25em;
+   height: 1.5em;
+}
+.cb-wrapper [aria-selected=true] {
+   background-color: #ddd;
+}
+.cb-wrapper [role=option]:hover {
+   background-color: #f2f1ec;
+}
+.cb-edit:hover,
+.cb-edit:focus {
+   border-color: #39d;
+   outline: none;
+}
+.cb-edit:focus {
+   box-shadow: 0 0 4px #39d;
+}
+.cb-btn:hover {
+   background-color: #f2f1ec;
+}
+.cb-status {
+   display:none;
+}
