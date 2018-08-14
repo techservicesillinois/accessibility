@@ -1,0 +1,134 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta charset="utf-8">
+<title>Cookie Notice - Accessible Widget Examples</title>
+<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../../css/examples.css">
+<link rel="stylesheet" type="text/css" href="notice.css">
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="notice.js"></script>
+</head>
+<body>
+<header role="banner">
+   <a class="skip-link" href="#main">Skip to Main Content</a>
+   <div class="row">
+      <div class="col-xs-12 col-lg-4">
+         <img class="imark" src="../../images/techsvc-logo-bw.svg" alt="Technology Sevices at Illinois I-mark">
+      </div>
+      <div class="col-xs-12 col-lg-8">
+         <h1>Accessible Widget Examples</h1>
+      </div>
+   </div>
+   <div class="sitenav row">
+      <nav role="navigation" aria-label="site">
+         <ul>
+            <li><a href="../../index.html">Home</a></li>
+            <li><a href="../../aria.html">ARIA</a></li>
+            <li><a href="../../bootstrap.html">Bootstrap</a></li>
+            <li><a href="../../examples.html" class="active">Examples</a></li>
+         </ul>
+      </nav>
+   </div>
+</header>
+<main id="main" role="main" class="container">
+<h1>Cookie Notice Example</h1>
+<p>This page shows an example of a WAI-ARIA dialog widget used as a privacy banner regarding cookie use. The page launches with a non-modal interaction pattern, whereby users may interact with the page contents whithout acknowledging the banner. The <strong>Launch Modal Example</strong> button below will launch a modal version of the banner widget. The non-modal version may be relaunched via the <strong>Launch Non-Modal Example</strong> button.</p>
+<div class="button-container">
+   <button id="modal-button" type="button" class="button btn-primary">Launch Modal Example</button>
+   <button id="nonmodal-button" type="button" class="button btn-primary">Launch Non-Modal Example</>
+</div>
+<h2>Implementation</h2>
+<p>This example uses a WAI-ARIA dialog implementation pattern. You may read more about ARIA dialogs in the <a href="https://www.w3.org/TR/wai-aria-practices-1.1/#alertdialog">WAI-ARIA Authoring Practices</a> documentation. The soruce for this snippet is as follows:</p>
+<p>
+<pre class="snippet">&lt;div <strong>role="dialog" aria-modal="false" aria-labelledby="alert-box-title" aria-describedby="alert-box-message"</strong>&gt;
+   &lt;a class="alert-box-close" href="javascript:void();" <strong>role="button" aria-label="Close dialog"</strong> title="Dismiss"&gt;&lt;/a&gt;
+   &lt;div class="alert-box-body"&gt;
+      &lt;h2 <strong>id="alert-box-title"</strong> class="alert-box-title"&gt; &hellip; &lt;/h2&gt;
+      &lt;p <strong>id="alert-box-message"</strong>&gt; &hellip; &lt;/p&gt;
+   &lt;/div&gt;
+   &lt;div class="alert-box-button-container"&gt;
+      &lt;div class="alert-box-button button-more"&gt;
+         &lt;a class="toggle-display" href="javascript:void();"&gt;About Cookies&lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class="alert-box-button button-allow"&gt;
+         &lt;a class="allow-all" href="javascript:void();" <strong>role="button"</strong>&gt;I Agree&lt;/a&gt;
+      &lt;/div&gt;
+   &lt;/div&gt;
+&lt;/div&gt;</pre>
+</p>
+<p>The markup is inserted via javascript at the start of the body of the page. This assures that the content is always announced by screen reader technologies, even for browser and assistive technology combinations that do not support WAI-ARIA.</p>
+<table>
+   <caption>Required ARIA Markup</caption>
+   <thead>
+   <tr>
+      <th>Attribute</th>
+      <th>Usage</th>
+      <th>Description</th>
+   </tr>
+   </thead>
+   <tbody>
+   <tr>
+      <td>dialog (role)</td>
+      <td>Placed on the containing element of the banner</td>
+      <td>Identifies the banner as a distinct, interactive region of the page. It further causes assistive technologies, such as screen readers, to announce the dialog's title and message automatically.</td>
+   </tr>
+   <tr>
+      <td>aria-modal (property)</td>
+      <td>Placed on the containing element of the banner</td>
+      <td>Specifies if the dialog is modal or not. Set to "true" if enforcing modal behavior; "false" if the dialog should not be modal</td>
+   </tr>
+   <tr>
+      <td>aria-labelledby (property)</td>
+      <td>Placed on the containing element of the banner.</td>
+      <td>Specifies the dialog title. The HTML id specified must exist in the page. <b>Note:</b> aria-labelledby is spelled using two l's.</td>
+   </tr>
+   <tr>
+      <td>aria-describedby (property)</td>
+      <td>Placed on the containing element of the banner.</td>
+      <td>Specifies the dialog message. The HTML id specified must exist in the page.</td>
+   </tr>
+   <tr>
+      <td>button (role)</td>
+      <td>Placed on the close and agree buttons.</td>
+      <td>Causes the links used to implement the buttons to be identified by assistive technology as buttons, ensuring agreement between the semantic role, appearance, and behavior of those elements.</td>
+   </tr>
+   <tr>
+      <td>aria-label (property)</td>
+      <td>Placed on the close button.</td>
+      <td>Supplies text for the link used to implement the button, since the link is empty</td>
+   </tr>
+   <tr>
+      <td>aria-hidden (state)</td>
+      <td>Placed on the direct children of the document body when the dialog is modal and displayed.</td>
+      <td>Hides content from assistive technology when the value is "true"</td>
+   </tr>
+   </tbody>
+</table>
+<h3>Non-Modal Interaction Pattern</h3>
+<p>A non-modal dialog is one that does not restrict interaction to the elements of the dialog while it is displayed. This interaction pattern should only be utilized when it is not essential that the user have their workflow interrupted to acknowledge the dialog.</p>
+<p>As indicated in the table above, the aria-modal attribute must have a value of "false" when the dialog is not modal.</p>
+<p><strong>Note:</strong> When a dialog is dismissed, focus must be placed on an appropriate focusable element of the webpage. In this example, focus is placed on the skip link to demonstrate a useful pattern for users who only interact via the keyboard.</p>
+
+<h3>Modal Interaction Pattern</h3>
+<p>A modal dialog is one that restricts interaction to the elements of the dialog while it is displayed. This interaction pattern should be utilized when it is essential that the user have their workflow interrupted to acknowledge the dialog. If the priority of the message is sufficient to be considered an alert, the <strong>dialog</strong> role should be replaced with <strong>alertdialog</strong>:</p>
+<pre>&lt;div <strong>role="alertdialog" aria-modal="true"</strong> aria-labelledby="&hellip;" aria-describedby="&hellip;"&gt;
+   &hellip;
+&lt;/div&gt;</pre>
+<h4>Additional requirements for modal dialogs</h4>
+<ul>
+   <li>As indicated in the snippet above, the aria-modal attribute must have a value of "true" when the dialog is modal.</li>
+   <li>JavaScript must be utilized to restrict interaction to the contents of the dialog. Note how pressing the tab key repeatedly will cycle through the focusable elements in the dialog. The ability to scroll the page has also been disabled via JavaScript. While not strictly necessary, this is a typical feature of modal dialogs.</li>
+   <li>Page content should be rendered inert by the application of <strong>aria-hidden="true"</strong> to the immediate children of the document body. This will hide those elements and any child elements from assistive technologies. Remove the aria-hidden attribute when the dialog is dismissed.</li>
+   <li>Insert an overlay element at the start of the document body to restrict users from clicking on any interactive page elements outside of the dialog. In this example, the overlay is a simply a &lt;div&gt; element with a partially transparent background and width and height set to 100%. Further, the CSS z-index property is used to ensure that the overlay appears above all of the page content.</li>
+</ul>
+
+</main>
+<footer role="contentinfo">
+   <p class="copy">Copyright &copy; 2018 University of Illinois Board of Trustees</p>
+</footer>
+<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../js/accessible_bootstrap-0.3.0.js"></script>
+</body>
+</html>

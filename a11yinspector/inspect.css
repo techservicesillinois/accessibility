@@ -357,6 +357,7 @@
    z-index: 10000;
    border: 2px solid #f00;
 }
-[aria-hidden=true] {
+#a11y-panel[aria-hidden=true],
+#a11y-panel [aria-hidden=true] {
    display: none;
 }

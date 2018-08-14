@@ -5,7 +5,7 @@ html {
    min-height: 100%;
 }
 body {
-   margin-bottom: 6em;
+   margin: 0 0 6em 0;
    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
 }
 header {
@@ -43,9 +43,11 @@ h2 {
 }
 h3 {
    font-size: 1.563em;
+   margin-top: 2.5rem;
 }
 h4 {
    font-size: 1.25em;
+   margin-top: 2.5rem;
 }
 /**** Banner markup ****/
 .skip-link {
@@ -64,6 +66,7 @@ h4 {
    border-radius: 5px;
    transition: top .25s;
    overflow: hidden;
+   z-index: 1000;
 }
 .skip-link:focus {
    top: 0.5em;
@@ -144,9 +147,21 @@ table {
    border: 1px solid #666;
    width: 100%;
 }
+table caption {
+   font-size: 1.2em;
+   font-weight: bold;
+   color: #222;
+}
 th, td {
    border: 1px solid #666;
-   padding: 2px 5px;
+   padding: 0.5em 0.75em;
+   vertical-align: top;
+}
+td {
+}
+
+li {
+   margin-bottom: 0.6em;
 }
 /************ Bootstrap Overrides ************/
 .row {
