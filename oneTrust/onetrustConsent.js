@@ -148,7 +148,7 @@ var a, c;
             0 < f("#optanon-cookie-policy").length &&
                 Ma();
             S();
-            f('#optanon-alert-box-button-accept').focus();
+            f('#alert-box-button-accept').focus();
             v("OptanonConsent", "groups") || D("OptanonConsent")
         });
         na && Optanon.LoadBanner()
