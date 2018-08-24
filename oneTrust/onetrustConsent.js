@@ -81,7 +81,7 @@ var a, c;
             var b, e = t(),
                 h, g, m;
             ja(e);
-            f("body").append('\x3cdiv id\x3d"optanon" class\x3d"modern"\x3e\x3c/div\x3e');
+            f("body").prepend('\x3cdiv id\x3d"optanon" class\x3d"modern"\x3e\x3c/div\x3e');
             b = '\x3cdiv id\x3d"optanon-popup-bg"\x3e\x3c/div\x3e\x3cdiv id\x3d"optanon-popup-wrapper" role\x3d"dialog" aria-modal\x3d"true" tabindex\x3d"-1"\x3e\x3cdiv id\x3d"optanon-popup-top"\x3e';
             e.ShowPreferenceCenterCloseButton && (b = b + '\x3ca href\x3d"#" onClick\x3d"Optanon.TriggerGoogleAnalyticsEvent(\'OneTrust Cookie Consent\', \'Preferences Close Button\');" class\x3d"optanon-close-link optanon-close optanon-close-ui" title\x3d"Close Preference Centre"\x3e\x3cdiv id\x3d"optanon-close" style\x3d"background: url(' +
                 M("" + N + "/skins/default_flat_bottom_two_button_black/v2/images/optanon-pop-up-close.png") + ');width:34px;height:34px;"\x3e\x3c/div\x3e\x3c/a\x3e');
@@ -123,13 +123,13 @@ var a, c;
             Y();
             Ia();
             e = t();
-            b = '\x3cdiv class\x3d"optanon-alert-box-wrapper  " style\x3d"display:none"\x3e\x3cdiv class\x3d"optanon-alert-box-bottom-top"\x3e';
-            e.showBannerCloseButton && (b += '\x3cdiv class\x3d"optanon-alert-box-corner-close"\x3e\x3ca class\x3d"optanon-alert-box-close" href\x3d"#" title\x3d"Close Banner" onClick\x3d"Optanon.TriggerGoogleAnalyticsEvent(\'OneTrust Cookie Consent\', \'Banner Close Button\');"\x3e\x3c/a\x3e\x3c/div\x3e');
+            b = '\x3cdiv class\x3d"optanon-alert-box-wrapper  " role\x3d"dialog" aria-modal\x3d"false" aria-labelledby\x3d"alert-box-title" aria-describedby\x3d"alert-notice-text" style\x3d"display:none"\x3e\x3cdiv class\x3d"optanon-alert-box-bottom-top"\x3e';
+            e.showBannerCloseButton && (b += '\x3cdiv class\x3d"optanon-alert-box-corner-close"\x3e\x3ca class\x3d"optanon-alert-box-close" href\x3d"#" role\x3d"button" title\x3d"Close Banner" onClick\x3d"Optanon.TriggerGoogleAnalyticsEvent(\'OneTrust Cookie Consent\', \'Banner Close Button\');"\x3e\x3c/a\x3e\x3c/div\x3e');
             b += '\x3c/div\x3e\x3cdiv class\x3d"optanon-alert-box-bg"\x3e\x3cdiv class\x3d"optanon-alert-box-logo"\x3e \x3c/div\x3e\x3cdiv class\x3d"optanon-alert-box-body"\x3e';
-            e.BannerTitle && (b = b + '\x3cp class\x3d"optanon-alert-box-title"\x3e' + e.BannerTitle + "\x3c/p\x3e");
-            b = b + "\x3cp\x3e" + e.AlertNoticeText + '\x3c/p\x3e\x3c/div\x3e\x3cdiv class\x3d"optanon-clearfix"\x3e\x3c/div\x3e\x3cdiv class\x3d"optanon-alert-box-button-container"\x3e\x3cdiv class\x3d"optanon-alert-box-button optanon-button-close"\x3e\x3cdiv class\x3d"optanon-alert-box-button-middle"\x3e\x3ca class\x3d"optanon-alert-box-close" href\x3d"#"\x3e' + e.AlertCloseText + '\x3c/a\x3e\x3c/div\x3e\x3c/div\x3e\x3cdiv class\x3d"optanon-alert-box-button optanon-button-allow"\x3e\x3cdiv class\x3d"optanon-alert-box-button-middle"\x3e\x3ca class\x3d"optanon-allow-all" href\x3d"#" onClick\x3d"Optanon.TriggerGoogleAnalyticsEvent(\'OneTrust Cookie Consent\', \'Banner Accept Cookies\');"\x3e' +
+            e.BannerTitle && (b = b + '\x3ch2 id\x3d"alert-box-title" class\x3d"optanon-alert-box-title"\x3e' + e.BannerTitle + "\x3c/h2\x3e");
+            b = b + "\x3cp id\x3d"alert-notice-text"\x3e" + e.AlertNoticeText + '\x3c/p\x3e\x3c/div\x3e\x3cdiv class\x3d"optanon-clearfix"\x3e\x3c/div\x3e\x3cdiv class\x3d"optanon-alert-box-button-container"\x3e\x3cdiv class\x3d"optanon-alert-box-button optanon-button-close"\x3e\x3cdiv class\x3d"optanon-alert-box-button-middle"\x3e\x3ca id\x3d="optanon-alert-box-button-accept" role\x3d"button" class\x3d"optanon-alert-box-close" href\x3d"#"\x3e' + e.AlertCloseText + '\x3c/a\x3e\x3c/div\x3e\x3c/div\x3e\x3cdiv class\x3d"optanon-alert-box-button optanon-button-allow"\x3e\x3cdiv class\x3d"optanon-alert-box-button-middle"\x3e\x3ca class\x3d"optanon-allow-all" href\x3d"#" onClick\x3d"Optanon.TriggerGoogleAnalyticsEvent(\'OneTrust Cookie Consent\', \'Banner Accept Cookies\');"\x3e' +
                 e.AlertAllowCookiesText + '\x3c/a\x3e\x3c/div\x3e\x3c/div\x3e\x3cdiv class\x3d"optanon-alert-box-button optanon-button-more"\x3e\x3cdiv class\x3d"optanon-alert-box-button-middle"\x3e\x3ca class\x3d"optanon-toggle-display" href\x3d"#" onClick\x3d"Optanon.TriggerGoogleAnalyticsEvent(\'OneTrust Cookie Consent\', \'Banner Open Preferences\');"\x3e' + e.AlertMoreInfoText + '\x3c/a\x3e\x3c/div\x3e\x3c/div\x3e\x3c/div\x3e\x3cdiv class\x3d"optanon-clearfix optanon-alert-box-bottom-padding"\x3e\x3c/div\x3e\x3c/div\x3e\x3c/div\x3e';
-            f("body").append(b);
+            f("body").prepend(b);
             Ja();
             if (0 < f(".optanon-show-settings").length && (f(".optanon-show-settings").attr("href", "#"), f(".optanon-show-settings").wrap('\x3cdiv class\x3d"optanon-show-settings-popup-wrapper"\x3e').wrap('\x3cdiv class\x3d"optanon-show-settings-button"\x3e').wrap('\x3cdiv class\x3d"optanon-show-settings-middle"\x3e'), f(".optanon-show-settings-middle").before('\x3cdiv class\x3d"optanon-show-settings-left"\x3e\x3c/div\x3e'), f(".optanon-show-settings-middle").after('\x3cdiv class\x3d"optanon-show-settings-right"\x3e\x3c/div\x3e'),
                     f(".optanon-show-settings-button").addClass("optanon-toggle-display"), Ka(), e = t(), !("ontouchstart" in window || navigator.msMaxTouchPoints || v("OptanonConsent", "dnt") || v("OptanonConsent", "groups"))))
@@ -148,6 +148,7 @@ var a, c;
             0 < f("#optanon-cookie-policy").length &&
                 Ma();
             S();
+            f('#optanon-alert-box-button-accept').focus();
             v("OptanonConsent", "groups") || D("OptanonConsent")
         });
         na && Optanon.LoadBanner()
