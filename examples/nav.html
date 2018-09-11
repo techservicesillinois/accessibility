@@ -199,9 +199,9 @@
       <li><code>aria-expanded</code> &ndash; Set to true if the menu is expanded; false if the menu is collapsed.</li>
       <li><code>aria-controls</code> &ndash; Set to the HTML id of the menu toggled by this button.</li>
       <li><code>aria-haspopup</code> &ndash; Set to true. This attribute informs a user that the button is a menu button.</li>
-      <li><code>aria-hidden</code> &ndash; Placed on the controlled menu. Set to false when expanded; true when collapsed.</li>
+      <li><code>aria-hidden</code> &ndash; Placed on the controlled menu to hide it from screen readers when collapsed. Set to false when expanded; true when collapsed.</li>
    </ul>
-   <p>Below is a code snippet showing simplified markup for implementing an accessible menu toggle button. The values of the <code>aria-expanded</code> and the <code>aria-hidden</code> attributes would be for the collapsed state.</p>
+   <p>Below is a code snippet showing simplified markup for implementing an accessible menu toggle button. The values of the <code>aria-expanded</code> and the <code>aria-hidden</code> attributes are shown for the collapsed state.</p>
    <pre>
 &lt;button <strong>aria-expanded="false" aria-haspopup="true" aria-controls="menu-id"</strong>&gt;Toggle Menu&lt;/button&gt;     
 &lt;ul id="menu-id" <strong>aria-hidden="true"</strong>&gt;
@@ -215,7 +215,8 @@
    . . .
 &lt;/ul&gt;
    </pre>
-   <p>JavaScript is needed to toggle the values of the <code>aria-expanded</code> and <code>aria-hidden</code> attributes. Note that the values of <code>aria-controls</code> and <code>aria-haspopup</code> do not change.
+   <p>JavaScript is needed to toggle the values of the <code>aria-expanded</code> and <code>aria-hidden</code> attributes. Note that the values of <code>aria-controls</code> and <code>aria-haspopup</code> do not change.</p>
+   <p><strong>Note:</strong> The <code>aria-hidden</code> attribute is not needed in modern browsers. Using <code>display: none</code> or <code>visability: hidden</code> is sufficient. The attribute is included here for illustrative purposes.</p>
    <h2>Interaction Pattern</h2>
    <ul>
       <li>Activating the menu button will toggle the menu open and closed. If the menu is closed, activating the button will open the menu and move focus to the first menu item.</li>
