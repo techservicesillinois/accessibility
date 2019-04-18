@@ -173,6 +173,7 @@ body {
 
 #maincontent-bgfill {
    background: url("../images/bgfill_white_780px.png") repeat-y;
+   width: 769px;
 }
 
 #maincontent h1 {
