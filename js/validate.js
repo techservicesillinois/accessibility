@@ -90,36 +90,38 @@ function doErrorMarkup($field, msg, formNum, $errList) {
    var $message = jQuery('#message-field' + formNum);
    var $form = $name.parent();
 
+   jQuery('<style>').html('.form-err { height: 1.2em;}').appendTo('head');
+
    // attach handlers to the form
    
    $name.on('keyup blur', function(e) {
- if (e.type == 'keyup' && e.keyCode == '9') {
-         return true;
- }
+      if (e.type == 'keyup' && e.keyCode == '9') {
+            return true;
+      }
       fieldInvalid($name, 'You must enter your name.', formNum, isValidLength)
       return true;
    });
 
    $email.on('keyup blur', function(e) {
- if (e.type == 'keyup' && e.keyCode == '9') {
-         return true;
- }
+      if (e.type == 'keyup' && e.keyCode == '9') {
+            return true;
+      }
       fieldInvalid($email, 'You must enter a valid email address.', formNum, isValidEmail)
       return true;
    });
 
    $subject.on('keyup blur', function(e) {
- if (e.type == 'keyup' && e.keyCode == '9') {
-         return true;
- }
+      if (e.type == 'keyup' && e.keyCode == '9') {
+            return true;
+      }
       fieldInvalid($subject, 'You must enter a subject.', formNum, isValidLength)
       return true;
    });
 
    $message.on('keyup blur', function(e) {
- if (e.type == 'keyup' && e.keyCode == '9') {
-         return true;
- }
+      if (e.type == 'keyup' && e.keyCode == '9') {
+            return true;
+      }
       fieldInvalid($message, 'You must enter a message.', formNum, isValidLength)
       return true;
    });
@@ -154,12 +156,12 @@ function doErrorMarkup($field, msg, formNum, $errList) {
 
       if (!bHaveErr) {
          alert('Your form was submitted');
-    e.preventDefault();
+         e.preventDefault();
          return false;
       }
 
       $focusField.focus();
- e.preventDefault();
+      e.preventDefault();
       return false;
    });
 }
@@ -177,7 +179,7 @@ function fieldInvalid($field, msg, formNum, valFunc) {
       }
 
       // field is invalid
-      $errContainer.html('<p id="' + errID + '-msg">' + msg + '</p>');
+      $errContainer.attr('role', 'alert').html('<p id="' + errID + '-msg">' + msg + '</p>');
       $field.attr({
          'aria-invalid': 'true',
          'aria-describedby': errID + '-msg'
@@ -189,7 +191,7 @@ function fieldInvalid($field, msg, formNum, valFunc) {
    else {
       $field.removeAttr('aria-describedby')
          .attr('aria-invalid', 'false');
-      $errContainer.empty();
+      $errContainer.removeAttr('role').empty();
       return false;
    }
 }
