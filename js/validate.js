@@ -4,14 +4,26 @@ function validateFormErrList(formNum) {
    var $subject = jQuery('#subject-field' + formNum);
    var $message = jQuery('#message-field' + formNum);
    var $form = $name.parent();
-   var $errContainer = jQuery('#err-msgs' + formNum);
+   var $errContainer = jQuery('#err-msgs' + formNum)
 
    $form.on('submit', function(e) {
       var bHaveErr = false;
       var $list = jQuery('<ul>');
 
  // reset the error state of the form
-      $errContainer.empty();
+      if ($errContainer.length) {
+         $errContainer.empty();
+      }
+      else {
+         $errContainer = jQuery('<div>')
+         .attr({
+            'id': '#err-msgs' + formNum,
+            'role': 'alert',
+            'tabindex': '-1'
+         })
+         .insertBefore('#name-label' + formNum);
+      }
+      
       $name.removeAttr('aria-describedby aria-invalid');
       $email.removeAttr('aria-describedby aria-invalid');
       $subject.removeAttr('aria-describedby aria-invalid');
