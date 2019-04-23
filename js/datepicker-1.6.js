@@ -63,10 +63,10 @@ function datepicker(editId, buttonId, bModal) {
    // Create the widget after the controlling button
    var widget = '<div id="' + this.name + '" class="datepicker" role="application"><div class="month-wrap">';
       widget += '<div id="' + this.name + '-bn_prev" class="bn_prev" role="button" aria-label="Go to previous month" tabindex="0">';
-      widget += '<img class="bn_img" src="https://cites-illinois.github.io/accessibility/images/datepicker/prev.png" alt="<<"/></div>';
+      widget += '<img class="bn_img" src="https://techservicesillinois.github.io/accessibility/images/datepicker/prev.png" alt="<<"/></div>';
       widget += '<div id="' + this.name + '-month" class="month" role="heading" aria-live="assertive" aria-atomic="true">February 2011</div>';
       widget += '<div id="' + this.name + '-bn_next" class="bn_next" role="button" aria-label="Go to next month" tabindex="0">';
-      widget += '<img class="bn_img" src="https://cites-illinois.github.io/accessibility/images/datepicker/next.png" alt=">>"/></div></div>';
+      widget += '<img class="bn_img" src="https://techservicesillinois.github.io/accessibility/images/datepicker/next.png" alt=">>"/></div></div>';
       widget += '<table id="' + this.name + '-cal" class="cal" role="grid" aria-labelledby="month" tabindex="0">';
       widget += '<thead><tr><th><abbr title="Sunday">Su</abbr></th><th><abbr title="Monday">Mo</abbr></th>';
       widget += '<th><abbr title="Tuesday">Tu</abbr></th><th><abbr title="Wednesday">We</abbr></th><th><abbr title="Thursday">Th</abbr></th>';
