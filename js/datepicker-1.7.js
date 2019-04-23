@@ -67,10 +67,10 @@ function datepicker(editId, buttonId, bModal) {
    // Create the widget after the controlling button
    var widget = '<div id="' + this.name + '" class="datepicker" role="application"><div class="month-wrap">';
       widget += '<div id="' + this.name + '-bn_prev" class="bn_prev" role="button" aria-label="Go to previous month" tabindex="0">';
-      widget += '<svg version="1.1" class="bn_img" role="img" aria-label="Previous month" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve"> <g> <path d="M10,0c5.5,0,10,4.5,10,10s-4.5,10-10,10S0,15.5,0,10C0,4.5,4.5,0,10,0z M14.8,18.2V1.8L0.5,10L14.8,18.2z"/> </g> </svg>';
+      widget += '<svg version="1.1" class="bn_img" role="img" aria-label="Previous month" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve"> <g> <path d="M10,2c4.4,0,8,3.6,8,8s-3.6,8-8,8s-8-3.6-8-8S5.6,2,10,2z M13.8,16.6V3.4L2.4,10L13.8,16.6z"/> </g> </svg>';
       widget += '</div><div id="' + this.name + '-month" class="month" role="heading" aria-live="assertive" aria-atomic="true">February 2011</div>';
       widget += '<div id="' + this.name + '-bn_next" class="bn_next" role="button" aria-label="Go to next month" tabindex="0">';
-      widget += '<svg version="1.1" class="bn_img" role="img" aria-label="Next month" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve"> <g> <path d="M20,10c0,5.5-4.5,10-10,10S0,15.5,0,10S4.5,0,10,0S20,4.5,20,10z M19.5,10L5.2,1.8v16.5L19.5,10z"/> </g> </svg>';
+      widget += '<svg version="1.1" class="bn_img" role="img" aria-label="Next month" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve"> <g> <path d="M18,10c0,4.4-3.6,8-8,8s-8-3.6-8-8s3.6-8,8-8S18,5.6,18,10z M17.6,10L6.2,3.4v13.2L17.6,10z"/> </g> </svg>';
       widget += '</div></div>';
       widget += '<table id="' + this.name + '-cal" class="cal" role="grid" aria-labelledby="month" tabindex="0">';
       widget += '<thead><tr><th><abbr title="Sunday">Su</abbr></th><th><abbr title="Monday">Mo</abbr></th>';
