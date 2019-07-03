@@ -31,7 +31,8 @@ if (typeof Object.create !== 'function') {
    var pluginName = 'showhide';
 
    var defaults = {
-      'hide': false
+      'hide': false,
+      'fail': false
    };
 
    $.fn[pluginName] = function(options) {
@@ -59,7 +60,6 @@ if (typeof Object.create !== 'function') {
          this.$elem = $(elem);
          this.elem = elem;
          this.$region = $('#' + this.$elem.attr('aria-controls'));
-         this.bExpanded = this.$elem.attr('aria-expanded') === 'true' ? true : false;
 
          this.keys = { // Define values for keycodes
             enter:       13,
@@ -69,7 +69,15 @@ if (typeof Object.create !== 'function') {
          // merge and store options
          this.options = $.extend({}, defaults, options);
 
+         if (this.options.fail) {
+            this.bExpanded = this.$region.attr('aria-expanded') === 'true' ? true : false;
+         }
+         else {
+            this.bExpanded = this.$elem.attr('aria-expanded') === 'true' ? true : false;
+         }
+
          this._buildWidget(); // build the widget
+
 
          if (this.options.hide) {
             this.toggleRegion(true);
@@ -88,12 +96,22 @@ if (typeof Object.create !== 'function') {
          bState = (typeof bState !== 'undefined') ? bState : false;
 
          if (bHide || this.bExpanded) {
-            this.$elem.attr('aria-expanded', 'false');
+            if (this.options.fail) {
+               this.$region.attr('aria-expanded', 'false');
+            }
+            else {
+               this.$elem.attr('aria-expanded', 'false');
+            }
             this.$region.attr('aria-hidden', 'true');
             this.bExpanded = false;
          }
          else {
-            this.$elem.attr('aria-expanded', 'true');
+            if (this.options.fail) {
+               this.$region.attr('aria-expanded', 'true');
+            }
+            else {
+               this.$elem.attr('aria-expanded', 'true');
+            }
             this.$region.attr('aria-hidden', 'false');
             this.bExpanded = true;
          }

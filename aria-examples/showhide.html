@@ -14,6 +14,7 @@
    $('document').ready(function() {
          jQuery('#hs1-toggle').showhide({'hide': true});
          jQuery('#hs2-toggle').showhide({'hide': true});
+         jQuery('#hs3-toggle').showhide({'hide': true, 'fail': true});
    });
 </script>
 </head>
@@ -86,6 +87,17 @@
    <div id="hs2-rgn" class="panel panel-primary" role="region" aria-labelledy="hs2-toggle" aria-hidden="false">
       <div class="panel-body">
          <p>This region was initially hidden. A screen reader user will hear <strong>Toggle Region 2 button expanded</strong>, or <strong>Toggle Region 2 button collapsed</strong> when focus is placed on the toggle button. The region will be identified as <strong>Toggle Region 2 region</strong>.
+      </div>
+   </div> 
+</div>
+<h2>Incorrect Implementation</h2>
+<p>This example demonstrates incorrectly placing the <code>aria-expanded</code> attribute on the toggled region, instead of on the toggle button. This error will result in the user not being notified of the state of the hide/show region. ARIA states will only update the user if placed on the item that currently has focus.</p>
+<div class="example-wrap">
+   <h3>Show/Hide Region with Toggle Button</h3>
+   <button id="hs3-toggle" class="btn btn-primary" aria-controls="hs3-rgn">Toggle Region 1</button>
+   <div id="hs3-rgn" class="panel panel-primary" role="region" aria-labelledy="hs3-toggle" aria-hidden="false" aria-exapnded="true">
+      <div class="panel-body">
+         <p>This region was initially hidden. A screen reader user will hear <strong>Toggle Region 1 button expanded</strong>, or <strong>Toggle Region 1 button collapsed</strong> when focus is placed on the toggle button. The region will be identified as <strong>Toggle Region 1 region</strong>.
       </div>
    </div> 
 </div>
