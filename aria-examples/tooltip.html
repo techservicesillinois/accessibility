@@ -1,0 +1,170 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>ARIA Tooltip - Technology Services Accessibility Examples</title>
+<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../css/examples.css">
+<link rel="stylesheet" type="text/css" href="../css/showhide.css">
+<script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
+<script async type="text/javascript" src="../js/showhide.js"></script>
+</head>
+<body>
+<header role="banner">
+   <a class="skip-link" href="#main">Skip to Main Content</a>
+   <div class="row">
+      <div class="col-xs-12 col-lg-4">
+         <img class="imark" src="../images/techsvc-logo-bw.svg" alt="Technology Sevices at Illinois I-mark">
+      </div>
+      <div class="col-xs-12 col-lg-8">
+         <h1>Accessible Widget Examples</h1>
+      </div>
+   </div>
+   <div class="sitenav row">
+      <nav role="navigation" aria-label="site">
+         <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../aria.html" class="active">ARIA</a></li>
+            <li><a href="../bootstrap.html">Bootstrap</a></li>
+            <li><a href="../examples.html">Examples</a></li>
+         </ul>
+      </nav>
+   </div>
+</header>
+<main id="main" role="main" class="container">
+<h1>Accessibility Examples: ARIA Tooltip</h1>
+<p>A tooltip is a popup widget to display information related to an element in a page. The tooltip widget is displayed when the associated element receives focus or is hovered over with a mouse. The tooltip is again hidden if the element loses focus, the user moves the mouse cursor off of the element, or the user presses the <code>escape</code> key. Tooltips are not focusable.</p>
+<h2>Required ARIA attributes</h2>
+<p>The following attributes are needed to implement tooltips:</p>
+<ul>
+   <li><strong>aria-describedy (property)</strong> &ndash; Placed on the triggering element to associate the tooltip content with the element</li>
+   <li><strong>tooltip (role)</strong> &ndash; Placed on the containing element of the tooltip</li>
+</ul>
+
+<h2>Markup</h2>
+<p>As an example of tooltip markup, below is a code snippet for a tooltip associated with a button:</p>
+<pre class="highlight" data-lang="html">
+&lt;div class="tp-wrapper"&gt;
+    &lt;button class="tp-trigger" <strong>aria-describedby="tp-container"</strong>&gt;Example&lt;/button&gt;
+    &lt;div id="tp-container" <strong>role="tooltip"</strong>&gt;This text describes the button.&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+<p>Placing the tooltip immediately after the triggering element in the page allows for the tip to be displayed on mouse hover via the CSS3 adjacent element operator (<code>+</code>). Note that it may be necessary to wrap the triggering element and the tooltip for the purpose of positioning the tooltip via CSS. The CSS for this example could be implemented as follows:</p>
+<pre class="highlight" data-lang="css">
+.tp-wrapper {
+    position: relative; /* Allow tooltips to be easily positioned relative to the triggering element */
+}
+[role=tooltip] { /* hide tooltips by default */
+    display: none;
+    position: absolute;
+    top: -2em;
+    left: 1em;
+    padding: 0.5em 1em;
+    background-color: #666;
+    border-radius: 5px;
+}
+[role=tooltip]:after { /* Add a downward arrow to style the tooltip */
+    position: absolute;
+    left: 20px;
+    bottom: 10px;
+    content: '';
+    width: 0;
+    height: 0;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+    border-top: 15px solid #666;
+    border-bottom: none;
+}
+.tp-trigger:hover + [role=tooltip],
+.tp-trigger:focus + [role=tooltip] {
+   display: block;
+}
+</pre>
+<p>JavaScript is necessary to hide the tooltip if the user presses the escape key. If the tooltip is displayed when the triggering element receives focus, then it should be dismissed when the element loses focus. If the tooltip is displayed due to mouse hover, then it should be dismissed when the mouse pointer is moved away from the triggering element.</p> 
+<p><strong>Note:</strong> Once the tooltip has been dismissed with the escape key, the css to display the widget on hover and focus will not function. As such, JavaScript is needed to bind focus, mouseEnter, and mouseOut event handlers. The hover and focus CSS pseudoclasses can either be omitted or kept as a backup incase there is a problem with the page that prevents the JavaScript from executing. The example will function purely with CSS, minus the escape key functionality. Set a flag on focus and mouse events to prevent the tooltip from being dismissed via hover if it was triggered via mouse and vice versa.</p>
+<style>
+   .tp-wrapper {
+       position: relative; /* Allow tooltips to be easily positioned relative to the triggering element */
+   }
+   [role=tooltip] { /* hide tooltips by default */
+       display: none;
+       position: absolute;
+       top: -3em;
+       left: 1em;
+       padding: 0.5em 1em;
+       color: #fff;
+       background-color: #666;
+       box-shadow: 4px 3px 4px rgba(0, 0, 0, 0.5);
+       border-radius: 5px;
+   }
+   [role=tooltip]:after { /* Add a downward arrow to style the tooltip */
+       position: absolute;
+       left: 1em;
+       bottom: -0.75em;
+       content: '';
+       width: 0;
+       height: 0;
+       border-right: 0.75em solid transparent;
+       border-left: 0.75em solid transparent;
+       border-top: 0.75em solid #666;
+       border-bottom: none;
+   }
+   .tp-trigger:hover + [role=tooltip],
+   .tp-trigger:focus + [role=tooltip] {
+      display: block;
+   }
+</style>
+<script>
+   jQuery('document').ready(function() {
+      var bFocus = bHover = false;
+
+      jQuery('.tp-trigger').on('keyup', function(e) {
+         var key = e.keyCode || e.which;
+         if (key == 27 && !bHover) {
+            jQuery(e.target).next('[role=tooltip]').hide();
+            return false;
+         }
+         return true;
+      })
+      .on('focus', function(e) {
+         bFocus = true;
+         jQuery(e.target).next('[role=tooltip]').show();
+         return false;
+      })
+      .on('mouseenter', function(e) {
+         bHover = true;
+         jQuery(e.target).next('[role=tooltip]').show();
+         return false;
+      })
+      .on('mouseout', function(e) {
+         bHover = false;
+         if (!bFocus) {
+            jQuery(e.target).next('[role=tooltip]').hide();
+         }
+         return false;
+      })
+      .on('blur', function(e) {
+         bFocus = false;
+         if (!bHover) {
+            jQuery(e.target).next('[role=tooltip]').hide();
+         }
+         return false;
+      });
+   });
+</script>
+<div class="example-wrap">
+   <h2>Tooltip Widget Example</h2>
+   <div class="tp-wrapper">
+      <button class="tp-trigger btn btn-primary" aria-describedby="tp-container">Example</button>
+       <div id="tp-container" role="tooltip">This text describes the button.</div>
+    </div>
+</div>
+</main>
+<footer role="contentinfo">
+   <p class="copy">Copyright &copy; 2019 University of Illinois Board of Trustees</p>
+</footer>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/accessible_bootstrap-0.3.0.js"></script>
+</body>
+</html>

@@ -143,6 +143,7 @@ div.example-wrap h5:first-child {
    padding: .5em 1em;
 }
 table {
+   margin: 2em auto;
    border-collapse: collapse;
    border: 1px solid #666;
    width: 100%;
@@ -162,6 +163,9 @@ td {
 
 li {
    margin-bottom: 0.6em;
+}
+pre {
+   margin: 2em 0;
 }
 /************ Bootstrap Overrides ************/
 .row {
@@ -211,6 +215,7 @@ li {
       padding-top: 0.75em;
    }
    div.example-wrap {
+      margin: 4em auto;
       width: 95%;
    }
 }
