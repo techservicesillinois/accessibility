@@ -1,0 +1,78 @@
+.accordian-group {
+   margin: 2em;
+   border: 1px solid #666;
+   border-radius: 15px;
+}
+.accordian-group.focused {
+   border-color: #66afe9;
+   box-shadow: inset 0 1px 1px rgba(0,0,0,0.075), 0 0 8px rgba(102,175,233,0.6);
+}
+.accordian-group form {
+   margin: 1em;
+}
+.accordian-group h3 {
+   margin: 0;
+   padding: 0;
+}
+.accordian-trigger {
+   display: block;
+   position: relative;
+   padding: 0.75em 0;
+   width: 100%;
+   background-color: #eeeeef;
+   border: none;
+   border-top: 1px solid #666;
+   border-bottom: 1px solid #666;
+}
+.accordian-trigger .accordian-plus {
+   position: absolute;
+   right: 1.5em;
+   top: 50%;
+   transform: translate(0, -50%);
+   height: 20px;
+   width: 5px;
+   background-color: #222;
+   transition: height 0.1s;
+}
+.accordian-trigger .accordian-plus:after {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   content: "";
+   height: 5px;
+   width: 20px;
+   background-color: #222;
+}
+.accordian-trigger[aria-expanded=true] .accordian-plus {
+   height:4px;
+   transition: height 0.1s;
+}
+.accordian-trigger:hover {
+   background-color: rgba(102,175,233,0.25);
+   outline: none;
+}
+.accordian-trigger:focus {
+   background-color: #66afe9;
+   outline: none;
+}
+.accordian-group h3:first-of-type .accordian-trigger {
+   border-top: none;
+   border-radius: 15px 15px 0 0;
+}
+.accordian-group h3:last-of-type .accordian-trigger[aria-expanded=false] {
+   border-bottom: none;
+   border-radius: 0 0 15px 15px;
+}
+.accordian-panel {
+   padding: 1em;
+}
+.hs-toggle {
+   display: block;
+   margin: 1em;
+}
+.hs-region {
+   padding: 1em;
+   border: 1px solid #666;
+   border-radius: 5px;
+}
