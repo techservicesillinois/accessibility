@@ -20,8 +20,8 @@ if (typeof Object.create !== 'function') {
 ;(function($, window, document, undefined) {
     var counter = 0;
     window.uniqueId = function(){
-        return 'a11y' + counter++
-    }
+        return 'a11y' + counter++;
+    };
 })(jQuery, window, document);
 
 
@@ -31,8 +31,9 @@ if (typeof Object.create !== 'function') {
    var pluginName = 'showhide';
 
    var defaults = {
-      'hide': false,
-      'fail': false
+      'hide': false, // Hide the region by default whent true
+      'useHidden': false, // Use the aria-hidden state on the region when true
+      'fail': false // demonstrate a failed implementation pattern
    };
 
    $.fn[pluginName] = function(options) {
@@ -61,11 +62,6 @@ if (typeof Object.create !== 'function') {
          this.elem = elem;
          this.$region = $('#' + this.$elem.attr('aria-controls'));
 
-         this.keys = { // Define values for keycodes
-            enter:       13,
-            space:       32
-         };
-
          // merge and store options
          this.options = $.extend({}, defaults, options);
 
@@ -89,7 +85,17 @@ if (typeof Object.create !== 'function') {
          thisObj.$elem.on('click', function(e) {
             thisObj.toggleRegion();
             return false;
+         })
+         .on('keydown', function(e) {
+            // Add keydown handler toggle with enter and space. Note that HTML buttons have this
+            // built-in by default. This allows links and custom buttons to function
+            if (e.key === " " || e.key === 'Enter') {
+               thisObj.toggleRegion();
+               return false;
+            }
+            return true;
          });
+
 
       }, // end _BuildWidget()
       toggleRegion: function(bHide) {
@@ -102,7 +108,14 @@ if (typeof Object.create !== 'function') {
             else {
                this.$elem.attr('aria-expanded', 'false');
             }
-            this.$region.attr('aria-hidden', 'true');
+
+            if (this.options.useHidden) {
+               this.$region.attr('aria-hidden', 'true');
+            }
+            else {
+               this.$region.hide();
+            }
+
             this.bExpanded = false;
          }
          else {
@@ -112,7 +125,12 @@ if (typeof Object.create !== 'function') {
             else {
                this.$elem.attr('aria-expanded', 'true');
             }
-            this.$region.attr('aria-hidden', 'false');
+            if (this.options.useHidden) {
+               this.$region.attr('aria-hidden', 'false');
+            }
+            else {
+               this.$region.show();
+            }
             this.bExpanded = true;
          }
       }

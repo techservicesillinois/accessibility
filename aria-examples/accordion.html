@@ -1,0 +1,263 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>ARIA Accordion - Technology Services Accessibility Examples</title>
+<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../css/examples.css">
+<link rel="stylesheet" type="text/css" href="../css/accordion.css">
+<script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
+<script async type="text/javascript" src="../js/accordion.js"></script>
+<script async type="text/javascript" src="../js/showhide.js"></script>
+</head>
+<body>
+<header role="banner">
+   <a class="skip-link" href="#main">Skip to Main Content</a>
+   <div class="row">
+      <div class="col-xs-12 col-lg-4">
+         <img class="imark" src="../images/techsvc-logo-bw.svg" alt="Technology Sevices at Illinois I-mark">
+      </div>
+      <div class="col-xs-12 col-lg-8">
+         <h1>Accessible Widget Examples</h1>
+      </div>
+   </div>
+   <div class="sitenav row">
+      <nav role="navigation" aria-label="site">
+         <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../aria.html" class="active">ARIA</a></li>
+            <li><a href="../bootstrap.html">Bootstrap</a></li>
+            <li><a href="../examples.html">Examples</a></li>
+         </ul>
+      </nav>
+   </div>
+</header>
+<main id="main" role="main" class="container">
+<h1>Accessibility Examples: ARIA Accordion</h1>
+<p>An accordion is a collapsible stack of headings that, when clicked, each reveal an associated region of content. Accordions are used to reduce the need to scroll a window to view all of the content. A visual affordance is often used to indicate that clicking on a trigger will expand or collapse a region.</p>
+
+<div class="example-wrap">
+   <h2>Accordion Widget Example</h2>
+   <div id="accordion1" class="accordion-group">
+      <h3>
+         <button id="trigger1" class="accordion-trigger" aria-controls="panel1">Accordion Contents</button>
+      </h3>
+      <div id="panel1" role="region" aria-labelledby="trigger1" class="accordion-panel">
+         <p>The panels of an accordion widget can contain any type of content, including forms and other interactive content. This panel does not contain any focusable elements.</p>
+      </div>
+      <h3>
+         <button id="trigger2" class="accordion-trigger" aria-controls="panel2">Contact Form</button>
+      </h3>
+      <div id="panel2" role="region" aria-labelledby="trigger2" class="accordion-panel">
+         <form>
+            <p>* All fields are required.</p>
+            <div class="form-group">
+               <label for="name">Name:</label>
+               <input id="name" type="text" class="form-control" required>
+            </div>
+            <div class="form-group">
+               <label for="email">Email:</label>
+               <input id="email" type="email" class="form-control" required>
+            </div>
+            <div class="form-group">
+               <label for="subject">Subject:</label>
+               <input id="subject" type="text" class="form-control" required>
+            </div>
+            <div class="form-group">
+               <label for="message">Message:</label>
+               <textarea id="message" class="form-control" required></textarea>
+            </div>
+         </form>
+      </div>
+      <h3>
+         <button id="trigger3" class="accordion-trigger" aria-controls="panel3">Disclosure widgets</button>
+      </h3>
+      <div id="panel3" role="region" aria-labelledby="trigger3" class="accordion-panel">
+         <a href="javascript:void(0);" id="hs1-toggle" class="hs-toggle" aria-controls="hs1-rgn" aria-expanded="true" role="button">Toggle Region 1</a>
+         <div id="hs1-rgn" class="hs-region" role="region" aria-labelledy="hs1-toggle">
+            <p>This region was initially hidden. A screen reader user will hear Toggle Region 1 button expanded, or Toggle Region 1 button collapsed when focus is placed on the toggle button. The region will be identified as Toggle Region 1 region.</p>
+         </div>
+         <a id="hs2-toggle" href="javascript:void(0);" class="hs-toggle" aria-controls="hs2-rgn" aria-expanded="true" role="button">Toggle Region 2</a>
+         <div id="hs2-rgn" class="hs-region" role="region" aria-labelledy="hs2-toggle">
+            <p>Any number of interactive widgets could be present in an accordion panel. Be aware of how much navigational effort is being added.</p>
+         </div>
+      </div>
+   </div>
+</div>
+<h2>Keyboard Interaction Pattern</h2>
+The following interaction pattern is defined for accordion widgets:
+<table>
+   <caption>Accordion Keyboard Interaction</caption>
+   <thead>
+      <tr>
+         <th>Key</th>
+         <th>Action</th>
+      </tr>
+   </thead>
+   <tbody>
+      <tr>
+         <th>Enter or Space</th>
+         <td>
+            On a panel header:
+            <ul>
+               <li>Expand a collapsed panel; collapse all others</li>
+               <li>Collapsed an expanded panel</li>
+            </ul>
+         </td>
+      </tr>
+      <tr>
+         <th>Tab</th>
+         <td>Move focus to the next focusable item in the tab sequence. Focus will progress into an accordian panel.</td>
+      </tr>
+      <tr>
+         <th>Shift + Tab</th>
+         <td>Move focus to the previous focusable item in the tab sequence</td>
+      </tr>
+      <tr>
+         <th>Down Arrow (optional)</th>
+         <td>Move focus to the next accordion header</td>
+      </tr>
+      <tr>
+         <th>Up Arrow (optional)</th>
+         <td>Move focus to the previous accordion header</td>
+      </tr>
+      <tr>
+         <th>Home (optional)</th>
+         <td>Move focus to the first accordion header</td>
+      </tr>
+      <tr>
+         <th>End (optional)</th>
+         <td>Move focus to the last accordion header</td>
+      </tr>
+   </tbody>
+</table>
+<h2>Required ARIA attributes</h2>
+<p>The following attributes are needed to implement tooltips:</p>
+<ul>
+   <li><strong>button (role)</strong> &ndash; Placed on the toggle for each accordion region.</li>
+   <li><strong>aria-expanded (state)</strong> &ndash; Placed on the region toggles. The value is true if a region is expanded; false if it is collapsed.</li>
+   <li><strong>aria-disabled (state)</strong> &ndash; (Optional) Placed on the accordion toggles for accordion widgets that require at least one panel to be expanded. Set to true when a region is expanded. The associated toggle may not be used to collape the panel. Reset to false or removed when another panel is expanded.</li>
+   <li><strong>aria-controls (property)</strong> &ndash; Placed on the region toggles. The value is id of the region that is shown and hidden via triggering the toggle.</li>
+   <li><strong>region (role)</strong> &ndash; (Optional) Placed on the accordion region panels to enhance the structure of the widget for screen reader users. Do not use the region role in accordions that have many panels (6 or more) that may be expanded at the same time.</li>
+   <li><strong>aria-labelledby (property)</strong> &ndash; (Optional) Placed on the region panels when the region role is used. It's value is the label of the toggle that is used to expand or collapse the region. The effect is to label the region with the same text as it's toggle.</li>
+
+</ul>
+<h2>Markup</h2>
+<p>Below is a code snippet for the accordion widget example in this page:</p>
+<pre class="highlight" data-lang="html">
+&lt;div id="accordion1" class="accordion-group"&gt;
+   &lt;h3&gt;
+      &lt;button id="trigger1" class="accordion-trigger" aria-expanded="true" aria-controls="panel1"&gt;Accordion Contents&lt;/button&gt;
+   &lt;/h3&gt;
+   &lt;div id="panel1" role="region" aria-labelledby="trigger1" class="accordion-panel"&gt;
+      &lt;p&gt;The panels of an accordion widget can contain any type of content, including forms and other interactive content. This panel does not contain any focusable elements.&lt;/p&gt;
+   &lt;/div&gt;
+   &lt;h3&gt;
+      &lt;button id="trigger2" class="accordion-trigger" aria-expanded="true" aria-controls="panel2"&gt;Contact Form&lt;/button&gt;
+   &lt;/h3&gt;
+   &lt;div id="panel2" role="region" aria-labelledby="trigger2" class="accordion-panel"&gt;
+      &hellip;
+   &lt;/div&gt;
+   &lt;h3&gt;
+      &lt;button id="trigger3" class="accordion-trigger" aria-expanded="true" aria-controls="panel3"&gt;Contact Form&lt;/button&gt;
+   &lt;/h3&gt;
+   &lt;div id="panel3" role="region" aria-labelledby="trigger3" class="accordion-panel"&gt;
+      &hellip;
+   &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+<h3>Widget CSS</h3>
+<p>The CSS for an accordion widget is relatively straightforward. It is helpful to the user if a highlight, such as the entire border changing color, is used when an element of the widget has focus. Each toggle header must highlight on focus and hover. If a visible indicator of the expanded or collapsed state of a panel is present, ensure that it is not announced by screen readers, i.e. it is visual-only). utilizing a pure CSS symbol works well.</p>
+<p>The CSS for the example in this page is as follows:</p>
+<pre class="highlight" data-lang="css">
+.accordion-group {
+   margin: 2em;
+   border: 1px solid #666;
+   border-radius: 15px;
+}
+.accordion-group.focused {
+   border-color: #66afe9;
+   box-shadow: inset 0 1px 1px rgba(0,0,0,0.075), 0 0 8px rgba(102,175,233,0.6);
+}
+.accordion-group form {
+   margin: 1em;
+}
+.accordion-group h3 {
+   margin: 0;
+   padding: 0;
+}
+.accordion-trigger {
+   display: block;
+   position: relative;
+   padding: 0.75em 0;
+   width: 100%;
+   background-color: #eeeeef;
+   border: none;
+   border-top: 1px solid #666;
+   border-bottom: 1px solid #666;
+}
+.accordion-trigger .accordion-plus {
+   position: absolute;
+   right: 1.5em;
+   top: 50%;
+   transform: translate(0, -50%);
+   height: 20px;
+   width: 5px;
+   background-color: #222;
+   transition: height 0.1s;
+}
+.accordion-trigger .accordion-plus:after {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   content: "";
+   height: 5px;
+   width: 20px;
+   background-color: #222;
+}
+.accordion-trigger[aria-expanded=true] .accordion-plus {
+   height:4px;
+   transition: height 0.1s;
+}
+.accordion-trigger:hover {
+   background-color: rgba(102,175,233,0.25);
+   outline: none;
+}
+.accordion-trigger:focus {
+   background-color: #66afe9;
+   outline: none;
+}
+.accordion-group h3:first-of-type .accordion-trigger {
+   border-top: none;
+   border-radius: 15px 15px 0 0;
+}
+.accordion-group h3:last-of-type .accordion-trigger[aria-expanded=false] {
+   border-bottom: none;
+   border-radius: 0 0 15px 15px;
+}
+.accordion-panel {
+   padding: 1em;
+}
+</pre>
+<h2>Downloads</h2>
+<ul>
+   <li><a href="../js/accordion.js">Accordion Script (jQuery)</a></li>
+   <li><a href="../js/showhide.js">Show Hide Script (jQuery)</a></li>
+   <li><a href="../css/accordion.css">Example CSS</a></li>
+</ul>
+</main>
+<footer role="contentinfo">
+   <p class="copy">Copyright &copy; 2019 University of Illinois Board of Trustees</p>
+</footer>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/accessible_bootstrap-0.3.0.js"></script>
+<script>
+   jQuery('#accordion1').accordion();
+   jQuery('#hs1-toggle').showhide({'hide': true});
+   jQuery('#hs2-toggle').showhide({'hide': true});
+</script>
+</body>
+</html>
+

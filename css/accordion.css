@@ -1,20 +1,20 @@
-.accordian-group {
+.accordion-group {
    margin: 2em;
    border: 1px solid #666;
    border-radius: 15px;
 }
-.accordian-group.focused {
+.accordion-group.focused {
    border-color: #66afe9;
    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075), 0 0 8px rgba(102,175,233,0.6);
 }
-.accordian-group form {
+.accordion-group form {
    margin: 1em;
 }
-.accordian-group h3 {
+.accordion-group h3 {
    margin: 0;
    padding: 0;
 }
-.accordian-trigger {
+.accordion-trigger {
    display: block;
    position: relative;
    padding: 0.75em 0;
@@ -24,7 +24,7 @@
    border-top: 1px solid #666;
    border-bottom: 1px solid #666;
 }
-.accordian-trigger .accordian-plus {
+.accordion-trigger .accordion-plus {
    position: absolute;
    right: 1.5em;
    top: 50%;
@@ -34,7 +34,7 @@
    background-color: #222;
    transition: height 0.1s;
 }
-.accordian-trigger .accordian-plus:after {
+.accordion-trigger .accordion-plus:after {
    position: absolute;
    top: 50%;
    left: 50%;
@@ -44,27 +44,27 @@
    width: 20px;
    background-color: #222;
 }
-.accordian-trigger[aria-expanded=true] .accordian-plus {
+.accordion-trigger[aria-expanded=true] .accordion-plus {
    height:4px;
    transition: height 0.1s;
 }
-.accordian-trigger:hover {
+.accordion-trigger:hover {
    background-color: rgba(102,175,233,0.25);
    outline: none;
 }
-.accordian-trigger:focus {
+.accordion-trigger:focus {
    background-color: #66afe9;
    outline: none;
 }
-.accordian-group h3:first-of-type .accordian-trigger {
+.accordion-group h3:first-of-type .accordion-trigger {
    border-top: none;
    border-radius: 15px 15px 0 0;
 }
-.accordian-group h3:last-of-type .accordian-trigger[aria-expanded=false] {
+.accordion-group h3:last-of-type .accordion-trigger[aria-expanded=false] {
    border-bottom: none;
    border-radius: 0 0 15px 15px;
 }
-.accordian-panel {
+.accordion-panel {
    padding: 1em;
 }
 .hs-toggle {

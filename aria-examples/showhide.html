@@ -12,9 +12,9 @@
 
 <script>
    $('document').ready(function() {
-         jQuery('#hs1-toggle').showhide({'hide': true});
-         jQuery('#hs2-toggle').showhide({'hide': true});
-         jQuery('#hs3-toggle').showhide({'hide': true, 'fail': true});
+         jQuery('#hs1-toggle').showhide({'hide': true, 'useHidden': true});
+         jQuery('#hs2-toggle').showhide({'hide': true, 'useHidden': true});
+         jQuery('#hs3-toggle').showhide({'hide': true, 'useHidden': true, 'fail': true});
    });
 </script>
 </head>
@@ -76,14 +76,15 @@
       </div>
    </div> 
 </div>
-<p>When using a link as the toggle for a show/hide region, it is necessary to add <code>role=button</code> to the link. This is because the link is being used as a button, not for navigation. The <code>href</code> attribute can either be empty ('#') or <code>javascrip:void();</code> may be used. The code would look something like this:</p>
+<p>When using a link as the toggle for a show/hide region, it is necessary to add <code>role=button</code> to the link. This is because the link is being used as a button, not for navigation. The <code>href</code> attribute can either be empty ('#') or <code>javascrip:void(0);</code> may be used. The code would look something like this:</p>
 <pre class="highlight" data-lang="html">
-&lt;a id="hs-toggle" href="javascript:void();" aria-controls="hs-rgn" aria-expanded="true" <strong>role="button"</strong>&gt;Toggle Region 2&lt;/a&gt;
+&lt;a id="hs-toggle" href="javascript:void(0);" aria-controls="hs-rgn" aria-expanded="true" <strong>role="button"</strong>&gt;Toggle Region 2&lt;/a&gt;
 &lt;div id="hs-rgn" role="region" aria-labelledy="hs-toggle" aria-hidden="false"&gt; &hellip; &lt;div&gt;
 </pre>
+<p>When using a link as the trigger it is also necessary to attach a keydown handler to allow the region to be toggled via the space bar (enter key support is implemented by default).</p>
 <div class="example-wrap">
    <h2>Show/Hide Region with Toggle Link</h2>
-   <a id="hs2-toggle" href="javascript:void();" aria-controls="hs2-rgn" aria-expanded="true" role="button">Toggle Region 2</a>
+   <a id="hs2-toggle" href="javascript:void(0);" aria-controls="hs2-rgn" aria-expanded="true" role="button">Toggle Region 2</a>
    <div id="hs2-rgn" class="panel panel-primary" role="region" aria-labelledy="hs2-toggle" aria-hidden="false">
       <div class="panel-body">
          <p>This region was initially hidden. A screen reader user will hear <strong>Toggle Region 2 button expanded</strong>, or <strong>Toggle Region 2 button collapsed</strong> when focus is placed on the toggle button. The region will be identified as <strong>Toggle Region 2 region</strong>.
