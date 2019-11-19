@@ -132,6 +132,14 @@ if (typeof Object.create !== 'function') {
                }
                return false;
             }
+            case 'End': {
+               this.$headers.last().focus();
+               return false;
+            }
+            case 'Home': {
+               this.$headers.first().focus();
+               return false;
+            }
          }
 
          return true;
