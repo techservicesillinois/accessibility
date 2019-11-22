@@ -3,18 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<title>ARIA Show/Hide - Technology Services Accessibility Examples</title>
+<title>ARIA Disclosure - Technology Services Accessibility Examples</title>
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../css/examples.css">
-<link rel="stylesheet" type="text/css" href="../css/showhide.css">
+<link rel="stylesheet" type="text/css" href="../css/disclosure.css">
 <script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
-<script async type="text/javascript" src="../js/showhide.js"></script>
+<script async type="text/javascript" src="../js/disclosure.js"></script>
 
 <script>
    $('document').ready(function() {
-         jQuery('#hs1-toggle').showhide({'hide': true, 'useHidden': true});
-         jQuery('#hs2-toggle').showhide({'hide': true, 'useHidden': true});
-         jQuery('#hs3-toggle').showhide({'hide': true, 'useHidden': true, 'fail': true});
+         jQuery('#hs1-toggle').disclosure({'hide': true});
+         jQuery('#hs2-toggle').disclosure({'hide': true});
+         jQuery('#hs3-toggle').disclosure({'hide': true, 'fail': true});
    });
 </script>
 </head>
@@ -41,31 +41,25 @@
    </div>
 </header>
 <main id="main" role="main" class="container">
-<h1>Accessibility Examples: ARIA Show/Hide</h1>
-<p>Show/Hide regions are collapsible regions in a page that are controlled (i.e. expanded or collapsed) by a button or a link. Show/Hide regions are relatively simply to implement accessibly, requiring very little JavaScript.</p>
-<p>Five ARIA attributes are needed to implement a Show/Hide region:</p>
+<h1>Accessibility Examples: ARIA Disclosure (Show/Hide)</h1>
+<p>Disclosure widgets are collapsible regions in a page that are controlled (i.e. expanded or collapsed) by a button or a link. Disclosure widgets are relatively simply to implement accessibly, requiring very little JavaScript.</p>
+<p>The following ARIA attributes are needed to implement a disclosure widget:</p>
 <ul>
-   <li><strong>aria-controls (property)</strong> - Establishes a programmatic relationship between the region toggle and the region.</li>
+   <li><strong>button</strong> - Designates the disclosure toggle as a button. Not needed if the trigger is an html <code>&lt;button&gt;</code> element.</li>
    <li><strong>aria-expanded (state)</strong> - True if the region is expanded; false if the region is collapsed.</li>
-   <li><strong>aria-hidden (state)</strong> - False if the region is expanded; true if the region is collapsed.</li>
-   <li><strong>aria-labelledby (optional state)</strong> - Optionally labels the region. Necessary if role=region is used on the region.</li>
+   <li><strong>aria-controls (optional property)</strong> - Establishes a programmatic relationship between the region toggle and the region. Not needed if the disclosure region immediately follows the region toggle.</li>
    <li><strong>region (optional role)</strong> - Optionally defines the collapsible region as a distinct region.</li>
+   <li><strong>aria-labelledby (optional state)</strong> - Optionally labels the region. Necessary if role=region is used on the toggled region.</li>
 </ul> 
-<p>The markup for the show/hide is as follows for the collapsed state:</p>
-<pre class="highlight" data-lang="html">
-&lt;button id="hs-toggle" class="btn" aria-controls="hs-rgn" aria-expanded="true"&gt;Toggle Region 1&lt;/button&gt;
-&lt;div id="hs-rgn" role="region" aria-labelledy="hs-toggle" aria-hidden="false"&gt; &hellip; &lt;/div&gt;
-</pre>
-<p>When expanded, the values of the aria-expanded and aria-hidden states are reversed:</p>
+<p>The markup for the disclosure is as follows for the collapsed state:</p>
 <pre class="highlight" data-lang="html">
 &lt;button id="hs-toggle" class="btn" aria-controls="hs-rgn" <strong>aria-expanded="false"</strong>&gt;Toggle Region 1&lt;/button&gt;
-&lt;div id="hs-rgn" role="region" aria-labelledy="hs-toggle" <strong>aria-hidden="true"</strong>&gt; &hellip; &lt;/div&gt;
+&lt;div id="hs-rgn" role="region" aria-labelledy="hs-toggle"&gt; &hellip; &lt;/div&gt;
 </pre>
-<p>JavaScript is necessary to update the aria states for the toggle and region. CSS should be used to update the visual state of the show/hide region. If a CSS attribute selector is used, there is no need to add or remove any CSS classes:</p>
-<pre class="highlight" data-lang="css">
-[aria-hidden=true] {
-   display: none;
-}
+<p>When expanded, the value of the <code>aria-expanded</code> state should be updated via JavaScript to true:</p>
+<pre class="highlight" data-lang="html">
+&lt;button id="hs-toggle" class="btn" aria-controls="hs-rgn" <strong>aria-expanded="true"</strong>&gt;Toggle Region 1&lt;/button&gt;
+&lt;div id="hs-rgn" role="region" aria-labelledy="hs-toggle"&gt; &hellip; &lt;/div&gt;
 </pre>
 <div class="example-wrap">
    <h2>Show/Hide Region with Toggle Button</h2>
@@ -76,27 +70,27 @@
       </div>
    </div> 
 </div>
-<p>When using a link as the toggle for a show/hide region, it is necessary to add <code>role=button</code> to the link. This is because the link is being used as a button, not for navigation. The <code>href</code> attribute can either be empty ('#') or <code>javascrip:void(0);</code> may be used. The code would look something like this:</p>
+<p>When using a link as the toggle for a disclosure widget, it is necessary to add <code>role=button</code> to the link. This is because the link is being used as a button, not for navigation. The <code>href</code> attribute can either be empty ('#') or <code>javascrip:void(0);</code> may be used. The code would look something like this:</p>
 <pre class="highlight" data-lang="html">
 &lt;a id="hs-toggle" href="javascript:void(0);" aria-controls="hs-rgn" aria-expanded="true" <strong>role="button"</strong>&gt;Toggle Region 2&lt;/a&gt;
-&lt;div id="hs-rgn" role="region" aria-labelledy="hs-toggle" aria-hidden="false"&gt; &hellip; &lt;div&gt;
+&lt;div id="hs-rgn" role="region" aria-labelledy="hs-toggle"&gt; &hellip; &lt;div&gt;
 </pre>
 <p>When using a link as the trigger it is also necessary to attach a keydown handler to allow the region to be toggled via the space bar (enter key support is implemented by default).</p>
 <div class="example-wrap">
    <h2>Show/Hide Region with Toggle Link</h2>
    <a id="hs2-toggle" href="javascript:void(0);" aria-controls="hs2-rgn" aria-expanded="true" role="button">Toggle Region 2</a>
-   <div id="hs2-rgn" class="panel panel-primary" role="region" aria-labelledy="hs2-toggle" aria-hidden="false">
+   <div id="hs2-rgn" class="panel panel-primary" role="region" aria-labelledy="hs2-toggle">
       <div class="panel-body">
          <p>This region was initially hidden. A screen reader user will hear <strong>Toggle Region 2 button expanded</strong>, or <strong>Toggle Region 2 button collapsed</strong> when focus is placed on the toggle button. The region will be identified as <strong>Toggle Region 2 region</strong>.
       </div>
    </div> 
 </div>
 <h2>Incorrect Implementation</h2>
-<p>This example demonstrates incorrectly placing the <code>aria-expanded</code> attribute on the toggled region, instead of on the toggle button. This error will result in the user not being notified of the state of the hide/show region. ARIA states will only update the user if placed on the item that currently has focus.</p>
+<p>This example demonstrates incorrectly placing the <code>aria-expanded</code> attribute on the toggled region, instead of on the toggle button. This error will result in the user not being notified of the state of the disclosure region. ARIA states will only update the user if placed on the item that currently has focus.</p>
 <div class="example-wrap">
    <h3>Show/Hide Region with Toggle Button</h3>
    <button id="hs3-toggle" class="btn btn-primary" aria-controls="hs3-rgn">Toggle Region 1</button>
-   <div id="hs3-rgn" class="panel panel-primary" role="region" aria-labelledy="hs3-toggle" aria-hidden="false" aria-expanded="true">
+   <div id="hs3-rgn" class="panel panel-primary" role="region" aria-labelledy="hs3-toggle" aria-expanded="true">
       <div class="panel-body">
          <p>This region was initially hidden. A screen reader user will hear <strong>Toggle Region 1 button expanded</strong>, or <strong>Toggle Region 1 button collapsed</strong> when focus is placed on the toggle button. The region will be identified as <strong>Toggle Region 1 region</strong>.
       </div>

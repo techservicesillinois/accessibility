@@ -1,0 +1,185 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Popover Widget - Technology Services Accessibility Examples</title>
+<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../css/examples.css">
+<link rel="stylesheet" type="text/css" href="css/popover.css">
+<script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
+</head>
+<body>
+<header role="banner">
+   <a class="skip-link" href="#main">Skip to Main Content</a>
+   <div class="row">
+      <div class="col-xs-12 col-lg-4">
+         <img class="imark" src="../images/techsvc-logo-bw.svg" alt="Technology Sevices at Illinois I-mark">
+      </div>
+      <div class="col-xs-12 col-lg-8">
+         <h1>Accessible Widget Examples</h1>
+      </div>
+   </div>
+   <div class="sitenav row">
+      <nav role="navigation" aria-label="site">
+         <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../aria.html">ARIA</a></li>
+            <li><a href="../bootstrap.html">Bootstrap</a></li>
+            <li><a href="../examples.html" class="active">Examples</a></li>
+         </ul>
+      </nav>
+   </div>
+</header>
+<main id="main" role="main" class="container">
+<h1>Accessibility Examples: Popover Widget </h1>
+<p>A popover is a <a href="../aria-examples/disclosure.html">disclosure</a> pattern (i.e. hide/show widget) styled to appear as a tooltip. Popover widgets allow for more content than would be appropriate for a tooltip and for the inclusion of interactive elements, such as links (tooltips are not focusable). <a href="../aria-examples/dialog.html">Modal dialog</a> widgets should be used when the pop-up information must be acknowledged by the user.</p>
+<div class="example-wrap">
+   <h2>Popover Example</h2>
+   <p>
+   A popover widget allows for interactive
+   <span class="a11y-popover a11y-popover-top" data-popover='Popovers are a <a href="../aria-examples/showhide.html">hide/show widget</a> that appears as a tooltip. These widgets are placed dynamically via javascript.'>content</span>
+      to appear in a pop-up widget.
+   </p>
+   <p>Popovers may be triggered from text that is made focusable, or any typically interactive page element; i.e. buttons, links, other form controls), and they may be positioned in any way that makes sense for the information:</p>
+   <a href="javascript:void(0);" class="a11y-popover a11y-popover-left" data-popover="Popover to the left!">left</a>
+   <a href="javascript:void(0);" class="a11y-popover a11y-popover-top" data-popover="Popover above!">top</a>
+   <a href="javascript:void(0);" class="a11y-popover a11y-popover-right" data-popover="Popover to the right!">right</a>
+   <a href="javascript:void(0);" class="a11y-popover a11y-popover-bottom" data-popover="Popover below!">below</a>
+</div>
+   <h2>Required HTML Markup</h2>
+   <p>A popover must indicate if it is expanded (visible) or collapsed (hidden) and the trigger for the popover must be associated with the popover region to be displayed.</p>
+   <ul>
+      <li><code>button (role)</code> &ndash; set on the popover trigger.</li>
+      <li><code>aria-expanded (state)</code> &ndash; Set to true if the popover is visible; false if the popover is hidden.</li>
+      <li><code>aria-controls (property) (optional)</code> &ndash; Set to the HTML id of the region toggled by popover trigger.</li>
+   </ul>
+   <p>Below is a code snippet showing simplified markup for implementing an accessible popover widget.</p>
+   <pre>
+&lt;span class="a11y-popover-wrap"&gt;
+   &lt;span id="popover1" <strong>aria-expanded="false" role="button" tabindex="0"</strong>&gt;Popover&lt;/span&gt;
+   &lt;span id="popover1-reg"<strong>aria-labelledby="popover1" role="region"</strong>&gt;
+      . . .
+   &lt;/span&gt;
+&lt;/span&gt;
+   </pre>
+   <p><strong>Note:</strong> Any logical containing element may be used for the popover trigger. The snippet above assumes that the trigger is a string of text within a larger paragraph. An html button or link could have been used as well. If the trigger element is not an html button, the button role must be added.</p>
+   <p><strong>Note:</strong> The use of the <code>aria-labelledby</code> property and <code>region</code> role on the popover region is not part of the ARIA specification for a disclosure widget. These attributes are used to clearly demarcate the contents of the popover region and to associate the region with its triggering element, e.g. give it a useful label. If the popover region contains a heading, then these attributes may be omitted. Also, the use of the <code>region</code> role should be omitted when it would result in region proliferation, i.e. when multiple popover regions (more than 6) will likely be displayed simultaneously.</p>  
+   <h2>Dynamic Markup Generation</h2>
+   <p>To simplify page markup, the popover markup may be generated dynamically, with the region's content stored in an HTML5 <code>data</code> attribute. The <code>aria-expanded</code> attribute could be added dynamically via javascript when the popover region is created. The live examples on this page are generated dynamically, as illustrated in the code snippets below.</p>
+   <h3>Popover markup prior to script</h3>
+   <pre>
+&lt;span class="a11y-popover"&gt;Popover&lt;/span&gt;
+   </pre>
+   <h3>Popover markup after code generation</h3>
+   <pre>
+&lt;span class="a11y-popover-wrap"&gt;
+    &lt;span class="a11y-popover" <strong>id="popover1" aria-expanded="false" role="button" tabindex="0"</strong>&gt;Popover&lt;/span&gt;
+    &lt;span id="popover1-reg"<strong>aria-labelledby="popover1" role="region"</strong>&gt;
+       . . .
+    &lt;/span&gt;
+&lt;/span&gt;
+   </pre>
+   <h2>Interaction Pattern</h2>
+   <ul>
+      <li><code>Enter</code>, <code>space</code>, or a mouse click will activate the popover trigger button, displaying or hiding the popover region.</li>
+   </ul>
+   <p>Note that, unlike a tooltip, the popover does not automatically display, the escape key does not dismiss the popover, and the popover is not hidden when the triggering button loses focus. The user must activate the popover trigger to both display and dismiss the popover region.</p>
+
+   <h2>Example Script</h2>
+   <p>The script used in the live examples in this page is invoked on any element with the class <code>.ally-popover</code>. The script assumes that the popover content will be present in the page or contained in a <code>data-popover</code> attribute on the popover trigger.    <p>If the popover region content is statically present in the page, the html id of the region should set as the value of an <code>aria-controls</code> property on the trigger.</p>
+   <p>A class is used to designate the position of the popover: <code>.a11y-popover-top</code>, <code>.a11y-popover-right</code>, <code>.a11y-popover-left</code>, <code>.a11y-popover-bottom</code>. This class may be omitted in favor of author-supplied CSS to position the popover regions.</p>
+
+   <h2>Example CSS</h2>
+   <p>The CSS for the popover region to be displayed must include the desired width for the popover elements. The height will be automatically determined from the popover contents. As the triggering elements are focusable buttons, styling must be used to indicate that they are focusable and when they have received focus. Style the popover trigger buttons so that they are not confused with links in the page.</p>
+   <p>Here is the CSS used in the page examples:</p>
+   <pre>
+.a11y-popover-wrap {
+   position: relative;
+}
+a.a11y-popover {
+   display: inline-block;
+   margin: 1em;
+}
+.a11y-popover {
+   text-decoration: underline wavy #080;
+}
+
+.a11y-popover:hover,
+.a11y-popover:focus {
+   text-decoration-style: wavy;
+   outline: 1px solid #080;
+   outline-offset: 1px;
+}
+.a11y-popover-region {
+   display: block;
+   position: absolute;
+   top: -6em;
+   left: 1em;
+   width: 20em;
+   padding: 0.5em 1em;
+   background-color: #fff;
+   border: 1px solid #222;
+   border-radius: 5px;
+   box-shadow: 4px 3px 4px rgba(0,0,0,0.25);
+   z-index: 100;
+}
+.a11y-popover-region:after { /* Add downward arrow tool popover */
+    position: absolute;
+    content: '';
+    width: 0;
+    height: 0;
+}
+.a11y-popover-region.a11y-popover-top:after { /* Add downward arrow tool popover */
+    left: 8px;
+    bottom: -12px;
+    border-right: 12px solid transparent;
+    border-left: 12px solid transparent;
+    border-top: 12px solid #222;
+    border-bottom: none;
+}
+.a11y-popover-region.a11y-popover-bottom:after { /* Add upward arrow tool popover */
+    left: 8px;
+    top: -12px;
+    border-right: 12px solid transparent;
+    border-left: 12px solid transparent;
+    border-bottom: 12px solid #222;
+    border-top: none;
+}
+.a11y-popover-region.a11y-popover-left:after { /* Add right-facing arrow tool popover */
+    right: -12px;
+    top: 50%;
+    transform: translate(0, -50%);
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    border-left: 12px solid #222;
+    border-right: none;
+}
+.a11y-popover-region.a11y-popover-right:after { /* Add left-facing arrow tool popover */
+    left: -12px;
+    top: 50%;
+    transform: translate(0, -50%);
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    border-right: 12px solid #222;
+    border-left: none;
+}
+</pre>
+   <h2>Downloads</h2>
+   <ul>
+      <li><a href="js/popover.js">Popover Script (jQuery)</a></li>
+      <li><a href="css/popover.css">Example CSS</a></li>
+   </ul>
+</main>
+<footer role="contentinfo">
+   <p class="copy">Copyright &copy; 2016 University of Illinois Board of Trustees</p>
+</footer>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/accessible_bootstrap-0.3.0.js"></script>
+<script type="text/javascript" src="js/popover.js"></script>
+<script>
+   jQuery('.a11y-popover').popover();
+</script>
+
+</body>
+</html>

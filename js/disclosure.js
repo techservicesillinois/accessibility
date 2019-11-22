@@ -1,5 +1,5 @@
 /*
- * ARIA Slider Widget jQuery Plugin
+ * ARIA Disclosure Widget jQuery Plugin
  * Revision 1.2
  *
  * Created by Keith Hays
@@ -25,14 +25,13 @@ if (typeof Object.create !== 'function') {
 })(jQuery, window, document);
 
 
-/******* SLIDER v1.2 *****/
+/******* DISCLOSURE v1.2 *****/
 ;(function($, window, document, undefined) {
 
-   var pluginName = 'showhide';
+   var pluginName = 'disclosure';
 
    var defaults = {
       'hide': false, // Hide the region by default whent true
-      'useHidden': false, // Use the aria-hidden state on the region when true
       'fail': false // demonstrate a failed implementation pattern
    };
 
@@ -109,13 +108,7 @@ if (typeof Object.create !== 'function') {
                this.$elem.attr('aria-expanded', 'false');
             }
 
-            if (this.options.useHidden) {
-               this.$region.attr('aria-hidden', 'true');
-            }
-            else {
-               this.$region.hide();
-            }
-
+            this.$region.hide();
             this.bExpanded = false;
          }
          else {
@@ -125,16 +118,12 @@ if (typeof Object.create !== 'function') {
             else {
                this.$elem.attr('aria-expanded', 'true');
             }
-            if (this.options.useHidden) {
-               this.$region.attr('aria-hidden', 'false');
-            }
-            else {
-               this.$region.show();
-            }
+
+            this.$region.show();
             this.bExpanded = true;
          }
       }
    };
 
 
-})(jQuery, window, document); // END SLIDER
+})(jQuery, window, document); // END DISCLOSURE

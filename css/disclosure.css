@@ -1,0 +1,12 @@
+/***** Disclosure *****/
+.example-wrap button {
+   margin: 5px 5px 5px 0;
+}
+.example-wrap {
+   overflow: hidden;
+}
+.example-wrap .panel-heading h3 {
+   margin: 0;
+   padding: 0;
+}
+/***** End Disclosure *****/
