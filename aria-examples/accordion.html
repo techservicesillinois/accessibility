@@ -8,8 +8,6 @@
 <link rel="stylesheet" type="text/css" href="../css/examples.css">
 <link rel="stylesheet" type="text/css" href="../css/accordion.css">
 <script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
-<script async type="text/javascript" src="../js/accordion.js"></script>
-<script async type="text/javascript" src="../js/showhide.js"></script>
 </head>
 <body>
 <header role="banner">
@@ -39,7 +37,7 @@
 
 <div class="example-wrap">
    <h2>Accordion Widget Example</h2>
-   <div id="accordion1" class="accordion-group">
+   <div id="accordion1" class="accordion-group a11y-accordion">
       <h3>
          <button id="trigger1" class="accordion-trigger" aria-controls="panel1">Accordion Contents</button>
       </h3>
@@ -145,7 +143,7 @@ The following table contains the keyboard interaction pattern that is defined fo
 <h2>Markup</h2>
 <p>Below is a code snippet for the accordion widget example in this page:</p>
 <pre class="highlight" data-lang="html">
-&lt;div id="accordion1" class="accordion-group"&gt;
+&lt;div id="accordion1" class="accordion-group a11y-accordian"&gt;
    &lt;h3&gt;
       &lt;button id="trigger1" class="accordion-trigger" aria-expanded="true" aria-controls="panel1"&gt;Accordion Contents&lt;/button&gt;
    &lt;/h3&gt;
@@ -243,7 +241,7 @@ The following table contains the keyboard interaction pattern that is defined fo
 <h2>Downloads</h2>
 <ul>
    <li><a href="../js/accordion.js">Accordion Script (jQuery)</a></li>
-   <li><a href="../js/showhide.js">Show Hide Script (jQuery)</a></li>
+   <li><a href="../js/disclosure.js">Disclosure Script (jQuery)</a></li>
    <li><a href="../css/accordion.css">Example CSS</a></li>
 </ul>
 </main>
@@ -252,10 +250,12 @@ The following table contains the keyboard interaction pattern that is defined fo
 </footer>
 <script type="text/javascript" src="../js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../js/accessible_bootstrap-0.3.0.js"></script>
+<script type="text/javascript" src="../js/accordion.js"></script>
+<script type="text/javascript" src="../js/disclosure.js"></script>
 <script>
-   jQuery('#accordion1').accordion();
-   jQuery('#hs1-toggle').showhide({'hide': true});
-   jQuery('#hs2-toggle').showhide({'hide': true});
+   jQuery('.a11y-accordion').accordion();
+   jQuery('#hs1-toggle').disclosure({'hide': true});
+   jQuery('#hs2-toggle').disclosure({'hide': true});
 </script>
 </body>
 </html>
