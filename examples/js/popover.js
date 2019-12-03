@@ -172,42 +172,16 @@ if (typeof Object.create !== 'function') {
          }
       }, // end _BuildWidget()
       toggleRegion: function(bHide) {
-         bState = (typeof bState !== 'undefined') ? bState : false;
-
          if (bHide || this.bExpanded) {
-            if (this.options.fail) {
-               this.$region.prop('aria-expanded', 'false');
-            }
-            else {
-               this.$trigger.prop('aria-expanded', 'false');
-            }
-
-            if (this.options.useHidden) {
-               this.$region.prop('aria-hidden', 'true');
-            }
-            else {
-               this.$region.hide();
-            }
-
+            this.$trigger.prop('aria-expanded', 'false');
+            this.$region.hide();
             this.bExpanded = false;
          }
          else {
-            if (this.options.fail) {
-               this.$region.prop('aria-expanded', 'true');
-            }
-            else {
-               this.$trigger.prop('aria-expanded', 'true');
-            }
-            if (this.options.useHidden) {
-               this.$region.prop('aria-hidden', 'false');
-            }
-            else {
-               this.$region.show();
-            }
+            this.$trigger.prop('aria-expanded', 'true');
+            this.$region.show();
             this.bExpanded = true;
          }
       }
    };
-
-
 })(jQuery, window, document); // END POPOVER
