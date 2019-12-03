@@ -37,6 +37,9 @@
 
 <div class="example-wrap">
    <h2>Accordion Widget Example</h2>
+
+   <button id="accordion1-toggle" class="btn btn-primary">Expand all panels</button>
+
    <div id="accordion1" class="accordion-group a11y-accordion">
       <h3>
          <button id="trigger1" class="accordion-trigger" aria-controls="panel1">Accordion Contents</button>
@@ -254,8 +257,35 @@ The following table contains the keyboard interaction pattern that is defined fo
 <script type="text/javascript" src="../js/disclosure.js"></script>
 <script>
    jQuery('.a11y-accordion').accordion();
+
    jQuery('#hs1-toggle').disclosure({'hide': true});
    jQuery('#hs2-toggle').disclosure({'hide': true});
+
+   var $accordion = jQuery('.a11y-accordion').data('aria_accordion');
+   var bExpanded = false;
+
+   var $widgetToggle = jQuery('#accordion1-toggle');
+
+   $widgetToggle.on('click', function(e) {
+      if (!bExpanded) {
+         $accordion.expandAll();
+         bExpanded = true;
+         $widgetToggle.text('Collapse all panels');
+      }
+      else {
+         $accordion.collapseAll();
+         bExpanded = false;
+         $widgetToggle.text('Expand all panels');
+      }
+      return false;
+   });
+
+   jQuery('.a11y-accordion').on('accordion-collapsed', function() {
+      $widgetToggle.text('Expand all panels');
+      bExpanded = false;
+      return false;
+   });
+
 </script>
 </body>
 </html>

@@ -16,14 +16,6 @@ if (typeof Object.create !== 'function') {
       return new F();
    };
 }
-/******* Simple Unique ID Generator ******/
-;(function($, window, document, undefined) {
-    var counter = 0;
-    window.uniqueId = function(){
-        return 'a11y' + counter++
-    }
-})(jQuery, window, document);
-
 
 /******* ACCORDION v1.1 *****/
 ;(function($, window, document, undefined) {
@@ -32,7 +24,7 @@ if (typeof Object.create !== 'function') {
 
    var defaults = {
       'collapse': true, // ignore default aria-expanded state in page and collapse all panels
-      'useArrows': true, // add arrow key support to move between header buttons
+      'noArrows': false, // turn off arrow key support for moving between header buttons
    };
 
    $.fn[pluginName] = function(options) {
@@ -62,6 +54,14 @@ if (typeof Object.create !== 'function') {
 
          // merge and store options
          this.options = $.extend({}, defaults, options);
+
+         if (this.$group.hasClass('accordion-nocollapse')) {
+            this.options.collapse = false;
+         }
+
+         if (this.$group.hasClass('accordion-arrows')) {
+            this.options.noArrows = false;
+         }
 
          this._buildWidget(); // build the widget
 
@@ -99,7 +99,7 @@ if (typeof Object.create !== 'function') {
                return false;
             })
             .on('keydown', function(e) { // add arrow key support to the triggers -- default is to use arrow keys
-               if (!thisObj.options.useArrows) { // arrow key support not specified
+               if (thisObj.options.noArrows) { // arrow key support not specified
                   return true;
                }
                return thisObj._handleKeydown(e);
@@ -115,6 +115,17 @@ if (typeof Object.create !== 'function') {
       }, // end _BuildWidget()
       _isExpanded: function($elem) {
          return ($elem.attr('aria-expanded') === 'true');
+      },
+      _widgetCollapsed: function() {
+         var bCollapsed = true;
+
+         this.$headers.each(function() {
+            if ($(this).attr('aria-expanded') === 'true') {
+               bCollapsed = false;
+            }
+         });
+
+         return bCollapsed;
       },
       _handleKeydown: function(e) {
          var hdrIndex = this.$headers.index($(e.target));
@@ -144,12 +155,33 @@ if (typeof Object.create !== 'function') {
 
          return true;
       },
+      collapseAll: function() {
+         this.$headers.each(function() {
+            var $item = $(this);
+
+            $item.attr('aria-expanded','false');
+            $('#' + $item.attr('aria-controls')).hide();
+         });
+      },
+      expandAll: function() {
+         this.$headers.each(function() {
+            var $item = $(this);
+
+            $item.attr('aria-expanded','true');
+            $('#' + $item.attr('aria-controls')).show();
+         });
+      },
       togglePanel: function($curHeader) {
          var $panel = $('#' + $curHeader.attr('aria-controls'));
 
          if (this._isExpanded($curHeader)) { // collapse this panel
             $curHeader.attr('aria-expanded', 'false');
             $panel.hide();
+
+            // if all panels collapsed, trigger collapsed event
+            if (this._widgetCollapsed()) {
+               this.$group.trigger('accordion-collapsed');
+            }
          }
          else { // expand this panel and collapse all others
             $curHeader.attr('aria-expanded', 'true');
