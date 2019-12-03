@@ -69,14 +69,14 @@
    <p>To simplify page markup, the popover markup may be generated dynamically, with the region's content stored in an HTML5 <code>data</code> attribute. The <code>aria-expanded</code> attribute could be added dynamically via javascript when the popover region is created. The live examples on this page are generated dynamically, as illustrated in the code snippets below.</p>
    <h3>Popover markup prior to script</h3>
    <pre>
-&lt;span class="a11y-popover"&gt;Popover&lt;/span&gt;
+&lt;span <strong>class="a11y-popover" data-popover="This is the popover content."</strong>&gt;Popover&lt;/span&gt;
    </pre>
    <h3>Popover markup after code generation</h3>
    <pre>
 &lt;span class="a11y-popover-wrap"&gt;
-    &lt;span class="a11y-popover" <strong>id="popover1" aria-expanded="false" role="button" tabindex="0"</strong>&gt;Popover&lt;/span&gt;
-    &lt;span id="popover1-reg"<strong>aria-labelledby="popover1" role="region"</strong>&gt;
-       . . .
+    &lt;span class="a11y-popover" data-popover="This is the popover content." <strong>id="popover1" aria-expanded="false" role="button" tabindex="0"</strong>&gt;Popover&lt;/span&gt;
+    &lt;span id="popover1-reg" <strong>aria-labelledby="popover1" role="region"</strong>&gt;
+       This is the popover content.
     &lt;/span&gt;
 &lt;/span&gt;
    </pre>
@@ -180,6 +180,5 @@ a.a11y-popover {
 <script>
    jQuery('.a11y-popover').popover();
 </script>
-
 </body>
 </html>
