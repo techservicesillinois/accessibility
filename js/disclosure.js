@@ -4,7 +4,7 @@
  *
  * Created by Keith Hays
  *
- * Copyright 2017 Illinois Board of Trustees
+ * Copyright 2019 Illinois Board of Trustees
  *
  */
 
@@ -97,33 +97,39 @@ if (typeof Object.create !== 'function') {
 
 
       }, // end _BuildWidget()
-      toggleRegion: function(bHide) {
-         bState = (typeof bState !== 'undefined') ? bState : false;
-
-         if (bHide || this.bExpanded) {
-            if (this.options.fail) {
-               this.$region.attr('aria-expanded', 'false');
-            }
-            else {
-               this.$elem.attr('aria-expanded', 'false');
-            }
-
-            this.$region.hide();
-            this.bExpanded = false;
+      collapseRegion: function() {
+         if (this.options.fail) {
+            this.$region.attr('aria-expanded', 'false');
          }
          else {
-            if (this.options.fail) {
-               this.$region.attr('aria-expanded', 'true');
-            }
-            else {
-               this.$elem.attr('aria-expanded', 'true');
-            }
+            this.$elem.attr('aria-expanded', 'false');
+         }
 
-            this.$region.show();
-            this.bExpanded = true;
+         this.$region.hide();
+         this.bExpanded = false;
+
+         this.$elem.trigger('a11y-collapse');
+      },
+      expandRegion: function() {
+         if (this.options.fail) {
+            this.$region.attr('aria-expanded', 'true');
+         }
+         else {
+            this.$elem.attr('aria-expanded', 'true');
+         }
+
+         this.$region.show();
+         this.bExpanded = true;
+
+         this.$elem.trigger('a11y-expand');
+      },
+      toggleRegion: function(bHide) {
+         if (bHide || this.bExpanded) {
+            this.collapseRegion();
+         }
+         else {
+            this.expandRegion();
          }
       }
    };
-
-
 })(jQuery, window, document); // END DISCLOSURE
