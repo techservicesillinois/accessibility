@@ -978,7 +978,7 @@ html[xmlns] #optanon-cookie-policy .clearfix {
 }
 
 .optanon-alert-box-wrapper .optanon-alert-box-button {
-    float: right;
+    float: left;
     margin-right: 30px;
     margin-bottom: 10px;
     line-height: initial

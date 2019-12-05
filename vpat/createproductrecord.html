@@ -1,0 +1,55 @@
+{% extends 'vpat/base.html' %}
+
+<!DOCTYPE html>
+	{% block header_section %}
+		<h1>Create A Project - Step 1 of 2</h1>
+		<script>
+			/*TODO: if the person is an outside vendor, add the required attribute to the company field*/
+		</script>
+	{% endblock %}
+	
+	{% block content %}
+		<div class="container">
+			<form action="/test_create_vpat/" method="post">
+				{% csrf_token %}
+				<fieldset>
+					<legend>Product Information</legend>
+					<p>
+						<label for="product_name">Product Name:</label> 
+						<input type="text" name="product_name" id="product_name" placeholder="ex: Product A" required pattern="[a-zA-Z][a-zA-Z0-9\s]*">
+					</p>
+					<p>
+						<label for="project_designation">Project Designation:</label>
+						<input type="text" name="project_designation" id="project_designation" placeholder="ex: TECHSVC-0000" required pattern="[a-zA-Z][a-zA-Z0-9\s]*">
+					</p>
+					<p>
+						<label for="project_description">Product Description:</label>
+						<textarea cols="40" rows="5" name="project_description" id="project_description" placeholder="ex: Product A has features..." required pattern="[a-zA-Z][a-zA-Z0-9\s]*"></textarea>
+					</p>
+				</fieldset>
+				<fieldset>
+					<legend>Contact Person</legend>
+					<p>
+						<label for="contact_name">Name:</label>
+						<input type="text" name="contact_name" id="contact_name" placeholder="Jane Doe" required pattern="[a-zA-Z][a-zA-Z0-9\s]*">
+					</p>
+					<p>
+						<label for="contact_email">Email Address:</label>
+                  <input type="email" name="contact_email" id="contact_email" placeholder="jane_doe@companyxyz.com" required> <!-- Extra quote was here -->
+					</p>
+					</p>
+						<label for="contact_phone">Phone Number:</label>
+						<input type="text" name="contact_phone" id="contact_phone" placeholder="ex: 222-333-4444" required pattern="^[0-9\-\.\( \)]+$">
+					</p>
+					<p>
+						<label for="company_name">Company Affiliation:</label>
+						<input type="text" name="contact_company" id="company_name" placeholder="ex: Company xyz" pattern="\S(.*\S)?">
+					</p>
+				</fieldset>
+				<input type="submit" value="Save & Return Later" class="submit_form">
+				<input type="submit" value="Proceed to Step 2 of 2" class="submit_form">
+			</form>
+		</div>
+	{% endblock %}
+
+</html>

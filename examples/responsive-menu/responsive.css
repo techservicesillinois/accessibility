@@ -139,7 +139,7 @@ nav[aria-hidden=false] {
       float: left;
       padding-left: 10px;
       width: 25%;
-      height: 23em;
+      height: 27em;
       border: none;
    }
    .menu > ul > li:not(:last-child) {
