@@ -189,6 +189,8 @@ if (typeof Object.create !== 'function') {
 
       }, // end _BuildWidget()
       _selectTab: function($item) {
+            $item = $item.closest('[aria-controls]'); // Find tab element if child element clicked
+            
             var $panel = $('#' + $item.attr('aria-controls'));
 
             this.$tabs.attr({ // update tab attributes
