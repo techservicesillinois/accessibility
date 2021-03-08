@@ -116,9 +116,9 @@ if (typeof Object.create !== 'function') {
          // Ensure that aria-expanded is on the trigger
          if (typeof expandedProp === typeof undefined || expandedProp === false) {
                // aria-expanded was not present - add it and set to false
-               this.$trigger.prop('aria-expanded', 'false');
+               this.$trigger.attr('aria-expanded', 'false');
          }
-         this.bExpanded = this.$trigger.prop('aria-expanded') === 'true' ? true : false;
+         this.bExpanded = this.$trigger.attr('aria-expanded') === 'true' ? true : false;
 
          // add tabindex to the trigger element and attach click and keydown handlers
          this.$trigger.prop('tabindex', '0')
@@ -173,12 +173,12 @@ if (typeof Object.create !== 'function') {
       }, // end _BuildWidget()
       toggleRegion: function(bHide) {
          if (bHide || this.bExpanded) {
-            this.$trigger.prop('aria-expanded', 'false');
+            this.$trigger.attr('aria-expanded', 'false');
             this.$region.hide();
             this.bExpanded = false;
          }
          else {
-            this.$trigger.prop('aria-expanded', 'true');
+            this.$trigger.attr('aria-expanded', 'true');
             this.$region.show();
             this.bExpanded = true;
          }
