@@ -53,17 +53,17 @@
 <p>The markup for the disclosure is as follows for the collapsed state:</p>
 <pre class="highlight" data-lang="html">
 &lt;button id="hs-toggle" class="btn" aria-controls="hs-rgn" <strong>aria-expanded="false"</strong>&gt;Toggle Region 1&lt;/button&gt;
-&lt;div id="hs-rgn" role="region" aria-labelledy="hs-toggle"&gt; &hellip; &lt;/div&gt;
+&lt;div id="hs-rgn" role="region" aria-labelledby="hs-toggle"&gt; &hellip; &lt;/div&gt;
 </pre>
 <p>When expanded, the value of the <code>aria-expanded</code> state should be updated via JavaScript to true:</p>
 <pre class="highlight" data-lang="html">
 &lt;button id="hs-toggle" class="btn" aria-controls="hs-rgn" <strong>aria-expanded="true"</strong>&gt;Toggle Region 1&lt;/button&gt;
-&lt;div id="hs-rgn" role="region" aria-labelledy="hs-toggle"&gt; &hellip; &lt;/div&gt;
+&lt;div id="hs-rgn" role="region" aria-labelledby="hs-toggle"&gt; &hellip; &lt;/div&gt;
 </pre>
 <div class="example-wrap">
    <h2>Show/Hide Region with Toggle Button</h2>
    <button id="hs1-toggle" class="btn btn-primary" aria-controls="hs1-rgn" aria-expanded="true">Toggle Region 1</button>
-   <div id="hs1-rgn" class="panel panel-primary" role="region" aria-labelledy="hs1-toggle" aria-hidden="false">
+   <div id="hs1-rgn" class="panel panel-primary" role="region" aria-labelledby="hs1-toggle" aria-hidden="false">
       <div class="panel-body">
          <p>This region was initially hidden. A screen reader user will hear <strong>Toggle Region 1 button expanded</strong>, or <strong>Toggle Region 1 button collapsed</strong> when focus is placed on the toggle button. The region will be identified as <strong>Toggle Region 1 region</strong>.
       </div>
@@ -72,13 +72,13 @@
 <p>When using a link as the toggle for a disclosure widget, it is necessary to add <code>role=button</code> to the link. This is because the link is being used as a button, not for navigation. The <code>href</code> attribute can either be empty ('#') or <code>javascrip:void(0);</code> may be used. The code would look something like this:</p>
 <pre class="highlight" data-lang="html">
 &lt;a id="hs-toggle" href="javascript:void(0);" aria-controls="hs-rgn" aria-expanded="true" <strong>role="button"</strong>&gt;Toggle Region 2&lt;/a&gt;
-&lt;div id="hs-rgn" role="region" aria-labelledy="hs-toggle"&gt; &hellip; &lt;div&gt;
+&lt;div id="hs-rgn" role="region" aria-labelledby="hs-toggle"&gt; &hellip; &lt;div&gt;
 </pre>
 <p>When using a link as the trigger it is also necessary to attach a keydown handler to allow the region to be toggled via the space bar (enter key support is implemented by default).</p>
 <div class="example-wrap">
    <h2>Show/Hide Region with Toggle Link</h2>
    <a id="hs2-toggle" href="javascript:void(0);" aria-controls="hs2-rgn" aria-expanded="true" role="button">Toggle Region 2</a>
-   <div id="hs2-rgn" class="panel panel-primary" role="region" aria-labelledy="hs2-toggle">
+   <div id="hs2-rgn" class="panel panel-primary" role="region" aria-labelledby="hs2-toggle">
       <div class="panel-body">
          <p>This region was initially hidden. A screen reader user will hear <strong>Toggle Region 2 button expanded</strong>, or <strong>Toggle Region 2 button collapsed</strong> when focus is placed on the toggle button. The region will be identified as <strong>Toggle Region 2 region</strong>.
       </div>
@@ -89,7 +89,7 @@
 <div class="example-wrap">
    <h3>Show/Hide Region with Toggle Button</h3>
    <button id="hs3-toggle" class="btn btn-primary" aria-controls="hs3-rgn">Toggle Region 1</button>
-   <div id="hs3-rgn" class="panel panel-primary" role="region" aria-labelledy="hs3-toggle" aria-expanded="true">
+   <div id="hs3-rgn" class="panel panel-primary" role="region" aria-labelledby="hs3-toggle" aria-expanded="true">
       <div class="panel-body">
          <p>This region was initially hidden. A screen reader user will hear <strong>Toggle Region 1 button expanded</strong>, or <strong>Toggle Region 1 button collapsed</strong> when focus is placed on the toggle button. The region will be identified as <strong>Toggle Region 1 region</strong>.
       </div>
